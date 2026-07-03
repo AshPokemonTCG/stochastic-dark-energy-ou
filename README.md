@@ -121,8 +121,6 @@ INSTRUCCIONES_EXPERIMENTO.md ← full experimental protocol (optional)
 results/
 RESUMEN_COMPLETO_FASES.txt ← verified numerical results (DR1)
 
-text
-
 ---
 
 ## Data sources (all public)
