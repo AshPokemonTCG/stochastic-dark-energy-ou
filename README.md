@@ -109,7 +109,7 @@ A geometric result independent of the model: the minimum resolvable frequency in
 ---
 
 ## Repository structure
-README.md ← this file
+README.md
 paper/
 stochastic_dark_energy_v3.0.md ← full preprint (English)
 code/
