@@ -143,7 +143,7 @@ FROM desi_dr2.lss.lrg_clustering
 WHERE Z BETWEEN 0.4 AND 0.8 AND ZWARN = 0
 Installation and reproduction
 bash
-git clone https://github.com/[tu-usuario]/stochastic-dark-energy-ou
+git clone https://github.com/AshPokemonTCG/stochastic-dark-energy-ou
 cd stochastic-dark-energy-ou
 pip install numpy scipy astropy healpy matplotlib
 
