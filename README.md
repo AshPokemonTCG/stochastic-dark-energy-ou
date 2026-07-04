@@ -64,13 +64,20 @@ Using the exact sensitivity kernel \(S(z) \equiv \partial \ln D_V / \partial \Om
 \]
 
 | \(z_{\rm eff}\) | Tracer       | \(|S(z)|/|S(0.706)|\) | \(\sigma_{\alpha,\rm floor}\) |
+
 |:---------------:|:-------------|:---------------------:|:-----------------------------:|
 | 0.295           | BGS          | 0.477                 | \(2.22 \times 10^{-3}\)       |
+
 | 0.510           | LRG1         | 0.777                 | \(3.61 \times 10^{-3}\)       |
+
 | **0.706**       | **LRG2**     | **1.000**             | **\(4.65 \times 10^{-3}\)**   |
+
 | **0.934**       | **LRG3+ELG1**| **1.208**             | **\(5.62 \times 10^{-3}\)**   |
+
 | 1.321           | ELG2         | 1.462                 | \(6.80 \times 10^{-3}\)       |
+
 | 1.484           | QSO          | 1.541                 | \(7.17 \times 10^{-3}\)       |
+
 | 2.330           | Ly\(\alpha\) | 1.798                 | \(8.36 \times 10^{-3}\)       |
 
 **Diagnostic bin \(z = 0.934\) (LRG3+ELG1):** the predicted OU floor exceeds the DESI DR2 observational error (\(\sigma_{\alpha,\rm obs}=0.0049\)) by a margin that translates into a \(\sim 2.8\sigma\) sensitivity excess. This is the cleanest test available with current DESI DR2 data.
