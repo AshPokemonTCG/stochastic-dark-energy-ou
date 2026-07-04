@@ -55,7 +55,7 @@ $$dX = -\theta \, X \, dx + \sigma \, dW_x,$$
 
 with stationary variance
 
-$$\operatorname{Var}(X) = \frac{\sigma^2}{2\theta}.$$
+$$\text{Var}(X) = \frac{\sigma^2}{2\theta}.$$
 
 The OU process captures finite memory and yields analytic redshift correlations. It is adopted as a minimal phenomenological closure.
 
@@ -63,7 +63,7 @@ The OU process captures finite memory and yields analytic redshift correlations.
 
 To preserve early‑universe constraints (CMB, BBN), a smooth activation factor g(z) is conceptually introduced:
 
-$$\sigma_{\rm eff}(z) = \sigma \, g(z), \qquad g(z) = \frac{1}{1 + \exp[-(x - x_*) / \Delta]},$$
+$$\sigma_{\text{eff}}(z) = \sigma \, g(z), \qquad g(z) = \frac{1}{1 + \exp[-(x - x_*) / \Delta]},$$
 
 where x = ln(1/(1+z)). However, for the redshift range probed by DESI (z ≲ 2.3) and Euclid (z ≲ 2.0), g(z) is essentially unconstrained by data. We set z_* = 1.5 (illustrative), with the understanding that this parameter is degenerate with σ and cannot be independently calibrated. For all numerical results in Sections 4–6, g(z) ≈ 1 in the observed range, meaning the effective amplitude σ_X absorbs any early‑time suppression.
 
@@ -82,13 +82,13 @@ $$S(z) \equiv \frac{\partial \ln D_V(z)}{\partial \Omega_\Lambda}.$$
 
 Linear propagation yields an induced BAO scatter (the "precision floor"):
 
-$$\sigma_{\alpha,\rm floor}(z) \approx |S(z)| \, \sigma_{\Omega_\Lambda}(z).$$
+$$\sigma_{\alpha,\text{floor}}(z) \approx |S(z)| \, \sigma_{\Omega_\Lambda}(z).$$
 
 ### 3.2 Calibration with DESI DR1 (Illustrative Upper Limit)
 
 To illustrate the magnitude of the precision floor, we allocate a conservative fraction f_net = 0.15 of the observed variance at the anchor bin z_eff = 0.71 to an irreducible network component. **This is a plausible upper limit for current DESI precision; the actual fraction is unconstrained and is precisely what the data will test.** Using σ_α,obs(0.71) ≈ 0.012:
 
-$$\sigma_{\alpha,\rm floor}(0.71) = \sqrt{0.15} \times 0.012 = 4.65 \times 10^{-3}.$$
+$$\sigma_{\alpha,\text{floor}}(0.71) = \sqrt{0.15} \times 0.012 = 4.65 \times 10^{-3}.$$
 
 Using the kernel value S(0.71) = -0.312, we infer σ_Ω_Λ(0.71) ≈ 1.49 × 10^-2. For θ = 1.2, this gives σ ≈ 2.31 × 10^-2. **These parameters are illustrative only; the actual fit (Section 4.2) treats θ and σ_X as free parameters.**
 
@@ -115,13 +115,13 @@ For the numerical results in Sections 4–6, we use the discrete sensitivity ker
 ### 4.1 Methodology
 The standard BAO analysis assumes Gaussian residuals with diagonal covariance. Our model adds an OU‑induced component to the total covariance:
 
-$$C_{\rm total} = C_{\rm std} + C_{\rm OU},$$
+$$C_{\text{total}} = C_{\text{std}} + C_{\text{OU}},$$
 
-where $$(C_{\rm OU})_{ij} = S(z_i) S(z_j) \operatorname{Cov}[X(x_i), X(x_j)]$$ and $$\operatorname{Cov}[X(x_i), X(x_j)] = \frac{\sigma^2}{2\theta} \exp[-\theta |x_i - x_j|].$$
+where $$(C_{\text{OU}})_{ij} = S(z_i) S(z_j) \text{Cov}[X(x_i), X(x_j)]$$ and $$\text{Cov}[X(x_i), X(x_j)] = \frac{\sigma^2}{2\theta} \exp[-\theta |x_i - x_j|].$$
 
 ### 4.2 Results
 
-| Model               | θ | σ_X | Δlog𝓛 (vs ΛCDM) | AIC      | BIC      |
+| Model               | θ | σ_X | Δlog L (vs ΛCDM) | AIC      | BIC      |
 |:--------------------|:---:|:---:|:---:|:---:|:---:|
 | ΛCDM                | —  | —   | 0.00 | ref  | ref  |
 | OU pure (H0)        | 0.765 | 0.018 | **+6.75** | −38.73 | −38.84 |
@@ -140,7 +140,7 @@ We construct a HEALPix map (N_side = 32) of galaxy overdensities from DESI DR1 L
 
 Combining NGC and SGC:
 
-$$r_{\rm cross} = 0.1673 \pm 0.0613 \quad (Z \approx 2.73\sigma \text{ excess}).$$
+$$r_{\text{cross}} = 0.1673 \pm 0.0613 \quad (Z \approx 2.73\sigma \text{ excess}).$$
 
 > **Important caveat:** With only **67 overlapping pixels**, the statistical power is limited. **Systematic effects (Galactic dust, imaging systematics) have not been controlled.** This is a preliminary motivation for DESI DR2 analysis with imaging weights, **not a confirmed detection.**
 
@@ -168,7 +168,7 @@ $$\rho_1 \approx 0.78, \quad \rho_2 \approx 0.62, \quad \rho_3 \approx 0.49.$$
 
 For N = 7 bins, the standard error is σ_ρ ≈ 1/√(N-3) ≈ 0.5, giving 95% CI ≈ ±1.0. **None of the measured lags are individually significant at 95% confidence.** The data are consistent with white noise at current resolution.
 
-This apparent inconsistency with the positive BAO likelihood (Δlog𝓛 = +6.75) is resolved by noting that the global covariance structure can improve fit even if individual lags are insignificant. **This ambiguity requires >20 bins to resolve.**
+This apparent inconsistency with the positive BAO likelihood (Δlog L = +6.75) is resolved by noting that the global covariance structure can improve fit even if individual lags are insignificant. **This ambiguity requires >20 bins to resolve.**
 
 ---
 
@@ -176,7 +176,7 @@ This apparent inconsistency with the positive BAO likelihood (Δlog𝓛 = +6.75)
 
 | Test | Result | Status |
 |:---|:---|:---|
-| **BAO likelihood** | OU improves fit (Δlog𝓛 = +6.75) | Preliminary, 7 bins |
+| **BAO likelihood** | OU improves fit (Δlog L = +6.75) | Preliminary, 7 bins |
 | **Cross-correlation** | r = 0.167 (2.73σ), 67 pixels | Preliminary, systematics uncontrolled |
 | **Lag correlations** | Mixed; none individually significant | Not conclusive with 7 bins |
 
@@ -288,7 +288,7 @@ This is a **purely geometric consequence** of survey redshift coverage, independ
 
 For redshift range Δx = ln(1+z_max) - ln(1+z_min), the minimum resolvable frequency is:
 
-$$\omega_{R,\min} = \frac{2\pi}{\Delta x}.$$
+$$\omega_{R,\text{min}} = \frac{2\pi}{\Delta x}.$$
 
 Any oscillation with ω_R < ω_R,min produces <1 visible cycle and is indistinguishable from a monotonic (pure OU) trend.
 
