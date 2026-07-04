@@ -17,6 +17,23 @@ We find a definitive null result: the MLE forces the stochastic amplitude to zer
 
 We interpret this null result as evidence for the **holographic rigidity** of the vacuum: dark energy behaves as a deterministic, homogeneous scalar field (quintessence) or an effective geometric term, rather than a granular medium. The absence of local stochastic noise imposes a strong constraint on quantum-gravity models predicting spacetime from discrete information networks. The decisive test for any residual granularity will require the >20 bins of Euclid DR1 (expected H2 2026).
 
+"This limit translates into a constraint on the mass of a possible scalar field mediating dark energy: 
+m
+ϕ
+≲
+10
+−
+5
+ 
+e
+V
+m 
+ϕ
+​
+ ≲10 
+−5
+ eV, placing it in the ultralight boson regime."
+
 ## "Our result does not resolve the absolute cosmological constant problem
 10
 120
