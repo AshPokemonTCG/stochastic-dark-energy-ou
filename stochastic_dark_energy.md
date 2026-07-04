@@ -214,7 +214,6 @@ $$\rho_1 \approx 0.78, \quad \rho_2 \approx 0.62, \quad \rho_3 \approx 0.49.$$
 However, since the MLE forces \(\sigma_X \to 0\), this prediction is no longer relevant: if there is no stochastic signal, there is no prediction to test. The data show no sign of these correlations, as detailed below. This is the core falsification of the model.
 
 ### 6.2 Results from DESI DR2
-### 6.2 Results from DESI DR2
 
 We computed the whitened BAO residuals using the publicly released isotropic \(\alpha\) values from DESI DR2 (7 bins). The results are:
 
