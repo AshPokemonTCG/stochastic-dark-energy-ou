@@ -11,7 +11,7 @@ Date:    July 2026
 Version: 2.1 (corrected, reviewer-ready)
 
 DATA SOURCE (current):
-  DESI DR1 BAO, arXiv:2404.03000, Table 3
+  DATA_SOURCE = "DESI DR2 (arXiv:2503.14738)"
   Isotropic alpha measurements, 7 redshift bins.
 
   To update to DESI DR2 (arXiv:2503.14738):
