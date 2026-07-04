@@ -199,6 +199,8 @@ $$r_{\text{cross}} = 0.1673 \pm 0.0613 \quad (Z \approx 2.73\sigma \text{ excess
 
 > **Important caveat:** With only **67 overlapping pixels**, the statistical power is limited. **Systematic effects (Galactic dust, imaging systematics) have not been controlled.** This is a preliminary motivation for DESI DR2 analysis with imaging weights, **not a confirmed detection.**
 
+Note on datasets: This result uses DESI DR1 and is presented as a preliminary cross-check. It is superseded in statistical power by the DR2 BAO analysis (Section 4.2) and does not affect the null result.
+
 ---
 
 ## 6. Test 3: Redshift Lag Correlations in BAO Residuals (The Critical Test)
@@ -226,8 +228,6 @@ We computed the whitened BAO residuals using the publicly released isotropic \(\
 
 ### 6.3 Interpretation
 
-### 6.3 Interpretation
-
 For N = 7 bins, the standard error is \(\sigma_\rho \approx 1/\sqrt{N-3} \approx 0.5\), giving a 95% confidence interval of approximately **±1.0**. The observed lag correlations in DR2 fluctuate wildly (\(-0.96\), \(+0.92\), \(-0.92\)), but all are consistent with zero within the large error bars. **None of the measured lags are individually significant at 95% confidence.**
 
 Crucially, these values are not positive and decaying as the OU model predicted (\(\rho_1 \approx 0.83\), \(\rho_2 \approx 0.85\), \(\rho_3 \approx 0.85\)). The predicted pattern of positive lag correlations is **falsified** by the data. This is fully consistent with the MLE result \(\sigma_X \to 0\): the data show no correlated stochastic noise.
@@ -235,14 +235,6 @@ Crucially, these values are not positive and decaying as the OU model predicted 
 The absence of signal in both the likelihood and the lag correlations decisively rules out the OU/QNM stochastic model with current DESI DR2 precision. This conclusion is independent of the large uncertainties: the model predicts a specific sign and structure that is not observed.
 
 ---
-
-## 7. Unified Discussion
-
-| Test | Result | Status |
-|:---|:---|:---|
-| **BAO likelihood** | OU improves fit (Δlog L = +6.75) | Preliminary, 7 bins |
-| **Cross-correlation** | r = 0.167 (2.73σ), 67 pixels | Preliminary, systematics uncontrolled |
-| **Lag correlations** | Mixed; none individually significant | Not conclusive with 7 bins |
 
 ## 7. Discussion: Stochastic Fluctuations are Ruled Out by DESI DR2
 
