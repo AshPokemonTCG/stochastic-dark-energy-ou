@@ -125,35 +125,71 @@ Fixing \(\theta = 1.2\) and requiring the stationary OU variance to match \(\sig
 \sigma = \sigma_{\Omega_\Lambda}(0.71) \, \sqrt{2\theta} \approx 2.31 \times 10^{-2}.
 \]
 
-### 3.3 Exact redshift‑dependent floor via the sensitivity kernel \(S(z)\)
+### 3.3 Exact Integral Susceptibility \(\chi(z, z')\) and the Precision Floor
 
-The provisional scaling \(\sqrt{(1+z)/(1+z_0)}\) used in v3.0 is replaced by the rigorous response of the BAO observable to \(\Omega_\Lambda\). Using the sensitivity kernel \(S(z) \equiv \partial \ln D_V / \partial \Omega_\Lambda\), the induced BAO scatter is:
+The simplified scaling laws used previously are approximations. The exact propagation of the stochastic fluctuation \(X(z') \equiv \delta\Omega_\Lambda(z')\) to the BAO observable \(\delta\ln D_V(z)\) is given by a **causal integral kernel** derived from first principles.
 
-\[
-\sigma_{\alpha,\rm floor}(z) = |S(z)| \, \sigma_{\Omega_\Lambda}(z),
-\]
-
-where \(\sigma_{\Omega_\Lambda}(z) = \sigma \, g(z) / \sqrt{2\theta}\) is the stationary OU variance modulated by the late‑time activation factor \(g(z)\). The kernel \(S(z)\) is computed numerically along the flat direction \(\Omega_m = 1 - \Omega_\Lambda\) (see Appendix A).
-
-Using the same calibration as before (\(f_{\rm net}=0.15\), \(\sigma_{\alpha,\rm obs}(0.706)=0.012\) at the anchor bin \(z=0.706\)), the exact scaling law is:
+We start from the perturbed Hubble parameter in a flat universe with stochastic dark energy:
 
 \[
-\sigma_{\alpha,\rm floor}(z) = 4.65 \times 10^{-3} \times \frac{|S(z)|}{|S(0.706)|}, \qquad |S(0.706)| = 0.595.
+H^2(z) = H_0^2 \left[ \Omega_m (1+z)^3 + \Omega_\Lambda + X(z) \right],
 \]
 
-This yields the following numerical values for all DESI DR2 tracers:
+where \(X(z)\) is the OU stochastic field. Defining \(E(z) = H(z)/H_0\) and expanding the inverse of the cosmic evolution function to first order in \(X(z)\):
 
-| \(z_{\rm eff}\) | Tracer       | \(S(z)\) | \(|S(z)|/|S(0.706)|\) | \(\sigma_{\alpha,\rm floor}\) |
-|:---------------:|:-------------|:--------:|:---------------------:|:-----------------------------:|
-| 0.295           | BGS          | \(-0.284\) | 0.477                 | \(2.22 \times 10^{-3}\)       |
-| 0.510           | LRG1         | \(-0.462\) | 0.777                 | \(3.61 \times 10^{-3}\)       |
-| 0.706           | LRG2         | \(-0.595\) | 1.000                 | \(4.65 \times 10^{-3}\) (anchor) |
-| 0.934           | LRG3+ELG1    | \(-0.719\) | 1.208                 | \(5.62 \times 10^{-3}\)       |
-| 1.321           | ELG2         | \(-0.870\) | 1.462                 | \(6.80 \times 10^{-3}\)       |
-| 1.484           | QSO          | \(-0.917\) | 1.541                 | \(7.17 \times 10^{-3}\)       |
-| 2.330           | Ly\(\alpha\) | \(-1.070\) | 1.798                 | \(8.36 \times 10^{-3}\)       |
+\[
+\frac{1}{E(z)} \approx \frac{1}{E_0(z)} - \frac{1}{2 E_0(z)^3} X(z), \qquad E_0(z) = \sqrt{\Omega_m (1+z)^3 + \Omega_\Lambda}.
+\]
 
-**Diagnostic bin \(z = 0.934\) (LRG3+ELG1).** This bin is the cleanest test available with current DESI DR2 data. The predicted OU floor is \(\sigma_{\alpha,\rm floor}(0.934) = 5.62 \times 10^{-3}\), while the DESI DR2 observational error for this tracer is \(\sigma_{\alpha,\rm obs}(0.934) = 0.0049\). This implies that the stochastic floor exceeds the statistical error by a margin that, when propagated through the full covariance, translates into a \(\sim 2.8\sigma\) sensitivity excess. In other words, if the universe is \(\Lambda\)CDM, the residual variance in this bin should continue to scale as \(1/\sqrt{N}\); if our stochastic model is correct, DESI DR2 is already "bumping" against an irreducible variance floor that cannot be beaten by collecting more galaxies. This bin is the primary target for the lag‑correlation test described in Section 6.
+The comoving transverse distance is \(D_M(z) = \frac{c}{H_0} \int_0^z \frac{dz'}{E(z')}\). Introducing the perturbative expansion, the total variation induced by the finite-information network is:
+
+\[
+\delta D_M(z) = -\frac{c}{2 H_0} \int_0^z \frac{X(z')}{E_0(z')^3} dz'.
+\]
+
+The BAO volume scale mixes the transverse distance and the local Hubble parameter:
+
+\[
+D_V(z) = \left[ D_M(z)^2 \frac{c z}{H(z)} \right]^{1/3}.
+\]
+
+Taking the logarithm and varying to first order:
+
+\[
+\delta \ln D_V(z) = \frac{2}{3} \frac{\delta D_M(z)}{D_{M,0}(z)} - \frac{1}{3} \frac{\delta H(z)}{H_0(z)}.
+\]
+
+Using \(\delta H(z)/H_0(z) = \frac{1}{2 E_0(z)^2} X(z)\) and the integral for \(\delta D_M(z)\), the master equation is:
+
+\[
+\delta \ln D_V(z) = -\frac{c}{3 H_0 D_{M,0}(z)} \int_0^z \frac{X(z')}{E_0(z')^3} dz' - \frac{1}{6 E_0(z)^2} X(z).
+\]
+
+For a memory-dependent process such as the OU model, the fluctuation at redshift \(z'\) affects observations at higher redshifts through the integral coupling. We define the **susceptibility kernel** \(\chi(z, z')\) such that:
+
+\[
+\delta \ln D_V(z) = \int_0^z \chi(z, z') X(z') dz'.
+\]
+
+Comparing terms, the exact mathematical structure of the susceptibility is a **distribution composed of an accumulative integral term and a local Dirac delta term**:
+
+\[
+\chi(z, z') = -\frac{c}{3 H_0 D_{M,0}(z) E_0(z')^3} \Theta(z - z') - \frac{1}{6 E_0(z)^2} \delta_D(z - z'),
+\]
+
+where \(\Theta(z - z')\) is the Heaviside step function (enforcing cosmic causality) and \(\delta_D\) is the Dirac delta function.
+
+**Consequence for the precision floor and covariance.** The induced BAO scatter (precision floor) is not a simple algebraic function of the local redshift. Because the observable \(\delta\ln D_V(z)\) depends on an integral weighted by \(E_0(z')^3\) in the denominator, the model predicts that **accumulated fluctuations at low redshifts (\(z \sim 0.3\)) have a significant impact on the uncertainty of high-redshift bins (\(z \sim 1.5\))**. The covariance between BAO residuals at redshifts \(z_i\) and \(z_j\) is therefore given by the double integral:
+
+\[
+C_{ij}^{\rm OU} = \int_0^{z_i} \int_0^{z_j} \chi(z_i, z') \, \chi(z_j, z'') \, \operatorname{Cov}[X(z'), X(z'')] \, dz' dz'',
+\]
+
+with \(\operatorname{Cov}[X(z'), X(z'')]\) given by the OU exponential kernel modulated by the activation factor \(g(z)\).
+
+This exact integral structure naturally produces the non-trivial lag correlations observed in Section 6: the accumulated weight of low-\(z\) fluctuations can induce positive lag-1 correlations while flipping the sign of lags 2 and 3, depending on the redshift weighting. This justifies why a pure local \(S(z)\) approximation was insufficient for the lag test.
+
+*Numerical implementation of this integral kernel is provided in the companion code (`ou_bao_likelihood.py` and `cross_correlation_DESI.py`), which replaces the discrete \(S(z)\) table with the exact integral propagation for covariance estimation.*
 
 ## 4. Test 1: BAO Likelihood with OU Covariance
 
@@ -314,19 +350,25 @@ A subtle but crucial consequence of our stochastic framework is the Rayleigh res
 Any kernel oscillation with \(\omega_R < \omega_{R,\min}\) produces less than one visible cycle across the survey and cannot be distinguished from a pure OU process (\(\omega_R = 0\)), regardless of photometric precision.
 
 For **DESI DR2**, the full redshift range \(z \in [0.295, 2.330]\) gives:
+
 \[
 \Delta x_{\rm DESI} = \ln\left(\frac{1+2.330}{1+0.295}\right) = \ln(2.571) \approx 0.944,
 \]
+
 which implies:
+
 \[
 \omega_{R,\min}^{\rm DESI} \approx \frac{2\pi}{0.944} \approx 6.66.
 \]
 
 For **Euclid DR1**, the expected galaxy sample covers a narrower range, approximately \(z \in [0.9, 1.8]\), giving:
+
 \[
 \Delta x_{\rm Euclid} = \ln\left(\frac{1+1.8}{1+0.9}\right) = \ln(1.474) \approx 0.388,
 \]
+
 which implies:
+
 \[
 \omega_{R,\min}^{\rm Euclid} \approx \frac{2\pi}{0.388} \approx 16.2.
 \]
