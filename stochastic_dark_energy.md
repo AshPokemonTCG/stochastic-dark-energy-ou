@@ -136,13 +136,15 @@ Linear propagation yields an induced BAO scatter (the "precision floor"):
 
 $$\sigma_{\alpha,\text{floor}}(z) \approx |S(z)| \, \sigma_{\Omega_\Lambda}(z).$$
 
-### 3.2 Calibration with DESI DR1 (Illustrative Upper Limit)
+### 3.2 Calibration (Superseded by MLE)
 
-To illustrate the magnitude of the precision floor, we allocate a conservative fraction f_net = 0.15 of the observed variance at the anchor bin z_eff = 0.71 to an irreducible network component. **This is a plausible upper limit for current DESI precision; the actual fraction is unconstrained and is precisely what the data will test.** Using σ_α,obs(0.71) ≈ 0.012:
+Earlier versions of this work used an illustrative calibration with \(f_{\text{net}} = 0.15\) and \(\sigma_X \sim 0.018\) based on DESI DR1. This calibration is **superseded** by the MLE analysis presented in Section 4.2, which treats \(\theta\) and \(\sigma_X\) as free parameters and yields \(\sigma_X \to 0\). The only relevant quantity is the 95% upper limit:
 
-$$\sigma_{\alpha,\text{floor}}(0.71) = \sqrt{0.15} \times 0.012 = 4.65 \times 10^{-3}.$$
+\[
+\sigma_X < 1.5 \times 10^{-4}.
+\]
 
-Using the kernel value S(0.71) = -0.312, we infer σ_Ω_Λ(0.71) ≈ 1.49 × 10^-2. For θ = 1.2, this gives σ ≈ 2.31 × 10^-2. **These parameters are illustrative only; the actual fit (Section 4.2) treats θ and σ_X as free parameters.**
+All numerical results in this work are based on this MLE fit, not on the illustrative calibration.
 
 ### 3.3 Precision Floor Implementation (Discrete Kernel)
 
