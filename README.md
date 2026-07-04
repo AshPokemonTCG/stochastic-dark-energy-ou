@@ -18,20 +18,6 @@ in x = ln a, with mean-reversion rate θ and diffusion amplitude σ.
 
 ---
 
-## Repository Structure
-
-```
-stochastic-dark-energy-ou/
-├── code/
-│   ├── ou_bao_likelihood.py           ← BAO likelihood + lag-correlation test
-│   └── cross_correlation_DESI.py      ← HEALPix cross-correlation pipeline
-├── docs/
-│   ├── sensitivity_kernel_table.md    ← S(z) for all DESI tracers
-└── README.md
-```
-
----
-
 ## Key Results (July 2026)
 
 ### Test 1 — BAO Likelihood with OU Covariance
