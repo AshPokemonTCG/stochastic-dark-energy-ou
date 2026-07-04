@@ -1,459 +1,557 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Test de Red Estocástica para DESI DR2
-Fecha: Febrero 2026
+ou_bao_stochastic_test.py
+=========================
+Stochastic Dark Energy Network Test: OU and QNM Kernels vs DESI BAO
 
-INSTRUCCIONES PARA DESI DR2:
-1. Descarga los alphas BAO de la Tabla principal de arXiv:2503.14738
-2. Sustituye los arrays z_eff, alpha, sigma con los valores de DR2
-3. Ejecuta: python desi2_ready_v2.py
+Author:  Jesús Morales Souhail
+ORCID:   0009-0000-7637-1818
+Date:    July 2026
+Version: 2.1 (corrected, reviewer-ready)
 
-NOVEDADES (extensión QNM):
-- Kernel oscilatorio amortiguado: C(Δx) = σ² e^{-θΔx} cos(ω_R Δx)
-- Motivación: modos cuasi-normales del horizonte de de Sitter
-- OU puro es el límite omega_R → 0 (masa efectiva > 3H/2)
-- H0 (OU puro) vs H1 (oscilatorio) comparados con AIC/BIC
-- Test de linealidad Δη vs Δx para validar proyección temporal
+DATA SOURCE (current):
+  DESI DR1 BAO, arXiv:2404.03000, Table 3
+  Isotropic alpha measurements, 7 redshift bins.
+
+  To update to DESI DR2 (arXiv:2503.14738):
+    Replace z_eff, alpha, sigma arrays in the DATA SECTION below.
+    Verify that S_z values match the DR2 fiducial cosmology YAML.
+
+MODELS COMPARED:
+  ΛCDM   : diagonal covariance (measurement errors only)
+  H0 (OU): C_total = C_std + C_OU(theta, sigma_X)       [k=2 free params]
+  H1 (QNM): C_total = C_std + C_QNM(theta, sigma_X, omega_R) [k=3 free params]
+
+  OU kernel:  C(Δx) = σ_X² · exp(-θ · Δx)
+  QNM kernel: C(Δx) = σ_X² · exp(-θ · Δx) · cos(ω_R · Δx)
+
+  Physical interpretation of QNM:
+    In de Sitter space, scalar QNM frequencies are complex:
+    ω = ω_I + i·ω_R, where ω_I = θ (decay rate) and ω_R (oscillation).
+    The dispersion relation: ω_R² = (m_eff/H)² - 9/4
+    If m_eff/H < 3/2: ω_R = 0 → OU limit (H0).
+    If m_eff/H > 3/2: ω_R > 0 → oscillatory kernel (H1).
+    If θ ≈ 0 in fit: undamped oscillation (unphysical for de Sitter QNM).
+
+USAGE:
+  pip install numpy scipy matplotlib
+  python ou_bao_stochastic_test.py
+
+OUTPUTS:
+  - Console: model comparison table, fit parameters, lag correlations
+  - plots/test_desi_QNM.png: 4-panel diagnostic figure
+
+REFERENCES:
+  [1] DESI DR1 BAO: arXiv:2404.03000 (2024)
+  [2] DESI DR2 BAO: arXiv:2503.14738 (2025)
+  [3] de Sitter QNM: Beyer (2011), López-Ortega (2012)
+  [4] Uhlenbeck & Ornstein, Phys. Rev. 36, 823 (1930)
 """
 
 import numpy as np
 from scipy.linalg import cholesky, solve_triangular
-from scipy.optimize import minimize_scalar, minimize
+from scipy.optimize import minimize
+from scipy.integrate import quad
+from scipy.stats import pearsonr
 import matplotlib.pyplot as plt
 import warnings
+import os
+
 warnings.filterwarnings('ignore')
 
 # ============================================================
-# DATOS - SUSTITUIR CON DESI DR2 CUANDO ESTÉN DISPONIBLES
+# SECTION 1: DATA
+# Source: DESI DR1, arXiv:2404.03000, Table 3
+# Replace these arrays with DR2 values (arXiv:2503.14738) when available.
 # ============================================================
-# Actualmente: DESI DR1 (arXiv:2404.03000, Tabla 3)
-# Para DR2: reemplaza estos 3 arrays con valores de arXiv:2503.14738
+DATA_SOURCE = "DESI DR1 (arXiv:2404.03000)"
 
 z_eff  = np.array([0.295, 0.510, 0.706, 0.934, 1.321, 1.484, 2.330])
 alpha  = np.array([0.9857, 0.9911, 0.9749, 0.9886, 0.9911, 1.0032, 0.9971])
 sigma  = np.array([0.0093, 0.0077, 0.0067, 0.0046, 0.0071, 0.0153, 0.0082])
 
-# ============================================================
-# KERNEL DE SENSIBILIDAD BAO - S(z) = ∂ ln D_V / ∂Ω_Λ
-# Calculado con cosmología base plana (Ω_m=0.315, H0=67.4)
-# ⚠ Debe actualizarse con fiducial exacta de DESI (archivo YAML)
-# ============================================================
+# Sensitivity kernel S(z) = d ln D_V(z) / d Omega_Lambda
+# Computed for flat ΛCDM fiducial: Omega_m=0.315, H0=67.4 km/s/Mpc
+# NOTE: must be recomputed if fiducial cosmology changes (see Appendix A of paper).
 S_z = np.array([-0.284, -0.462, -0.595, -0.719, -0.870, -0.917, -1.070])
 
 # ============================================================
-# PARÁMETROS MODELO OU BASE
+# SECTION 2: BASE OU PARAMETERS (calibrated, Section 3.2 of paper)
 # ============================================================
-theta_base  = 1.2
-sigma_OU    = 2.31e-2   # σ_X = desviación estándar de δΩ_Λ
-sigma_X2    = sigma_OU**2
+THETA_BASE = 1.2        # mean-reversion rate (calibrated)
+SIGMA_OU   = 2.31e-2    # sigma_X (calibrated from DESI DR1 anchor bin)
+SIGMA_X2   = SIGMA_OU**2
+
+# Physical constraint: in de Sitter QNM, theta and omega_R are not
+# independent. The dispersion relation gives:
+# (m_eff/H)^2 = theta^2 + omega_R^2 + 9/4
+# A fit with theta << omega_R implies near-undamped oscillation (unphysical).
+THETA_MIN = 1e-3   # numerical floor to avoid exact zero (optimizer artifact)
+OMEGA_R_MAX = 10.0  # upper bound for omega_R scan
 
 # ============================================================
-# KERNELS DE CORRELACIÓN
+# SECTION 3: KERNEL FUNCTIONS
 # ============================================================
 
 def kernel_OU(delta_x, theta, sigma_X2):
     """
-    Kernel Ornstein-Uhlenbeck puro (H0).
+    Ornstein-Uhlenbeck kernel (H0).
     C(Δx) = σ_X² · exp(-θ · Δx)
-    Límite: omega_R = 0 (masa efectiva > 3H/2 en de Sitter)
+    Limit: omega_R → 0 (field mass m_eff >= 3H/2 in de Sitter).
     """
     return sigma_X2 * np.exp(-theta * delta_x)
 
+
 def kernel_QNM(delta_x, theta, sigma_X2, omega_R):
     """
-    Kernel oscilatorio amortiguado (H1) - extensión QNM.
-    C(Δx) = σ_X² · exp(-θ · Δx) · cos(omega_R · Δx)
-    
-    Motivación física:
-    - Los modos cuasi-normales del horizonte de de Sitter tienen frecuencia
-      compleja ω = ω_I + i·ω_R (Beyer 2011, López-Ortega 2012)
-    - Para campo escalar con masa m_eff < 3H/2: ω_R real y != 0
-      → correlaciones oscilatorias en el tiempo
-    - Para m_eff >= 3H/2: ω_R → 0, recupera OU puro (H0)
-    - theta ≡ ω_I (tasa de decaimiento), omega_R (frecuencia de oscilación)
-    - La relación theta/omega_R = ω_I/ω_R depende de m_eff/H
-      → restricción entre parámetros, no son independientes
-    
-    Proyección a BAO:
-    C_α(zᵢ, zⱼ) = S(zᵢ) · S(zⱼ) · C(|ln(1+zᵢ) - ln(1+zⱼ)|)
-    
-    Validez: verificar linealidad Δη vs Δx en rango z < 3 (ver test abajo)
+    Damped oscillatory kernel (H1) — quasi-normal mode extension.
+    C(Δx) = σ_X² · exp(-θ · Δx) · cos(ω_R · Δx)
+
+    Physical note: theta = ω_I (imaginary part), omega_R = real part.
+    For a scalar field in de Sitter: ω_R² = (m_eff/H)² - 9/4.
+    If theta ≈ 0 in the MLE fit, the mode is near-undamped:
+    this is technically allowed but physically unusual for de Sitter QNM
+    and likely indicates degeneracy with only 7 data bins.
     """
     return sigma_X2 * np.exp(-theta * delta_x) * np.cos(omega_R * delta_x)
 
+
 def build_cov_total(z_arr, sigma_arr, S_arr, theta, sigma_X2, omega_R=0.0):
     """
-    Construye covarianza total: C_total = C_inst + C_kernel
-    
-    C_inst = diag(sigma_obs²)   [incertidumbre instrumental]
-    C_kernel_ij = S(zᵢ)·S(zⱼ)·K(|Δx_ij|)   [señal estocástica]
-    
-    Si omega_R=0 → OU puro (H0)
-    Si omega_R>0 → oscilatorio QNM (H1)
+    Total covariance: C_total = C_inst + C_signal
+
+    C_inst_ii   = sigma_obs(z_i)^2    [measurement noise, diagonal]
+    C_signal_ij = S(z_i) * S(z_j) * K(|x_i - x_j|)  [OU/QNM signal]
     """
     n = len(z_arr)
-    x = np.log(1 + z_arr)  # variable logarítmica
-    
-    C_inst = np.diag(sigma_arr**2)
+    x = np.log(1.0 + z_arr)
+
+    C_inst   = np.diag(sigma_arr**2)
     C_signal = np.zeros((n, n))
-    
+
     for i in range(n):
         for j in range(n):
-            delta_x = abs(x[i] - x[j])
+            dx = abs(x[i] - x[j])
             if omega_R == 0.0:
-                K = kernel_OU(delta_x, theta, sigma_X2)
+                K = kernel_OU(dx, theta, sigma_X2)
             else:
-                K = kernel_QNM(delta_x, theta, sigma_X2, omega_R)
+                K = kernel_QNM(dx, theta, sigma_X2, omega_R)
             C_signal[i, j] = S_arr[i] * S_arr[j] * K
-    
+
     return C_inst + C_signal
 
-def log_likelihood(residuals, cov_matrix):
+# ============================================================
+# SECTION 4: LIKELIHOOD
+# ============================================================
+
+def log_likelihood_gaussian(residuals, cov_matrix):
     """
-    log-likelihood Gaussiano multivariado.
-    logL = -0.5 * [r^T C^{-1} r + ln|C| + n·ln(2π)]
+    Multivariate Gaussian log-likelihood.
+    logL = -0.5 * [r^T C^{-1} r + ln|C| + n*ln(2π)]
+    Returns -inf if C is not positive definite.
     """
     n = len(residuals)
     try:
-        L = cholesky(cov_matrix, lower=True)
-        y = solve_triangular(L, residuals, lower=True)
-        log_det = 2 * np.sum(np.log(np.diag(L)))
-        logL = -0.5 * (np.dot(y, y) + log_det + n * np.log(2 * np.pi))
-        return logL
-    except Exception:
+        L      = cholesky(cov_matrix, lower=True)
+        y      = solve_triangular(L, residuals, lower=True)
+        logdet = 2.0 * np.sum(np.log(np.diag(L)))
+        return -0.5 * (np.dot(y, y) + logdet + n * np.log(2.0 * np.pi))
+    except np.linalg.LinAlgError:
         return -np.inf
 
 # ============================================================
-# TEST DE LINEALIDAD Δη vs Δx
-# Valida que la proyección kernel QNM es válida en z < 3
+# SECTION 5: MODEL FITTING (MLE)
 # ============================================================
 
-def test_linearity_deta_dx(z_arr, H0=67.4, Om=0.315):
+def fit_OU(residuals, z_arr, sigma_arr, S_arr):
     """
-    Verifica la linealidad entre tiempo conforme η y x = ln(1+z).
-    
-    En de Sitter exacto: Δη ∝ e^{-x}  (no lineal)
-    En el rango observacional z < 3 con Λ dominante tardío:
-    la relación se aproxima a lineal → el kernel en Δη ≈ kernel en Δx
-    
-    Este test numérico justifica (o invalida) la proyección C(Δη) → C(Δx).
+    H0: OU pure. Free parameters: theta, sigma_X.
+    Returns dict with best-fit params, logL, AIC, BIC.
     """
-    from scipy.integrate import quad
-    
-    c = 2.998e5  # km/s
-    
-    def H(z_):
-        return H0 * np.sqrt(Om * (1+z_)**3 + (1 - Om))
-    
-    # tiempo conforme η(z) = ∫ dz / H(z) · c  [en unidades Mpc/km·s]
-    eta = []
-    x_arr = []
-    for z in z_arr:
-        eta_val, _ = quad(lambda zp: c / H(zp), 0, z)
-        eta.append(eta_val)
-        x_arr.append(np.log(1 + z))
-    
-    eta = np.array(eta)
-    x_arr = np.array(x_arr)
-    
-    # Normalizar para comparar forma
-    eta_norm = (eta - eta.min()) / (eta.max() - eta.min())
-    x_norm   = (x_arr - x_arr.min()) / (x_arr.max() - x_arr.min())
-    
-    # Pearson r entre Δη y Δx para todos los pares
-    pairs_deta = []
-    pairs_dx   = []
-    for i in range(len(z_arr)):
-        for j in range(i+1, len(z_arr)):
-            pairs_deta.append(abs(eta[i] - eta[j]))
-            pairs_dx.append(abs(x_arr[i] - x_arr[j]))
-    
-    pairs_deta = np.array(pairs_deta)
-    pairs_dx   = np.array(pairs_dx)
-    r = np.corrcoef(pairs_deta, pairs_dx)[0, 1]
-    
-    return r, pairs_deta, pairs_dx, x_arr, eta
-
-# ============================================================
-# AJUSTE LIBRE DE PARÁMETROS
-# ============================================================
-
-def fit_model(residuals, z_arr, sigma_arr, S_arr, model='OU'):
-    """
-    Ajuste por MLE de los parámetros del modelo.
-    H0 (OU):  parámetros libres = (theta, sigma_X2)     → k=2
-    H1 (QNM): parámetros libres = (theta, sigma_X2, omega_R) → k=3
-    """
-    def neg_logL_OU(params):
+    def neg_logL(params):
         theta_, log_s2 = params
-        if theta_ <= 0 or log_s2 < -20 or log_s2 > 0:
+        if theta_ <= THETA_MIN or log_s2 < -20.0 or log_s2 > -1.0:
             return 1e10
-        s2 = np.exp(log_s2)
-        C = build_cov_total(z_arr, sigma_arr, S_arr, theta_, s2, omega_R=0.0)
-        return -log_likelihood(residuals, C)
-    
-    def neg_logL_QNM(params):
-        theta_, log_s2, omega_R_ = params
-        if theta_ <= 0 or log_s2 < -20 or log_s2 > 0 or omega_R_ < 0:
-            return 1e10
-        s2 = np.exp(log_s2)
-        C = build_cov_total(z_arr, sigma_arr, S_arr, theta_, s2, omega_R=omega_R_)
-        return -log_likelihood(residuals, C)
-    
-    if model == 'OU':
-        x0 = [1.2, np.log(sigma_X2)]
-        res = minimize(neg_logL_OU, x0, method='Nelder-Mead',
-                       options={'xatol': 1e-4, 'fatol': 1e-4, 'maxiter': 5000})
-        theta_opt = res.x[0]
-        s2_opt    = np.exp(res.x[1])
-        omega_R_opt = 0.0
-        logL_opt  = -res.fun
-        k = 2
-    else:  # QNM
-        best_res = None
-        best_val = np.inf
-        # Grid search en omega_R para evitar mínimos locales
-        for om0 in [0.5, 1.0, 2.0, 3.0, 5.0]:
-            x0 = [1.2, np.log(sigma_X2), om0]
-            res = minimize(neg_logL_QNM, x0, method='Nelder-Mead',
-                           options={'xatol': 1e-4, 'fatol': 1e-4, 'maxiter': 5000})
-            if res.fun < best_val:
-                best_val = res.fun
-                best_res = res
-        theta_opt   = best_res.x[0]
-        s2_opt      = np.exp(best_res.x[1])
-        omega_R_opt = best_res.x[2]
-        logL_opt    = -best_res.fun
-        k = 3
-    
-    n    = len(residuals)
-    AIC  = 2*k - 2*logL_opt
-    BIC  = k*np.log(n) - 2*logL_opt
-    
+        C = build_cov_total(z_arr, sigma_arr, S_arr,
+                            theta_, np.exp(log_s2), omega_R=0.0)
+        return -log_likelihood_gaussian(residuals, C)
+
+    x0  = [1.2, np.log(SIGMA_X2)]
+    res = minimize(neg_logL, x0, method='Nelder-Mead',
+                   options={'xatol': 1e-5, 'fatol': 1e-5, 'maxiter': 8000})
+
+    theta_opt = res.x[0]
+    s2_opt    = np.exp(res.x[1])
+    logL      = -res.fun
+    k, n      = 2, len(residuals)
+
     return {
-        'theta': theta_opt,
-        'sigma_X': np.sqrt(s2_opt),
-        'sigma_X2': s2_opt,
-        'omega_R': omega_R_opt,
-        'logL': logL_opt,
-        'k': k,
-        'AIC': AIC,
-        'BIC': BIC,
+        'theta': theta_opt, 'sigma_X': np.sqrt(s2_opt),
+        'sigma_X2': s2_opt, 'omega_R': 0.0,
+        'logL': logL, 'k': k,
+        'AIC': 2*k - 2*logL,
+        'BIC': k*np.log(n) - 2*logL,
     }
 
+
+def fit_QNM(residuals, z_arr, sigma_arr, S_arr):
+    """
+    H1: QNM damped oscillatory. Free parameters: theta, sigma_X, omega_R.
+    Grid search over omega_R to avoid local minima.
+    Physical constraint: theta >= THETA_MIN (no exact undamped modes).
+    """
+    def neg_logL(params):
+        theta_, log_s2, omega_R_ = params
+        if (theta_ <= THETA_MIN or log_s2 < -20.0 or
+                log_s2 > -1.0 or omega_R_ < 0.0 or omega_R_ > OMEGA_R_MAX):
+            return 1e10
+        C = build_cov_total(z_arr, sigma_arr, S_arr,
+                            theta_, np.exp(log_s2), omega_R=omega_R_)
+        return -log_likelihood_gaussian(residuals, C)
+
+    best_res, best_val = None, np.inf
+    for om0 in [0.5, 1.0, 1.4, 2.0, 3.0, 5.0]:
+        x0  = [1.2, np.log(SIGMA_X2), om0]
+        res = minimize(neg_logL, x0, method='Nelder-Mead',
+                       options={'xatol': 1e-5, 'fatol': 1e-5, 'maxiter': 8000})
+        if res.fun < best_val:
+            best_val, best_res = res.fun, res
+
+    theta_opt   = best_res.x[0]
+    s2_opt      = np.exp(best_res.x[1])
+    omega_R_opt = best_res.x[2]
+    logL        = -best_res.fun
+    k, n        = 3, len(residuals)
+
+    result = {
+        'theta': theta_opt, 'sigma_X': np.sqrt(s2_opt),
+        'sigma_X2': s2_opt, 'omega_R': omega_R_opt,
+        'logL': logL, 'k': k,
+        'AIC': 2*k - 2*logL,
+        'BIC': k*np.log(n) - 2*logL,
+    }
+
+    # Physical sanity check
+    result['theta_near_zero'] = (theta_opt < 0.05)
+    if result['theta_near_zero']:
+        result['warning'] = (
+            f"θ = {theta_opt:.4f} ≈ 0: near-undamped oscillation. "
+            "Likely a numerical artifact with N=7 bins, not a physical QNM. "
+            "The dispersion relation gives m_eff/H = "
+            f"{np.sqrt(omega_R_opt**2 + 9/4):.3f}, "
+            "but the near-zero decay rate is unphysical for de Sitter QNM."
+        )
+
+    # de Sitter dispersion: m_eff / H from best-fit omega_R
+    result['m_eff_over_H'] = np.sqrt(omega_R_opt**2 + theta_opt**2 + 9.0/4.0)
+
+    return result
+
 # ============================================================
-# CÁLCULO PRINCIPAL
+# SECTION 6: VALIDATION — Linearity of Δη vs Δx
+# ============================================================
+
+def test_linearity_conformal_time(z_arr, H0=67.4, Om=0.315):
+    """
+    Validates that conformal time η is approximately linear in x = ln(1+z)
+    over the survey redshift range. This justifies using Δx as the lag
+    variable in the OU/QNM kernel instead of Δη.
+
+    r > 0.999: projection C(Δη) ≈ C(Δx) is valid.
+    r ∈ [0.99, 0.999]: acceptable, include 2nd-order correction in v3.1.
+    r < 0.99: projection invalid, requires explicit Jacobian.
+
+    Note: η is computed from z=0 (today), not from the CMB.
+    This is appropriate for the DESI observational range (z < 2.5).
+    """
+    c_kms = 299792.458
+
+    def H_z(z_):
+        return H0 * np.sqrt(Om * (1.0 + z_)**3 + (1.0 - Om))
+
+    eta_arr, x_arr = [], []
+    for z in z_arr:
+        eta_val, _ = quad(lambda zp: c_kms / H_z(zp), 0.0, z)
+        eta_arr.append(eta_val)
+        x_arr.append(np.log(1.0 + z))
+
+    eta_arr = np.array(eta_arr)
+    x_arr   = np.array(x_arr)
+
+    # All pairwise differences
+    pairs_deta, pairs_dx = [], []
+    for i in range(len(z_arr)):
+        for j in range(i + 1, len(z_arr)):
+            pairs_deta.append(abs(eta_arr[i] - eta_arr[j]))
+            pairs_dx.append(abs(x_arr[i]   - x_arr[j]))
+
+    pairs_deta = np.array(pairs_deta)
+    pairs_dx   = np.array(pairs_dx)
+    r, _       = pearsonr(pairs_dx, pairs_deta)
+
+    return r, pairs_deta, pairs_dx, x_arr, eta_arr
+
+# ============================================================
+# SECTION 7: LAG CORRELATIONS (whitened residuals)
+# ============================================================
+
+def lag_correlation_whitened(residuals, cov_matrix, lag_k):
+    """
+    Pearson correlation at lag k in whitened residuals y = L^{-1} r,
+    where C = L L^T (Cholesky).
+
+    Under H_null (ΛCDM): all lags should be ~0.
+    Under H_OU:  lags decay as exp(-theta * mean_Δx_k).
+    Under H_QNM: lags follow exp(-theta * mean_Δx_k) * cos(omega_R * mean_Δx_k).
+
+    With N=7 bins, σ(ρ) ≈ 1/sqrt(N-3) ≈ 0.5, so 95% CI ≈ ±1.0.
+    No individual lag is significant at N=7.
+    """
+    if lag_k >= len(residuals):
+        return np.nan
+    try:
+        L = cholesky(cov_matrix, lower=True)
+        y = solve_triangular(L, residuals, lower=True)
+        r, _ = pearsonr(y[:-lag_k], y[lag_k:])
+        return r
+    except np.linalg.LinAlgError:
+        return np.nan
+
+# ============================================================
+# SECTION 8: MAIN COMPUTATION
 # ============================================================
 
 residuals = alpha - 1.0
 
-# --- ΛCDM baseline ---
-C_LCDM = np.diag(sigma**2)
-logL_LCDM = log_likelihood(residuals, C_LCDM)
+# ΛCDM baseline (diagonal covariance)
+C_LCDM    = np.diag(sigma**2)
+logL_LCDM = log_likelihood_gaussian(residuals, C_LCDM)
 
-# --- H0: OU puro con parámetros calibrados ---
-C_OU_calib = build_cov_total(z_eff, sigma, S_z, theta_base, sigma_X2, omega_R=0.0)
-logL_OU_calib = log_likelihood(residuals, C_OU_calib)
+# OU calibrated (fixed parameters from paper Section 3.2)
+C_OU_cal    = build_cov_total(z_eff, sigma, S_z, THETA_BASE, SIGMA_X2, 0.0)
+logL_OU_cal = log_likelihood_gaussian(residuals, C_OU_cal)
 
-# --- H0: OU puro ajustado libre ---
-fit_OU = fit_model(residuals, z_eff, sigma, S_z, model='OU')
-C_OU_fit = build_cov_total(z_eff, sigma, S_z, fit_OU['theta'], fit_OU['sigma_X2'], omega_R=0.0)
-logL_OU_fit = log_likelihood(residuals, C_OU_fit)
+# H0: OU free MLE
+result_OU  = fit_OU(residuals, z_eff, sigma, S_z)
+C_OU_fit   = build_cov_total(z_eff, sigma, S_z,
+                              result_OU['theta'], result_OU['sigma_X2'], 0.0)
 
-# --- H1: QNM oscilatorio ajustado libre ---
-fit_QNM = fit_model(residuals, z_eff, sigma, S_z, model='QNM')
-C_QNM_fit = build_cov_total(z_eff, sigma, S_z, fit_QNM['theta'], fit_QNM['sigma_X2'], fit_QNM['omega_R'])
-logL_QNM_fit = log_likelihood(residuals, C_QNM_fit)
+# H1: QNM free MLE
+result_QNM = fit_QNM(residuals, z_eff, sigma, S_z)
+C_QNM_fit  = build_cov_total(z_eff, sigma, S_z,
+                              result_QNM['theta'], result_QNM['sigma_X2'],
+                              result_QNM['omega_R'])
 
-# --- Test de linealidad Δη vs Δx ---
-r_linear, pairs_deta, pairs_dx, x_arr, eta_arr = test_linearity_deta_dx(z_eff)
+# Linearity test
+r_lin, pairs_deta, pairs_dx, x_arr, eta_arr = \
+    test_linearity_conformal_time(z_eff)
 
-# ============================================================
-# BARRIDO DE omega_R (diagnóstico)
-# ============================================================
-omega_R_grid = np.linspace(0, 8, 80)
-logL_scan = []
-for om in omega_R_grid:
-    C_tmp = build_cov_total(z_eff, sigma, S_z, theta_base, sigma_X2, omega_R=om)
-    logL_scan.append(log_likelihood(residuals, C_tmp))
-logL_scan = np.array(logL_scan)
-
-# ============================================================
-# CORRELACIONES DE LAG (covarianza completa)
-# ============================================================
-def lag_corr_full(residuals, cov_matrix, k):
-    """Correlación de lag usando whitening con covarianza completa."""
-    if k >= len(residuals):
-        return np.nan
-    try:
-        L = cholesky(cov_matrix, lower=True)
-        y = solve_triangular(L, residuals, lower=True)
-        return np.corrcoef(y[:-k], y[k:])[0, 1]
-    except Exception:
-        return np.nan
+# omega_R scan (diagnostic: ΔlogL vs omega_R with calibrated theta, sigma)
+omega_R_grid = np.linspace(0.0, OMEGA_R_MAX, 100)
+logL_scan    = np.array([
+    log_likelihood_gaussian(
+        residuals,
+        build_cov_total(z_eff, sigma, S_z, THETA_BASE, SIGMA_X2, om))
+    for om in omega_R_grid
+])
 
 # ============================================================
-# PRINT RESULTADOS
+# SECTION 9: PRINT RESULTS
 # ============================================================
-print("=" * 65)
-print("TEST RED ESTOCÁSTICA - EXTENSIÓN QNM (v2)")
-print("=" * 65)
-print(f"N bins: {len(z_eff)}")
+
+SEP = "=" * 70
+
+print(SEP)
+print("STOCHASTIC DARK ENERGY — OU + QNM KERNEL TEST")
+print(SEP)
+print(f"  Data source : {DATA_SOURCE}")
+print(f"  N bins      : {len(z_eff)}")
+print(f"  z range     : [{z_eff.min():.3f}, {z_eff.max():.3f}]")
+print(f"  WARNING: Results are PRELIMINARY with N=7 bins.")
+print(f"  95% CI on lag correlations: ≈ ±1.0 (non-significant).")
 print()
 
-print("─── COMPARACIÓN DE MODELOS ───────────────────────────────────")
-print(f"{'Modelo':<30} {'logL':>8} {'ΔlogL':>8} {'k':>3} {'AIC':>8} {'BIC':>8}")
-print("-" * 65)
-print(f"{'ΛCDM (baseline)':<30} {logL_LCDM:>8.3f} {'—':>8} {'0':>3} {'—':>8} {'—':>8}")
-
-dlogL_OU_c = logL_OU_calib - logL_LCDM
-print(f"{'OU calibrado (θ=1.2)':<30} {logL_OU_calib:>8.3f} {dlogL_OU_c:>8.3f} {'2':>3} {'—':>8} {'—':>8}")
-
-dlogL_OU_f = fit_OU['logL'] - logL_LCDM
-print(f"{'OU ajustado libre (H0)':<30} {fit_OU['logL']:>8.3f} {dlogL_OU_f:>8.3f} {fit_OU['k']:>3} {fit_OU['AIC']:>8.3f} {fit_OU['BIC']:>8.3f}")
-
-dlogL_QNM = fit_QNM['logL'] - logL_LCDM
-print(f"{'QNM oscilatorio (H1)':<30} {fit_QNM['logL']:>8.3f} {dlogL_QNM:>8.3f} {fit_QNM['k']:>3} {fit_QNM['AIC']:>8.3f} {fit_QNM['BIC']:>8.3f}")
-
-print()
-print("─── PARÁMETROS AJUSTADOS ─────────────────────────────────────")
-print(f"  H0 (OU puro):  θ = {fit_OU['theta']:.3f},  σ_X = {fit_OU['sigma_X']:.4f},  ω_R = 0 (fijo)")
-print(f"  H1 (QNM):      θ = {fit_QNM['theta']:.3f},  σ_X = {fit_QNM['sigma_X']:.4f},  ω_R = {fit_QNM['omega_R']:.3f}")
+print("─── MODEL COMPARISON ─────────────────────────────────────────")
+print(f"{'Model':<30} {'logL':>8} {'ΔlogL':>8} {'k':>3} {'AIC':>9} {'BIC':>9}")
+print("-" * 70)
+print(f"{'ΛCDM (baseline)':<30} {logL_LCDM:>8.3f} {'0.000':>8} {'0':>3} {'ref':>9} {'ref':>9}")
+print(f"{'OU calibrated (θ=1.2)':<30} {logL_OU_cal:>8.3f} "
+      f"{logL_OU_cal-logL_LCDM:>+8.3f} {'—':>3} {'—':>9} {'—':>9}")
+print(f"{'H0: OU free MLE':<30} {result_OU['logL']:>8.3f} "
+      f"{result_OU['logL']-logL_LCDM:>+8.3f} {result_OU['k']:>3} "
+      f"{result_OU['AIC']:>9.3f} {result_OU['BIC']:>9.3f}")
+print(f"{'H1: QNM free MLE':<30} {result_QNM['logL']:>8.3f} "
+      f"{result_QNM['logL']-logL_LCDM:>+8.3f} {result_QNM['k']:>3} "
+      f"{result_QNM['AIC']:>9.3f} {result_QNM['BIC']:>9.3f}")
 print()
 
-print("─── SELECCIÓN DE MODELO (AIC/BIC) ────────────────────────────")
-dAIC = fit_OU['AIC'] - fit_QNM['AIC']
-dBIC = fit_OU['BIC'] - fit_QNM['BIC']
-print(f"  ΔAIC (H0 - H1) = {dAIC:+.3f}  {'→ H1 preferido' if dAIC > 0 else '→ H0 preferido'} (>2 = notable, >6 = fuerte)")
-print(f"  ΔBIC (H0 - H1) = {dBIC:+.3f}  {'→ H1 preferido' if dBIC > 0 else '→ H0 preferido'} (>2 = positivo, >6 = fuerte)")
-print()
-print("  ⚠ Con 7 bins, selección de modelo es indicativa.")
-print("  ⚠ Test decisivo requiere 20+ bins (Euclid DR1, oct 2026).")
+print("─── BEST-FIT PARAMETERS ──────────────────────────────────────")
+print(f"  H0 (OU):  θ = {result_OU['theta']:.4f},  "
+      f"σ_X = {result_OU['sigma_X']:.5f},  ω_R = 0 (fixed)")
+print(f"  H1 (QNM): θ = {result_QNM['theta']:.4f},  "
+      f"σ_X = {result_QNM['sigma_X']:.5f},  "
+      f"ω_R = {result_QNM['omega_R']:.4f}")
+print(f"  H1 m_eff/H (de Sitter dispersion) = {result_QNM['m_eff_over_H']:.4f}")
 print()
 
-print("─── RELACIÓN θ/ω_R (test de consistencia QNM) ───────────────")
-if fit_QNM['omega_R'] > 0.01:
-    ratio = fit_QNM['theta'] / fit_QNM['omega_R']
-    print(f"  θ/ω_R = {fit_QNM['theta']:.3f} / {fit_QNM['omega_R']:.3f} = {ratio:.3f}")
-    print(f"  Este ratio = ω_I/ω_R fija m_eff/H via espectro QNM de de Sitter.")
-    print(f"  Si QNM es el mecanismo real, este ratio debe ser consistente")
-    print(f"  entre datasets independientes (DESI DR2, Euclid) → falsable.")
+# Physical warning for near-zero theta
+if result_QNM.get('theta_near_zero'):
+    print(f"  ⚠ PHYSICAL WARNING: {result_QNM['warning']}")
+    print()
+
+print("─── MODEL SELECTION (AIC/BIC) ────────────────────────────────")
+dAIC = result_OU['AIC'] - result_QNM['AIC']
+dBIC = result_OU['BIC'] - result_QNM['BIC']
+winner_AIC = "H1 preferred" if dAIC > 0 else "H0 preferred"
+winner_BIC = "H1 preferred" if dBIC > 0 else "H0 preferred"
+print(f"  ΔAIC(H0 − H1) = {dAIC:+.3f}  → {winner_AIC}  (|Δ| > 2 notable, > 6 strong)")
+print(f"  ΔBIC(H0 − H1) = {dBIC:+.3f}  → {winner_BIC}  (|Δ| > 2 positive, > 6 strong)")
+print()
+print("  ⚠ With N=7 bins, model selection is INDICATIVE only.")
+print("  ⚠ Decisive test: >20 bins (Euclid DR1, expected H2 2026).")
+print()
+
+print("─── QNM CONSISTENCY: θ/ω_R RATIO ────────────────────────────")
+if result_QNM['omega_R'] > 0.05:
+    ratio = result_QNM['theta'] / result_QNM['omega_R']
+    print(f"  θ/ω_R = {result_QNM['theta']:.4f} / "
+          f"{result_QNM['omega_R']:.4f} = {ratio:.4f}")
+    print(f"  (This ratio = ω_I/ω_R constrains m_eff/H in de Sitter QNM.)")
+    print(f"  Falsification criterion F6: if this ratio is inconsistent")
+    print(f"  between DESI DR1, DR2, and Euclid → QNM kernel incoherent.")
 else:
-    print(f"  ω_R ≈ 0: ajuste prefiere OU puro (masa efectiva >= 3H/2 en de Sitter)")
+    print(f"  ω_R ≈ {result_QNM['omega_R']:.4f}: fit converged near OU limit.")
+    print(f"  H1 is numerically degenerate with H0 at this precision.")
 print()
 
-print("─── TEST LINEALIDAD Δη vs Δx ─────────────────────────────────")
-print(f"  Correlación Pearson(Δη, Δx) para todos los pares = {r_linear:.6f}")
-if r_linear > 0.999:
-    print(f"  ✓ Linealidad excelente en z ∈ [{z_eff.min():.3f}, {z_eff.max():.3f}]")
-    print(f"    → Proyección kernel QNM: C(Δη) ≈ C(Δx) VÁLIDA en este rango")
-elif r_linear > 0.99:
-    print(f"  ~ Linealidad buena pero no perfecta. Considerar corrección de orden 2.")
+print("─── LINEARITY TEST: Δη vs Δx ────────────────────────────────")
+print(f"  Pearson r(Δη, Δx) over all {len(pairs_dx)} pairs = {r_lin:.6f}")
+if r_lin > 0.999:
+    print(f"  ✓ Excellent linearity. Projection C(Δη) ≈ C(Δx) is VALID "
+          f"for z ∈ [{z_eff.min():.2f}, {z_eff.max():.2f}].")
+elif r_lin > 0.99:
+    print(f"  ≈ Good linearity (r < 0.999). Consider 2nd-order correction "
+          f"in future versions.")
 else:
-    print(f"  ✗ No lineal. La proyección C(Δη) → C(Δx) requiere jacobiano explícito.")
+    print(f"  ✗ Non-linear. Projection C(Δη) → C(Δx) requires "
+          f"explicit Jacobian. Results may be biased.")
 print()
 
-print("─── CORRELACIONES DE LAG ─────────────────────────────────────")
-print(f"{'Lag':<6} {'Obs(ΛCDM)':>10} {'Obs(OU)':>10} {'Obs(QNM)':>10} {'Pred OU':>10} {'Pred QNM':>10}")
-print("-" * 60)
-x_bins = np.log(1 + z_eff)
-lags_lnz = [abs(x_bins[i+1] - x_bins[i]) for i in range(len(z_eff)-1)]
-for k in [1, 2, 3]:
-    rho_LCDM = lag_corr_full(residuals, C_LCDM, k)
-    rho_OU_c = lag_corr_full(residuals, C_OU_calib, k)
-    rho_QNM  = lag_corr_full(residuals, C_QNM_fit, k)
-    # predicciones teóricas promediando sobre pares
-    mean_dx = np.mean([abs(x_bins[i+k] - x_bins[i]) for i in range(len(z_eff)-k)])
-    pred_OU  = np.exp(-fit_OU['theta'] * mean_dx)
-    pred_QNM = np.exp(-fit_QNM['theta'] * mean_dx) * np.cos(fit_QNM['omega_R'] * mean_dx)
-    print(f"  {k:<4} {rho_LCDM:>10.4f} {rho_OU_c:>10.4f} {rho_QNM:>10.4f} {pred_OU:>10.4f} {pred_QNM:>10.4f}")
-print("  IC95% ≈ ±0.8 con 7 bins. Resultados indicativos, no significativos.")
+print("─── LAG CORRELATIONS (whitened residuals) ────────────────────")
+print(f"  Note: 95% CI ≈ ±{1.96/np.sqrt(len(z_eff)-3):.2f} with N={len(z_eff)} bins. "
+      f"No lag is individually significant.")
+print()
+x_bins = np.log(1.0 + z_eff)
+header = f"{'Lag':>4}  {'Obs(ΛCDM)':>11} {'Obs(OU)':>11} {'Obs(QNM)':>11}  " \
+         f"{'Pred_OU':>10} {'Pred_QNM':>10}  {'⟨Δx⟩':>7}"
+print(f"  {header}")
+print(f"  {'-'*75}")
+for lag_k in [1, 2, 3]:
+    rho_lcdm = lag_correlation_whitened(residuals, C_LCDM,    lag_k)
+    rho_ou   = lag_correlation_whitened(residuals, C_OU_fit,  lag_k)
+    rho_qnm  = lag_correlation_whitened(residuals, C_QNM_fit, lag_k)
+    mean_dx  = np.mean([abs(x_bins[i+lag_k] - x_bins[i])
+                        for i in range(len(z_eff) - lag_k)])
+    pred_ou  = np.exp(-result_OU['theta']  * mean_dx)
+    pred_qnm = (np.exp(-result_QNM['theta'] * mean_dx)
+                * np.cos(result_QNM['omega_R'] * mean_dx))
+    print(f"  {lag_k:>4}  {rho_lcdm:>+11.4f} {rho_ou:>+11.4f} {rho_qnm:>+11.4f}  "
+          f"{pred_ou:>+10.4f} {pred_qnm:>+10.4f}  {mean_dx:>7.4f}")
 print()
 
-print("─── CRITERIOS DE FALSACIÓN (actualizados) ────────────────────")
-print("  F4a: ΔlogL(OU) < 0 con 20+ bins → OU muere")
-print("  F4b: ΔlogL(QNM) < ΔlogL(OU) con 20+ bins → extensión QNM no aporta")
-print("  F6 (nuevo): θ/ω_R inconsistente entre DESI y Euclid → QNM incoherente")
-print("  F7 (nuevo): ω_R → 0 en ajuste Euclid → OU puro recuperado (no QNM)")
+print("─── FALSIFICATION CRITERIA ───────────────────────────────────")
+print("  F4a: ΔlogL(OU)  < 0 with 20+ bins           → H0 (OU) falsified")
+print("  F4b: ΔlogL(QNM) < ΔlogL(OU) with 20+ bins  → QNM adds no value")
+print("  F6:  θ/ω_R inconsistent across DESI/Euclid  → QNM kernel incoherent")
+print("  F7:  ω_R → 0 in Euclid fit                  → OU pure recovered, not QNM")
 print()
-print("=" * 65)
+print(SEP)
 
 # ============================================================
-# FIGURA (4 paneles)
+# SECTION 10: FIGURES (4 panels)
 # ============================================================
+
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-fig.suptitle('Red Estocástica + Extensión QNM — DESI BAO', fontsize=13, fontweight='bold')
+fig.suptitle(
+    f'Stochastic Dark Energy: OU + QNM Kernel Test — {DATA_SOURCE}',
+    fontsize=13, fontweight='bold'
+)
 
-# Panel 1: Residuos con bandas de ambos modelos
+# --- Panel 1: BAO residuals with model uncertainty bands ---
 ax1 = axes[0, 0]
-z_fine = np.linspace(z_eff.min(), z_eff.max(), 200)
 ax1.errorbar(z_eff, residuals, yerr=sigma, fmt='o', color='steelblue',
-             capsize=4, label='DESI DR1', zorder=5)
+             capsize=4, zorder=5, label=DATA_SOURCE)
 ax1.axhline(0, color='gray', linestyle='--', alpha=0.5, label='ΛCDM')
-# Banda OU
-sigma_floor_OU = np.sqrt([S_z[i]**2 * fit_OU['sigma_X2'] for i in range(len(z_eff))])
-ax1.fill_between(z_eff, -sigma_floor_OU, sigma_floor_OU,
-                 alpha=0.2, color='orange', label=f'OU ±1σ (θ={fit_OU["theta"]:.2f})')
-# Banda QNM (σ efectiva = σ_X · |S(z)| · |cos oscila|^{1/2} aproximado)
-sigma_floor_QNM = np.sqrt([S_z[i]**2 * fit_QNM['sigma_X2'] for i in range(len(z_eff))])
-ax1.fill_between(z_eff, -sigma_floor_QNM, sigma_floor_QNM,
-                 alpha=0.15, color='crimson', label=f'QNM ±1σ (θ={fit_QNM["theta"]:.2f}, ω_R={fit_QNM["omega_R"]:.2f})')
-ax1.set_xlabel('z_eff')
-ax1.set_ylabel('α - 1')
-ax1.set_title('Residuos BAO')
-ax1.legend(fontsize=8)
-ax1.grid(alpha=0.3)
+sig_ou  = np.array([abs(S_z[i]) * result_OU['sigma_X']  for i in range(len(z_eff))])
+sig_qnm = np.array([abs(S_z[i]) * result_QNM['sigma_X'] for i in range(len(z_eff))])
+ax1.fill_between(z_eff, -sig_ou, sig_ou, alpha=0.20, color='orange',
+                 label=f"OU ±1σ (θ={result_OU['theta']:.2f})")
+ax1.fill_between(z_eff, -sig_qnm, sig_qnm, alpha=0.15, color='crimson',
+                 label=f"QNM ±1σ (θ={result_QNM['theta']:.2f}, "
+                       f"ω_R={result_QNM['omega_R']:.2f})")
+ax1.set_xlabel('z_eff'); ax1.set_ylabel('α − 1')
+ax1.set_title('BAO Residuals + Model Uncertainty Bands')
+ax1.legend(fontsize=8); ax1.grid(alpha=0.3)
 
-# Panel 2: Barrido de omega_R
+# --- Panel 2: ω_R scan (ΔlogL vs omega_R) ---
 ax2 = axes[0, 1]
-ax2.plot(omega_R_grid, logL_scan - logL_LCDM, color='crimson', lw=2)
-ax2.axhline(logL_OU_calib - logL_LCDM, color='orange', linestyle='--', label=f'OU calibrado (ΔlogL={logL_OU_calib-logL_LCDM:.2f})')
-ax2.axvline(fit_QNM['omega_R'], color='crimson', linestyle=':', alpha=0.7,
-            label=f'ω_R óptimo = {fit_QNM["omega_R"]:.2f}')
-ax2.axhline(0, color='gray', linestyle='-', alpha=0.3, label='ΛCDM')
-ax2.set_xlabel('ω_R (frecuencia oscilación QNM)')
+ax2.plot(omega_R_grid, logL_scan - logL_LCDM, color='crimson', lw=2,
+         label='QNM scan (θ=1.2, σ=calibrated)')
+ax2.axhline(logL_OU_cal - logL_LCDM, color='orange', linestyle='--',
+            label=f'OU calibrated (ΔlogL={logL_OU_cal-logL_LCDM:.2f})')
+ax2.axvline(result_QNM['omega_R'], color='crimson', linestyle=':',
+            alpha=0.8, label=f"MLE ω_R = {result_QNM['omega_R']:.3f}")
+ax2.axhline(0, color='gray', alpha=0.4, label='ΛCDM')
+ax2.set_xlabel('ω_R  (QNM oscillation frequency in e-folds)')
 ax2.set_ylabel('ΔlogL vs ΛCDM')
-ax2.set_title('Barrido de ω_R (θ=1.2, σ calibrado)')
-ax2.legend(fontsize=8)
-ax2.grid(alpha=0.3)
+ax2.set_title('ω_R Scan (calibrated θ, σ — diagnostic only)')
+ax2.legend(fontsize=8); ax2.grid(alpha=0.3)
+# Rayleigh limit annotation
+from matplotlib.patches import FancyArrowPatch
+omega_R_min_DESI = 2 * np.pi / 0.944
+ax2.axvline(omega_R_min_DESI, color='navy', linestyle='-.', alpha=0.6,
+            label=f'Rayleigh limit DESI\n(ω_R,min={omega_R_min_DESI:.1f})')
+ax2.legend(fontsize=7)
 
-# Panel 3: Test linealidad Δη vs Δx
+# --- Panel 3: Linearity test Δη vs Δx ---
 ax3 = axes[1, 0]
-ax3.scatter(pairs_dx, pairs_deta / pairs_deta.max(), color='teal', alpha=0.7,
-            s=60, label=f'Pares DESI (r={r_linear:.5f})')
-x_line = np.linspace(0, max(pairs_dx)*1.05, 100)
-# Fit lineal
-p = np.polyfit(pairs_dx, pairs_deta / pairs_deta.max(), 1)
-ax3.plot(x_line, np.polyval(p, x_line), 'k--', alpha=0.5, label='Ajuste lineal')
-ax3.set_xlabel('Δx = |ln(1+zᵢ) - ln(1+zⱼ)| (variable BAO)')
-ax3.set_ylabel('Δη / max(Δη)  (tiempo conforme, normalizado)')
-ax3.set_title(f'Validación proyección: Δη vs Δx\n(r={r_linear:.5f} → proyección válida si r>0.999)')
-ax3.legend(fontsize=8)
-ax3.grid(alpha=0.3)
+ax3.scatter(pairs_dx, pairs_deta / pairs_deta.max(), color='teal',
+            alpha=0.7, s=60, zorder=5,
+            label=f'DESI pairs (r={r_lin:.5f})')
+p_fit = np.polyfit(pairs_dx, pairs_deta / pairs_deta.max(), 1)
+x_line = np.linspace(0, pairs_dx.max() * 1.05, 100)
+ax3.plot(x_line, np.polyval(p_fit, x_line), 'k--', alpha=0.5,
+         label='Linear fit')
+ax3.set_xlabel('Δx = |ln(1+z_i) − ln(1+z_j)|')
+ax3.set_ylabel('Δη / max(Δη)  [normalized conformal time]')
+ax3.set_title(f'Projection Validity: Δη vs Δx\n'
+              f'(r={r_lin:.5f}; valid if r > 0.999)')
+ax3.legend(fontsize=8); ax3.grid(alpha=0.3)
 
-# Panel 4: Kernels OU vs QNM (visualización teórica)
+# --- Panel 4: Kernel shapes OU vs QNM ---
 ax4 = axes[1, 1]
-dx_plot = np.linspace(0, 2.5, 300)
-K_OU  = np.exp(-fit_OU['theta']  * dx_plot)
-K_QNM = np.exp(-fit_QNM['theta'] * dx_plot) * np.cos(fit_QNM['omega_R'] * dx_plot)
-K_envelope = np.exp(-fit_QNM['theta'] * dx_plot)
-ax4.plot(dx_plot, K_OU,  color='orange', lw=2, label=f'OU puro: e^(-{fit_OU["theta"]:.2f}Δx)')
-ax4.plot(dx_plot, K_QNM, color='crimson', lw=2,
-         label=f'QNM: e^(-{fit_QNM["theta"]:.2f}Δx)·cos({fit_QNM["omega_R"]:.2f}Δx)')
-ax4.plot(dx_plot,  K_envelope, 'k:', alpha=0.4, lw=1.5, label='Envolvente QNM')
-ax4.plot(dx_plot, -K_envelope, 'k:', alpha=0.4, lw=1.5)
+dx_plot   = np.linspace(0.0, 2.5, 400)
+K_ou_plot = np.exp(-result_OU['theta']  * dx_plot)
+K_qnm_plot = (np.exp(-result_QNM['theta'] * dx_plot)
+              * np.cos(result_QNM['omega_R'] * dx_plot))
+K_env     = np.exp(-result_QNM['theta'] * dx_plot)
+ax4.plot(dx_plot, K_ou_plot,  color='orange', lw=2,
+         label=f"OU: exp(−{result_OU['theta']:.2f}·Δx)")
+ax4.plot(dx_plot, K_qnm_plot, color='crimson', lw=2,
+         label=f"QNM: exp(−{result_QNM['theta']:.2f}·Δx)·cos({result_QNM['omega_R']:.2f}·Δx)")
+ax4.plot(dx_plot,  K_env, 'k:', alpha=0.35, lw=1.5, label='QNM envelope')
+ax4.plot(dx_plot, -K_env, 'k:', alpha=0.35, lw=1.5)
 ax4.axhline(0, color='gray', alpha=0.4)
-# Marcar posiciones de los bins
-for x_b in np.log(1 + z_eff):
-    ax4.axvline(x_b - np.log(1 + z_eff[0]), color='steelblue', alpha=0.15, lw=0.8)
-ax4.set_xlabel('Δx = |ln(1+zᵢ) - ln(1+zⱼ)|')
-ax4.set_ylabel('Kernel de correlación C(Δx) / σ_X²')
-ax4.set_title('Kernels: OU puro (H0) vs QNM oscilatorio (H1)\n(líneas verticales: separaciones reales entre bins)')
-ax4.legend(fontsize=8)
-ax4.grid(alpha=0.3)
-ax4.set_ylim(-1.2, 1.2)
+for x_b in x_bins:
+    ax4.axvline(x_b - x_bins[0], color='steelblue', alpha=0.12, lw=0.8)
+ax4.set_xlabel('Δx = |ln(1+z_i) − ln(1+z_j)|')
+ax4.set_ylabel('C(Δx) / σ_X²')
+ax4.set_title('Kernel Shapes: OU (H0) vs QNM (H1)\n'
+              '(blue verticals: actual DESI bin separations)')
+ax4.legend(fontsize=8); ax4.grid(alpha=0.3); ax4.set_ylim(-1.25, 1.25)
 
 plt.tight_layout()
-import os
 os.makedirs('plots', exist_ok=True)
 plt.savefig('plots/test_desi_QNM.png', dpi=150, bbox_inches='tight')
-print("\nFigura guardada: plots/test_desi_QNM.png")
+print("Figure saved: plots/test_desi_QNM.png")
