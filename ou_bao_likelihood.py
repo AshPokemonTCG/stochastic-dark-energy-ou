@@ -7,7 +7,7 @@ INSTRUCCIONES PARA DESI DR2:
 2. Sustituye los arrays z_eff, alpha, sigma con los valores de DR2
 3. Ejecuta: python desi2_ready_v2.py
 
-NOVEDADES v2 (extensión QNM):
+NOVEDADES (extensión QNM):
 - Kernel oscilatorio amortiguado: C(Δx) = σ² e^{-θΔx} cos(ω_R Δx)
 - Motivación: modos cuasi-normales del horizonte de de Sitter
 - OU puro es el límite omega_R → 0 (masa efectiva > 3H/2)
