@@ -161,7 +161,7 @@ systematic analysis.
   author = {Morales Souhail, Jesús},
   title  = {Stochastic Dark Energy from a Finite Information Network},
   year   = {2026},
-  url    = {https://github.com/AshPokemonTCG]/stochastic-dark-energy-ou},
+  url    = {https://github.com/AshPokemonTCG/stochastic-dark-energy-ou},
 }
 ```
 
