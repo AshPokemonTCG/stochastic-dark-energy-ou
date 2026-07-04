@@ -199,8 +199,6 @@ $$r_{\text{cross}} = 0.1673 \pm 0.0613 \quad (Z \approx 2.73\sigma \text{ excess
 
 > **Important caveat:** With only **67 overlapping pixels**, the statistical power is limited. **Systematic effects (Galactic dust, imaging systematics) have not been controlled.** This is a preliminary motivation for DESI DR2 analysis with imaging weights, **not a confirmed detection.**
 
-Note on datasets: This result uses DESI DR1 and is presented as a preliminary cross-check. It is superseded in statistical power by the DR2 BAO analysis (Section 4.2) and does not affect the null result.
-
 ---
 
 ## 6. Test 3: Redshift Lag Correlations in BAO Residuals (The Critical Test)
@@ -250,6 +248,8 @@ The MLE fit sets the stochastic amplitude to \(\sigma_X \approx 5 \times 10^{-5}
 \]
 
 This is a factor of \(\sim 100\) lower than the illustrative calibration used in earlier versions of this work (\(\sigma_X \sim 0.018\)). Any quantum-gravity or information-theoretic model that predicts stochastic fluctuations in the dark energy density must produce fluctuations with an amplitude below this threshold to be consistent with DESI DR2.
+
+> Fig. X shows the 2D exclusion plot in the (\(\theta, \sigma_X\)) plane, with the MLE best fit marked in red and the 95% CL contour shaded.
 
 ### 7.2 The Smoothness of Dark Energy: A Theoretical Constraint
 
