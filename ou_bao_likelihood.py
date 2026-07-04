@@ -8,7 +8,6 @@ Stochastic Dark Energy Network Test: OU and QNM Kernels vs DESI BAO
 Author:  Jesús Morales Souhail
 ORCID:   0009-0000-7637-1818
 Date:    July 2026
-Version: 2.1 (corrected, reviewer-ready)
 
 DATA SOURCE (current):
   DATA_SOURCE = "DESI DR2 (arXiv:2503.14738)"
