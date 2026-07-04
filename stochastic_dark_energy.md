@@ -17,6 +17,88 @@ We find a definitive null result: the MLE forces the stochastic amplitude to zer
 
 We interpret this null result as evidence for the **holographic rigidity** of the vacuum: dark energy behaves as a deterministic, homogeneous scalar field (quintessence) or an effective geometric term, rather than a granular medium. The absence of local stochastic noise imposes a strong constraint on quantum-gravity models predicting spacetime from discrete information networks. The decisive test for any residual granularity will require the >20 bins of Euclid DR1 (expected H2 2026).
 
+"Our result does not resolve the absolute cosmological constant problem—the notorious 
+10
+120
+10 
+120
+  discrepancy between the observed vacuum energy density (
+ρ
+Λ
+∼
+10
+−
+47
+G
+e
+V
+4
+ρ 
+Λ
+​
+ ∼10 
+−47
+ GeV 
+4
+ ) and the theoretical quantum-field-theory estimate (
+M
+P
+l
+4
+∼
+10
+76
+G
+e
+V
+4
+M 
+Pl
+4
+​
+ ∼10 
+76
+ GeV 
+4
+ ). That fine-tuning remains one of the deepest unsolved questions in physics. However, our result addresses a different, equally fundamental aspect of the problem: the spatial and temporal smoothness of the vacuum.
+
+The upper limit 
+σ
+X
+<
+1.5
+×
+10
+−
+4
+σ 
+X
+​
+ <1.5×10 
+−4
+  implies that the dark energy density is not only fine-tuned to a specific value, but that this value is realized with extraordinary homogeneity across the observable universe. There is no detectable local fluctuation, no 'roughness' or 'noise' in the field. In other words, whatever cancellation mechanism is responsible for the smallness of 
+Λ
+Λ (whether anthropic selection, a symmetry, or a dynamical attractor), it must operate with such precision that it suppresses local fluctuations by more than four orders of magnitude relative to the background density.
+
+This result is consistent with standard quintessence models where the scalar field is ultra-light and coherent over cosmological scales. In this scenario, the field's mass must satisfy 
+m
+ϕ
+≲
+10
+−
+5
+ 
+e
+V
+m 
+ϕ
+​
+ ≲10 
+−5
+ eV, placing it in the regime of fuzzy dark matter candidates. The vacuum behaves as a rigid quantum fluid, lacking the internal degrees of freedom that would produce the stochastic noise ruled out by our analysis."
+
+
+
 ---
 
 ## 1. Introduction
