@@ -19,7 +19,7 @@ We derive three observational tests using public DESI and Pantheon+ data:
 
 3. **Redshift lag correlations in BAO residuals.** The OU kernel predicts ρ_1 ≈ 0.78, ρ_2 ≈ 0.62, ρ_3 ≈ 0.49. DESI DR2 shows mixed results: lag-1 positive (consistent), lags 2–3 negative (inconsistent). **With N=7 bins and 95% CI ≈ ±1.0, no lag is individually significant.**
 
-**Conclusion:** The finite‑information stochastic framework is **not falsified** by current data. The OU likelihood improves the fit, but the model remains degenerate with only 7 bins. The decisive test requires >20 bins from Euclid DR1 (expected H2 2026).
+**Conclusion:** The finite‑information stochastic framework is **not falsified** by current data. The OU likelihood improves the fit, but the model remains degenerate with only 7 bins. The decisive test requires >20 bins from Euclid DR1 (expected November 2026).
 
 ---
 
@@ -265,9 +265,9 @@ Data: DESI DR1/DR2 BAO at data.desi.lbl.gov, Pantheon+ at github.com/PantheonPlu
 
 ---
 
-## Appendix C — Theoretical Outlook: Integral Susceptibility χ(z, z') (for v3.1)
+## Appendix C — Theoretical Outlook: Integral Susceptibility χ(z, z')
 
-The following derivation is **not** used in v3.0 but provided for future reference.
+The following derivation is **not** used in this version but provided for future reference.
 
 Starting from the perturbed Hubble parameter:
 
@@ -281,7 +281,7 @@ Defining χ(z, z') via δ ln D_V(z) = ∫_0^z χ(z, z') X(z') dz':
 
 $$\chi(z, z') = -\frac{c}{3 H_0 D_{M,0}(z) E_0(z')^3} \Theta(z - z') - \frac{1}{6 E_0(z)^2} \delta_D(z - z').$$
 
-Full numerical implementation deferred to v3.1. Current version uses discrete S(z).
+Full numerical implementation deferred to next versions. Current version uses discrete S(z).
 
 ---
 
