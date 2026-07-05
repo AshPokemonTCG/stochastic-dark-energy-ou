@@ -472,19 +472,40 @@ The decisive test for any residual granularity will require the \(>20\) redshift
 
 ### 7.4 Connection to Varying Fundamental Constants
 
-The null result \(\sigma_X < 1.5 \times 10^{-4}\) has implications for models where dark energy is a scalar field \(\phi\) that couples to the Standard Model. In such scenarios, the evolution of \(\phi\) induces variations of the fine-structure constant, \(\alpha\), and the proton-to-electron mass ratio, \(\mu = m_p/m_e\), via effective couplings \(\beta_\alpha\) and \(\beta_\mu\):
+In scalar-field dark energy models where the field is coupled to the electromagnetic sector, the effective fine-structure constant becomes a function of the field, \(\alpha(\phi)\). For a linear coupling,
 
 \[
-\frac{\Delta \alpha}{\alpha} = \beta_\alpha \, \delta \phi, \qquad
-\frac{\Delta \mu}{\mu} = \beta_\mu \, \delta \phi.
+\frac{\Delta \alpha}{\alpha} \equiv \frac{\alpha(\phi) - \alpha_0}{\alpha_0} \approx \beta \, \delta \phi,
 \]
 
-Current astrophysical constraints from quasar absorption lines, including the work of Wilczyńska et al. (2020) on the \(z = 7.085\) quasar J1120+0641, place stringent limits on these variations: \(|\Delta \alpha/\alpha| \lesssim 10^{-5}\) and \(|\Delta \mu/\mu| \lesssim 10^{-9}\) at redshifts up to \(z \sim 6\text{--}7\).
+where \(\beta\) is the effective coupling constant (with dimensions of inverse mass if \(\phi\) has mass dimension 1) and \(\delta \phi\) is the field fluctuation.
 
-Our limit \(\sigma_X < 1.5 \times 10^{-4}\) constrains the stochastic amplitude of \(\Omega_\Lambda\), which, in a scalar-field model, is related to the fluctuation \(\delta \phi\). Assuming the stochastic fluctuations of \(\phi\) are the source of variations in \(\alpha\) and \(\mu\), the same data that rule out \(\sigma_X > 10^{-4}\) also imply that \(\beta_\alpha \, \delta \phi\) and \(\beta_\mu \, \delta \phi\) must be below observational thresholds, unless the couplings are extremely suppressed.
+Assuming that the dark energy density is predominantly given by the potential energy, \(\rho_\Lambda \approx V(\phi)\), the fractional fluctuation in \(\rho_\Lambda\) is
 
-This consistency does not resolve the naturalness problem of the electron mass—the question of why \(m_e\) is \(10^5\) times smaller than the Planck scale. However, it does rule out a class of solutions where the fine-tuning is "smeared" by stochastic fluctuations of the scalar field with amplitude \(\sigma_X > 10^{-4}\). The data favor a rigid, deterministic vacuum over a granular one.
+\[
+\sigma_X \equiv \frac{\delta \rho_\Lambda}{\rho_\Lambda}
+\approx \frac{V'(\phi)}{V(\phi)} \, \delta \phi,
+\]
 
+where \(V' \equiv dV/d\phi\). Combining both expressions yields the relation between the stochastic amplitude and the variation of \(\alpha\):
+
+\[
+\frac{\Delta \alpha}{\alpha}
+\approx \beta \, \frac{V(\phi)}{V'(\phi)} \, \sigma_X.
+\]
+
+Our upper bound \(\sigma_X < 1.5 \times 10^{-4}\) therefore implies
+
+\[
+\left|\frac{\Delta \alpha}{\alpha}\right|
+\lesssim |\beta| \, \left|\frac{V}{V'}\right| \, (1.5 \times 10^{-4}).
+\]
+
+This constraint applies to the product of the coupling strength and the potential slope. The ratio \(V/V'\) has dimensions of mass; its numerical value is only meaningful after fixing the normalization of \(\phi\) (e.g., writing \(\delta \phi\) in units of \(M_{Pl}\)). For example, in Planck-suppressed models where \(\beta \sim 1/M_{Pl}\), the bound is naturally weak, while models with \(\beta \sim 1\) require \(V/V' \lesssim 10^{-1}\) to be compatible with astrophysical constraints on \(\Delta \alpha/\alpha\).
+
+Crucially, this relation does not by itself distinguish between potentials with a finite minimum and runaway potentials. It only constrains the combination \(\beta (V/V')\). A finite-minimum potential with \(V'(\phi_0) = 0\) will have \(V/V'\) diverging at the minimum, but in that same limit \(\delta \phi \to 0\) (if no excitations are present). A runaway potential can also be compatible if the coupling \(\beta\) is sufficiently suppressed or if the potential slope is very shallow.
+
+Combined with the stringent astrophysical bounds on \(\Delta \alpha/\alpha\) from quasar absorption spectroscopy (e.g., Wilczyńska et al. 2020, \(|\Delta \alpha/\alpha| \lesssim 10^{-5}\) at \(z \sim 7\)), our limit disfavors models with \(|\beta| \sim 1\) and \(|V/V'| \sim O(1)\) unless additional screening mechanisms suppress the observable variation.
 **Statement for the paper:** *“Our phenomenological upper limit \(\sigma_X < 1.5 \times 10^{-4}\), when combined with stringent astrophysical bounds on \(\Delta \alpha/\alpha\) and \(\Delta \mu/\mu\), disfavors quintessence models that produce \(O(10^{-4})\) or larger local fluctuations in the scalar field unless the couplings to the Standard Model are suppressed below observational sensitivity. It does not, however, by itself determine whether the scalar potential possesses a finite minimum or resolves naturalness.”*
 
 ## 8. Status of the Stochastic Model
