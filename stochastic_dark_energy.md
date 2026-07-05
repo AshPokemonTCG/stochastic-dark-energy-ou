@@ -350,6 +350,23 @@ Specifically, any such model must ensure that fluctuations in \(\Omega_\Lambda\)
 The decisive test for any residual granularity will require the \(>20\) redshift bins of Euclid DR1. With its improved statistical power, Euclid could detect fluctuations with \(\sigma_X > 1 \times 10^{-5}\) if they exist. Until then, DESI DR2 provides the strongest constraint on stochastic dark energy and serves as a benchmark for future models.
 ---
 
+### 7.4 Connection to Varying Fundamental Constants
+
+The null result \(\sigma_X < 1.5 \times 10^{-4}\) has implications for models where dark energy is a scalar field \(\phi\) that couples to the Standard Model. In such scenarios, the evolution of \(\phi\) induces variations of the fine-structure constant, \(\alpha\), and the proton-to-electron mass ratio, \(\mu = m_p/m_e\), via effective couplings \(\beta_\alpha\) and \(\beta_\mu\):
+
+\[
+\frac{\Delta \alpha}{\alpha} = \beta_\alpha \, \delta \phi, \qquad
+\frac{\Delta \mu}{\mu} = \beta_\mu \, \delta \phi.
+\]
+
+Current astrophysical constraints from quasar absorption lines, including the work of Wilczyńska et al. (2020) on the \(z = 7.085\) quasar J1120+0641, place stringent limits on these variations: \(|\Delta \alpha/\alpha| \lesssim 10^{-5}\) and \(|\Delta \mu/\mu| \lesssim 10^{-9}\) at redshifts up to \(z \sim 6\text{--}7\).
+
+Our limit \(\sigma_X < 1.5 \times 10^{-4}\) constrains the stochastic amplitude of \(\Omega_\Lambda\), which, in a scalar-field model, is related to the fluctuation \(\delta \phi\). Assuming the stochastic fluctuations of \(\phi\) are the source of variations in \(\alpha\) and \(\mu\), the same data that rule out \(\sigma_X > 10^{-4}\) also imply that \(\beta_\alpha \, \delta \phi\) and \(\beta_\mu \, \delta \phi\) must be below observational thresholds, unless the couplings are extremely suppressed.
+
+This consistency does not resolve the naturalness problem of the electron mass—the question of why \(m_e\) is \(10^5\) times smaller than the Planck scale. However, it does rule out a class of solutions where the fine-tuning is "smeared" by stochastic fluctuations of the scalar field with amplitude \(\sigma_X > 10^{-4}\). The data favor a rigid, deterministic vacuum over a granular one.
+
+**Statement for the paper:** *“Our phenomenological upper limit \(\sigma_X < 1.5 \times 10^{-4}\), when combined with stringent astrophysical bounds on \(\Delta \alpha/\alpha\) and \(\Delta \mu/\mu\), disfavors quintessence models that produce \(O(10^{-4})\) or larger local fluctuations in the scalar field unless the couplings to the Standard Model are suppressed below observational sensitivity. It does not, however, by itself determine whether the scalar potential possesses a finite minimum or resolves naturalness.”*
+
 ## 8. Status of the Stochastic Model
 
 With only 7 BAO bins and using a diagonal covariance approximation, the model space is highly degenerate. The lag-correlation test lacks individual significance (95% CI ≈ ±1.0). While the MLE drives \(\sigma_X \to 0\) and \(\omega_R \to 0\) for the specific case of a fixed CPL background, this does not constitute a definitive falsification of stochastic dark energy generically.
@@ -484,3 +501,5 @@ Any oscillation with ω_R < ω_R,min produces <1 visible cycle and is indistingu
 [5] Scolnic, D. et al., ApJ 938, 113 (2022).
 
 [6] Uhlenbeck, G. E. & Ornstein, L. S., Phys. Rev. 36, 823 (1930).
+
+[7] Wilczyńska, M. R., et al., "Four direct measurements of the fine-structure constant 13 billion years ago," Science Advances 6, eaay3092 (2020).
