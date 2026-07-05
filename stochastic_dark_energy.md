@@ -335,8 +335,6 @@ This is a factor of \(\sim 100\) lower than the illustrative calibration used in
 
 > Fig. X shows the 2D exclusion plot in the (\(\theta, \sigma_X\)) plane, with the MLE best fit marked in red and the 95% CL contour shaded.
 
-### 7.2 The Smoothness of Dark Energy: A Theoretical Constraint
-
 ### 7.2 Implications for Models of Dark Energy
 
 The null result obtained here is consistent with models where dark energy is a smooth, deterministic field (quintessence) or a cosmological constant. It places a phenomenological constraint on models that predict additional stochastic variance: any such model must have an amplitude \(\sigma_X < 1.5 \times 10^{-4}\) to be compatible with DESI DR2.
