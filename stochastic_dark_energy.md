@@ -17,6 +17,156 @@ We find that the MLE drives the stochastic amplitude to the numerical floor: \(\
 
 We caution that this result is subject to degeneracies between the stochastic component and the CPL parameters, which cannot be fully resolved with only 7 BAO bins. The primary contribution of this work is a validated analysis pipeline and a benchmark for future analyses with the \(>20\) bins of Euclid DR1 (expected H2 2026).
 
+"In a scalar-field dark energy model with a coupling to the electromagnetic sector, 
+Δ
+α
+/
+α
+≈
+β
+ 
+δ
+ϕ
+Δα/α≈βδϕ, and the fluctuation amplitude 
+σ
+X
+≡
+δ
+ρ
+Λ
+/
+ρ
+Λ
+σ 
+X
+​
+ ≡δρ 
+Λ
+​
+ /ρ 
+Λ
+​
+  satisfies 
+σ
+X
+=
+(
+V
+′
+/
+V
+)
+ 
+δ
+ϕ
+σ 
+X
+​
+ =(V 
+′
+ /V)δϕ. Our upper limit 
+σ
+X
+<
+1.5
+×
+10
+−
+4
+σ 
+X
+​
+ <1.5×10 
+−4
+  therefore translates into:
+
+∣
+Δ
+α
+α
+∣
+≲
+β
+ 
+V
+(
+ϕ
+)
+V
+′
+(
+ϕ
+)
+ 
+(
+1.5
+×
+10
+−
+4
+)
+.
+​
+  
+α
+Δα
+​
+  
+​
+ ≲β 
+V 
+′
+ (ϕ)
+V(ϕ)
+​
+ (1.5×10 
+−4
+ ).
+Combined with astrophysical constraints (e.g., 
+∣
+Δ
+α
+/
+α
+∣
+≲
+10
+−
+5
+∣Δα/α∣≲10 
+−5
+  from quasar spectroscopy), this requires either a small coupling 
+β
+β or a small ratio 
+V
+/
+V
+′
+V/V 
+′
+  (i.e. a very flat potential). This constraint does not determine whether 
+V
+(
+ϕ
+)
+V(ϕ) has a finite minimum or a runaway form; it only bounds the product of the coupling and the potential slope. Models with 
+β
+∼
+1
+β∼1 and 
+V
+/
+V
+′
+∼
+O
+(
+1
+)
+V/V 
+′
+ ∼O(1) are excluded unless additional screening mechanisms are present."
+
 ## Our result does not resolve the absolute cosmological constant problem
 10
 120
