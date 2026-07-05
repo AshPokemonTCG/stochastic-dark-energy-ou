@@ -396,7 +396,16 @@ Euclid Data Release 1 (expected H2 2026) will provide >20 redshift bins, resolvi
 
 We have tested a specific class of stochastic dark energy models (OU and QNM) against DESI DR2 BAO data, assuming a fixed CPL background. The MLE drives the stochastic amplitude to the numerical floor: \(\sigma_X \to 0\) and \(\omega_R \to 0\). The data are fully consistent with a smooth CPL evolution plus instrumental noise.
 
-This result places a phenomenological upper limit on the amplitude of such fluctuations: \(\sigma_X < 1.5 \times 10^{-4}\) (95% CL). While the stochastic model is not favored by the current data, a definitive conclusion requires a simultaneous fit of the stochastic parameters with the CPL background and, ideally, the \(>20\) redshift bins of Euclid DR1 (expected H2 2026). Our analysis pipeline is ready for this future test. Until then, this work serves as a benchmark limit and a validation of the methodology.
+This result places a phenomenological upper limit on the amplitude of such fluctuations: \(\sigma_X < 1.5 \times 10^{-4}\) (95% CL). While the stochastic model is not favored by the current data, a definitive conclusion requires a simultaneous fit of the stochastic parameters with the CPL background and, ideally, the \(>20\) redshift bins of Euclid DR1 (expected H2 2026).
+
+The upper limit translates into a constraint on the mass of a possible scalar field mediating dark energy: \(m_\phi \lesssim 10^{-5} \, \text{eV}\). This is consistent with ultralight boson scenarios and with astrophysical bounds on the variation of fundamental constants (e.g., \(\Delta \alpha/\alpha \lesssim 10^{-5}\) from quasar spectroscopy).
+
+More broadly, \(\sigma_X < 1.5 \times 10^{-4}\) implies that any microscopic mechanism responsible for the observed value of \(\Lambda\) must either:
+- strongly protect the coupling of the scalar field to the Standard Model (e.g., via shift symmetries), or
+- operate at scales and with mechanisms that leave an absolutely minimal cosmological imprint.
+
+Euclid DR1 will be able to distinguish between these possibilities by pushing the limit toward \(\sigma_X \sim 10^{-5}\). Our analysis pipeline is ready for this future test. Until then, this work serves as a benchmark limit and a validation of the methodology.
+
 
 ---
 
