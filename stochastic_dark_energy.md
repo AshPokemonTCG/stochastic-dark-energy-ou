@@ -140,6 +140,32 @@ where x = ln(1/(1+z)). However, for the redshift range probed by DESI (z ≲ 2.3
 
 ****Section 2.1: The Continuity Equation as the Covariant Form of the OU Process****
 
+### 2.1.1 Noether's Theorem and the Absence of Global Energy Conservation in FLRW
+
+Noether's theorem states that every continuous symmetry of the action corresponds to a conserved current and, for spacetime symmetries, a conserved charge. In Minkowski spacetime, invariance under time translations yields a conserved energy via the energy-momentum tensor \(T^{\mu\nu}\):
+
+\[
+\partial_\mu T^{\mu\nu} = 0 \quad \Longrightarrow \quad E = \int d^3x \, T^{00} = \text{constant}.
+\]
+
+In a Friedmann-Lemaître-Robertson-Walker (FLRW) spacetime with metric
+
+\[
+ds^2 = -dt^2 + a(t)^2 \left[ \frac{dr^2}{1-kr^2} + r^2 d\Omega^2 \right],
+\]
+
+the time translation vector \(\xi^\mu = (1,0,0,0)\) is **not** a Killing vector when \(\dot{a} \neq 0\). The Lie derivative of the metric along \(\xi^\mu\) is:
+
+\[
+\mathcal{L}_\xi g_{\mu\nu} = 2\dot{a} \, a \, \delta_{\mu\nu} \neq 0.
+\]
+
+Consequently, there is no conserved energy associated with time translations. This is not a statement about the local conservation of energy-momentum (which is always preserved via the contracted Bianchi identity, \(\nabla_\mu T^{\mu\nu} = 0\)), but about the absence of a global, conserved charge analogous to energy in a static spacetime.
+
+**Implication:** The cosmological fluid can exchange energy with the expanding spacetime geometry. Photons redshift; the vacuum energy density can vary. This provides the formal opening for stochastic perturbations of the vacuum sector, which we model through the Ornstein-Uhlenbeck process in Axiom A3.
+
+**Reference:** For the canonical treatment, see Wald, *General Relativity* (1984), Chapter 4; for the application to cosmology, see Carroll, *Spacetime and Geometry* (2004), Chapter 8.
+
 ****2.1.2 Covariant Foundation: From Global Symmetry Breaking to Stochastic Dynamics****
 
 ****2.1.3 The Hierarchy of Conservation Laws in Expanding Spacetime****
@@ -691,6 +717,8 @@ Any oscillation with ω_R < ω_R,min produces <1 visible cycle and is indistingu
 
 [8] Ashtekar, A. et al., "BMS supertranslations and Weinberg's soft graviton theorem," 
     JHEP 2015, 152 (2015).
+    
+[8] Wald, R. M., *General Relativity*, University of Chicago Press (1984).
 
 Note: The connection between BMS charges and the Sorkin fluctuation 
 mechanism is presented as theoretical motivation, not a derived result. 
