@@ -497,6 +497,16 @@ Within the framework of the OU/QNM stochastic model, our null result places a ph
 
 We emphasize that this constraint is specific to the model tested here and does not constitute a general test of quantum gravity. It is a phenomenological upper limit that future models must respect if they predict fluctuations in the same observable channel.
 
+> **A Bayesian analysis of systematic false positives** (see Fig. X, Appendix F) demonstrates that a tentative detection with a single cosmological probe is intrinsically degenerate with instrumental noise, unresolved foregrounds, or calibration errors. Given the ultra-weak coupling limit \(\sigma_X < 1.5 \times 10^{-4}\) dictated by the non-equilibrium Fluctuation-Dissipation Theorem (FDT), the posterior probability that an observed signal represents a genuine modification of the vacuum energy density rises sharply only when \(N\) independent probes — featuring orthogonal systematic uncertainties — yield a consistent cross-correlation structure.
+>
+> Specifically, the joint likelihood requires that the spatial and temporal correlations strictly conform to the light-cone causal constraint:
+>
+> \[
+> \Xi(\Delta x, r) \propto \frac{K_1\!\left( \theta_0 \sqrt{\Delta x^2 + (aH)^2 r^2} \right)}{\sqrt{\Delta x^2 + (aH)^2 r^2}}
+> \]
+>
+> In the absence of such multi-probe cross-validation, any isolated anomaly must be treated under the Price framework as a highly probable instrumental artifact. Consequently, the current null result derived from the DESI DR2 baryon acoustic oscillations data must be interpreted as a conservative, phenomenological upper bound on the stochastic coupling of the vacuum, subject to revision only upon robust replication by independent surveys such as the upcoming Euclid DR1 and Rubin Observatory LSST datasets.
+
 ---
 
 ### 7.4 Connection to Varying Fundamental Constants
