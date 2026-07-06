@@ -338,11 +338,11 @@ $$\sigma_{\text{eff}}(z) = \sigma \, g(z), \qquad g(z) = \frac{1}{1 + \exp[-(x -
 
 where x = ln(1/(1+z)). However, for the redshift range probed by DESI (z ≲ 2.3) and Euclid (z ≲ 2.0), g(z) is essentially unconstrained by data. We set z_* = 1.5 (illustrative), with the understanding that this parameter is degenerate with σ and cannot be independently calibrated. For all numerical results in Sections 4–6, g(z) ≈ 1 in the observed range, meaning the effective amplitude σ_X absorbs any early‑time suppression.
 
-Section 2.5: The Continuity Equation as the Covariant Form of the OU Process
+****Section 2.1: The Continuity Equation as the Covariant Form of the OU Process****
 
-2.2 Covariant Foundation: From Global Symmetry Breaking to Stochastic Dynamics
+****2.1.2 Covariant Foundation: From Global Symmetry Breaking to Stochastic Dynamics****
 
-2.3 The Hierarchy of Conservation Laws in Expanding Spacetime
+****2.1.3 The Hierarchy of Conservation Laws in Expanding Spacetime****
 
 The relationship between symmetry and conservation in General Relativity operates
 at three distinct levels that must not be conflated:
@@ -384,7 +384,7 @@ the microscopic justification for the Sorkin fluctuation $\delta\Lambda \sim
 1/\sqrt{N}$ of Axiom A2.
 
 
-2.4 The Standard Continuity Equation for Dark Energy
+****2.1.4 The Standard Continuity Equation for Dark Energy****
 
 For a cosmological fluid with equation of state wΛw_\Lambda
 wΛ​, the continuity
@@ -405,7 +405,7 @@ $$\rho_\Lambda(z) = \rho_{\Lambda,0} \cdot (1+z)^{3(1+w_0+w_a)} \cdot
 which is a smooth, deterministic evolution — no stochastic component.
 
 
-2.5 The Stochastic Continuity Equation: OU as Physical Dynamics
+****2.1.5 The Stochastic Continuity Equation: OU as Physical Dynamics****
 
 The OU process dX=−θX dx+σ dWxdX = -\theta X\,dx + \sigma\,dW_x
 dX=−θXdx+σdWx​ (Axiom A3) is not merely
@@ -456,8 +456,7 @@ finite stochastic fluctuations: either the equation of state departs from
 −1-1
 −1 (as DESI DR2 suggests), or the noise amplitude must vanish.
 
-
-2.6 Asymptotic Symmetries and the Origin of the Noise Term
+****2.1.6 Asymptotic Symmetries and the Origin of the Noise Term****
 
 The noise source ξ(t)\xi(t)
 ξ(t) has a natural interpretation in terms of the
@@ -485,8 +484,7 @@ with the observed homogeneity of the CMB and the DESI BAO measurements.
 Only the temporal BMS symmetry is broken, allowing σ≠0\sigma \neq 0
 σ=0.
 
-
-2.7 Connection to the Current Data and Upper Limit
+****2.1.7 Connection to the Current Data and Upper Limit****
 
 The null result of Section 4.2 (σX→0\sigma_X \to 0
 σX​→0 under free MLE with DESI DR2)
