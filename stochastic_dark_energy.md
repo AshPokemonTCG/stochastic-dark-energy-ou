@@ -885,3 +885,10 @@ Any oscillation with ω_R < ω_R,min produces <1 visible cycle and is indistingu
 [6] Uhlenbeck, G. E. & Ornstein, L. S., Phys. Rev. 36, 823 (1930).
 
 [7] Wilczyńska, M. R., et al., "Four direct measurements of the fine-structure constant 13 billion years ago," Science Advances 6, eaay3092 (2020).
+
+[8] Ashtekar, A. et al., "BMS supertranslations and Weinberg's soft graviton theorem," 
+    JHEP 2015, 152 (2015).
+
+Note: The connection between BMS charges and the Sorkin fluctuation 
+mechanism is presented as theoretical motivation, not a derived result. 
+A rigorous derivation is deferred to future work.
