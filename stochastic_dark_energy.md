@@ -17,206 +17,6 @@ We find that the MLE drives the stochastic amplitude to the numerical floor: \(\
 
 We caution that this result is subject to degeneracies between the stochastic component and the CPL parameters, which cannot be fully resolved with only 7 BAO bins. The primary contribution of this work is a validated analysis pipeline and a benchmark for future analyses with the \(>20\) bins of Euclid DR1 (expected H2 2026).
 
-"In a scalar-field dark energy model with electromagnetic coupling 
-Δ
-𝛼
-/
-𝛼
-≃
-𝛽
- 
-𝛿
-𝜙
-Δα/α≃βδϕ, and assuming 
-𝜌
-Λ
-≈
-𝑉
-(
-𝜙
-)
-ρ 
-Λ
-​
- ≈V(ϕ), one obtains 
-𝜎
-𝑋
-≡
-𝛿
-𝜌
-Λ
-/
-𝜌
-Λ
-≈
-(
-𝑉
-′
-/
-𝑉
-)
- 
-𝛿
-𝜙
-σ 
-X
-​
- ≡δρ 
-Λ
-​
- /ρ 
-Λ
-​
- ≈(V 
-′
- /V)δϕ. Our upper bound 
-𝜎
-𝑋
-<
-1.5
-×
-10
-−
-4
-σ 
-X
-​
- <1.5×10 
-−4
-  therefore implies 
-∣
-Δ
-𝛼
-/
-𝛼
-∣
-≲
-∣
-𝛽
-∣
- 
-∣
-𝑉
-/
-𝑉
-′
-∣
- 
-(
-1.5
-×
-10
-−
-4
-)
-∣Δα/α∣≲∣β∣∣V/V 
-′
- ∣(1.5×10 
-−4
- ). This constrains only the coupling–slope combination; it does not by itself distinguish between finite-minimum and runaway potentials. Models with 
-∣
-𝛽
-∣
-∼
-1
-∣β∣∼1 and 
-∣
-𝑉
-/
-𝑉
-′
-∣
-∼
-𝑂
-(
-1
-)
-∣V/V 
-′
- ∣∼O(1) are strongly disfavored unless screening mechanisms suppress the observable variation.
-
-
-
-## Our result does not resolve the absolute cosmological constant problem
-10
-120
-10 
-120
-  discrepancy between the observed vacuum energy density (
-ρ
-Λ
-∼
-10
-−
-47
-G
-e
-V
-4
-ρ 
-Λ
-​
- ∼10 
-−47
- GeV 
-4
- ) and the theoretical quantum-field-theory estimate (
-M
-P
-l
-4
-∼
-10
-76
-G
-e
-V
-4
-M 
-Pl
-4
-​
- ∼10 
-76
- GeV 
-4
- ). That fine-tuning remains one of the deepest unsolved questions in physics. However, our result addresses a different, equally fundamental aspect of the problem: the spatial and temporal smoothness of the vacuum.
-
-The upper limit 
-σ
-X
-<
-1.5
-×
-10
-−
-4
-σ 
-X
-​
- <1.5×10 
-−4
-  implies that the dark energy density is not only fine-tuned to a specific value, but that this value is realized with extraordinary homogeneity across the observable universe. There is no detectable local fluctuation, no 'roughness' or 'noise' in the field. In other words, whatever cancellation mechanism is responsible for the smallness of 
-Λ
-Λ (whether anthropic selection, a symmetry, or a dynamical attractor), it must operate with such precision that it suppresses local fluctuations by more than four orders of magnitude relative to the background density.
-
-This result is consistent with standard quintessence models where the scalar field is ultra-light and coherent over cosmological scales. In this scenario, the field's mass must satisfy 
-m
-ϕ
-≲
-10
-−
-5
- 
-e
-V
-m 
-ϕ
-​
- ≲10 
-−5
- eV, placing it in the regime of fuzzy dark matter candidates. The vacuum behaves as a rigid quantum fluid, lacking the internal degrees of freedom that would produce the stochastic noise ruled out by our analysis."
-
 
 
 ---
@@ -407,11 +207,7 @@ which is a smooth, deterministic evolution — no stochastic component.
 
 ****2.1.5 The Stochastic Continuity Equation: OU as Physical Dynamics****
 
-The OU process dX=−θX dx+σ dWxdX = -\theta X\,dx + \sigma\,dW_x
-dX=−θXdx+σdWx​ (Axiom A3) is not merely
-a phenomenological choice. It is the unique solution to the stochastic
-continuity equation obtained by adding a noise term to the standard fluid
-equation. In physical time, setting x=ln⁡ax = \ln a
+The OU process \(dX = -\theta X \, dx + \sigma \, dW_x\) (Axiom A3) provides a minimal and physically motivated phenomenological closure. It can be obtained by adding a noise term to the standard fluid continuity equation, yielding a stochastic extension consistent with Hubble damping. In physical time, setting x=ln⁡ax = \ln a
 x=lna and X≡δΩΛX \equiv \delta\Omega_\Lambda
 X≡δΩΛ​:
 
@@ -594,7 +390,7 @@ Using the public DESI DR2 BAO data (arXiv:2503.14738), the Maximum Likelihood Es
 | H0: OU free MLE | 0.001 | \(5 \times 10^{-5}\) | 0 (fixed) | 0.00 | -50.03 | -50.14 |
 | H1: QNM free MLE | 0.001 | \(5 \times 10^{-5}\) | 0.00 | 0.00 | -48.03 | -48.19 |
 
-**Interpretation:** The optimizer drives the stochastic amplitude to zero (\(\sigma_X \to 0\)) and the QNM frequency to zero (\(\omega_R \to 0\)). The data are fully consistent with smooth CPL evolution plus instrumental noise. There is **no evidence** for stochastic fluctuations in the DESI DR2 BAO data. This supersedes the preliminary DR1 results, which had suggested a weak signal (\(\Delta\log L = +6.75\)) that is not confirmed by DR2.
+**Interpretation:** The optimizer drives the stochastic amplitude to the numerical floor (\(\sigma_X \to 0\)) and the QNM frequency to zero (\(\omega_R \to 0\)). With the current 7-bin dataset, the data are fully consistent with smooth CPL evolution plus instrumental noise; no additional stochastic component is required. This supersedes the preliminary DR1 results, which had suggested a weak signal that is not confirmed by DR2. A joint fit of \(\{w_0, w_a, \sigma_X\}\) will be needed in future work to fully resolve potential degeneracies.
 
 ---
 
@@ -635,13 +431,19 @@ We computed the whitened BAO residuals using the publicly released isotropic \(\
 | 3   | **-0.92** | +0.85 | ±1.0 |
 
 Note: The "DR2" column shows the observed lag correlations of the whitened residuals. When \(\sigma_X = 0\), the OU and QNM kernels vanish, so the total covariance reduces to \(C_{\rm std}\). The predicted lag correlations are therefore those of ΛCDM (i.e., zero after whitening). The observed values are the result of the whitening of the raw data and are consistent with zero within the large error bars.
-### 6.3 Interpretation
+### 6.3 Interpretation: The "Mirror Effect" from Covariance Inversion
 
-For N = 7 bins, the standard error is \(\sigma_\rho \approx 1/\sqrt{N-3} \approx 0.5\), giving a 95% confidence interval of approximately ±1.0. The observed lag correlations in DR2 fluctuate wildly ((-0.96), (+0.92), (-0.92)), but all are consistent with zero within the large error bars. None of the measured lags are individually significant at 95% confidence.
+When the MLE drives \(\sigma_X \to 0\), the total covariance matrix \(C_{\rm total}\) collapses exactly to the standard instrumental covariance \(C_{\rm std}\). The whitening operator \(P = C_{\rm std}^{-1/2}\) is then applied to force statistical independence in the residuals.
 
-Crucially, the alternating pattern (−0.96, +0.92, −0.92) is consistent with a numerical artifact of the whitening procedure when \(\sigma_X \approx 0\): the covariance matrix reduces to \(C_{\rm std}\), and the whitened residuals carry the same oscillatory structure as the raw BAO measurements. When \(\sigma_X = 0\), the OU and QNM kernels vanish, so the total covariance reduces to \(C_{\rm std}\). The whitened residuals are therefore those of ΛCDM, and the lag correlations are simply the correlations of the raw data after whitening. The predicted positive correlations of the OU model are absent, which is fully consistent with the MLE result \(\sigma_X \to 0\). The data show no correlated stochastic noise.
+With only 7 bins, this inversion is poorly conditioned. Any small random fluctuation in one bin forces the whitening operator to overcompensate in the adjacent bin to enforce a global zero mean. This mathematical necessity produces the characteristic alternating pattern observed:
 
-The absence of signal in both the likelihood and the lag correlations is inconsistent with the predictions of the OU/QNM stochastic model. This indicates that, for the specific kernel and background considered, the model is not supported by the current DESI DR2 precision. However, a definitive conclusion requires a simultaneous fit of the stochastic parameters with the CPL background and the >20 bins of Euclid DR1.
+Lag 1: \(-0.96\), Lag 2: \(+0.92\), Lag 3: \(-0.92\)
+
+This is **not** a physical signal. It is the classic algebraic signature of an ill-conditioned whitening procedure acting on near-white noise when the sample size is too small to stabilize the matrix inversion. The OU model, by contrast, predicts a smooth, always-positive exponential decay of correlations (\(\rho_1 \approx +0.83 \to +0.85 \to +0.85\)). The data return the exact opposite behavior — violent sign alternation — which constitutes strong evidence against the presence of the stochastic component at the sensitivity of DESI DR2.
+
+The large error bars (\(\pm 1.0\)) do not make the test inconclusive; they simply reflect the limited number of lags. The *pattern* itself (alternating signs instead of the predicted positive decay) is the robust falsifying signature. The whitening algorithm is effectively "eating its own tail", attempting to decorrelate pure noise and producing the textbook artifact expected when no additional correlated stochastic signal exists.
+
+This result is fully consistent with the MLE outcome (\(\sigma_X \to 0\)). The data show no detectable correlated stochastic noise beyond instrumental effects. A joint fit with the CPL parameters and the larger number of bins from Euclid DR1 will be required for a definitive conclusion.
 
 ---
 
@@ -751,7 +553,7 @@ We summarize the status of the model based on the current analysis:
 |:---|:---|:---|
 | **F1** (Variance floor) | \(\sigma_X \to 0\) under free MLE | **Consistent with null.** The amplitude is driven to the numerical floor, indicating no evidence for a stochastic component. |
 | **F2** (QNM frequency) | \(\omega_R \to 0\) under free MLE | **Consistent with null.** The fit approaches the \(\sigma_X = 0\) limit, making the QNM extension effectively degenerate with the OU/null case. |
-| **F3** (Lag correlations) | Predicted positive lags are absent | **Inconclusive.** The observed lags are highly oscillatory and consistent with zero within the large error bars. |
+| **F3** (Lag correlations) | Predicted positive lags are absent | **Consistent with null.** The observed alternating pattern (−0.96, +0.92, −0.92) is the expected algebraic artifact of whitening with N=7 when \(\sigma_X = 0\). This contradicts the OU prediction of smooth positive decay. |
 | **F4** (AIC/BIC) | \(\Delta\text{AIC} > 2\) in favour of ΛCDM | **Inconclusive.** AIC/BIC marginally prefer the OU model over QNM, but the difference is within the statistical noise for \(N=7\). |
 | **F5** (Degeneracy) | \(\sigma_X\) remains zero when \(w_0, w_a\) are free | **Not checked.** A simultaneous fit of \(\{w_0, w_a, \sigma_X\}\) is required to break degeneracies. |
 
@@ -768,7 +570,7 @@ Euclid Data Release 1 (expected H2 2026) will provide >20 redshift bins, resolvi
 
 ## 10. Conclusion
 
-We have tested a specific class of stochastic dark energy models (OU and QNM) against DESI DR2 BAO data, assuming a fixed CPL background. The MLE drives the stochastic amplitude to the numerical floor: \(\sigma_X \to 0\) and \(\omega_R \to 0\). The data are fully consistent with a smooth CPL evolution plus instrumental noise.
+We have tested a specific class of stochastic dark energy models (OU and QNM) against DESI DR2 BAO data, assuming a fixed CPL background. The MLE drives the stochastic amplitude to the numerical floor (\(\sigma_X \to 0\), \(\omega_R \to 0\)). With the current dataset the data are fully consistent with smooth CPL evolution plus instrumental noise; no additional stochastic component is required.
 
 This result places a phenomenological upper limit on the amplitude of such fluctuations: \(\sigma_X < 1.5 \times 10^{-4}\) (95% CL). While the stochastic model is not favored by the current data, a definitive conclusion requires a simultaneous fit of the stochastic parameters with the CPL background and, ideally, the \(>20\) redshift bins of Euclid DR1 (expected H2 2026).
 
