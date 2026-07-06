@@ -726,6 +726,173 @@ result. A rigorous derivation is deferred to future work.*
 *This derivation is provided for theoretical completeness and as a foundation
 for future extensions with larger datasets. It is not used in the main analysis.*
 
+## Appendix H — Connection between the stochastic amplitude \(\sigma_X\) and the variation of the fine-structure constant
+
+### Introduction
+
+In this appendix we derive the quantitative relation between the phenomenological upper limit on the amplitude of stochastic dark-energy fluctuations, \(\sigma_X < 1.5\times 10^{-4}\) (obtained in Sec. 4.2 from DESI DR2 data), and the observational constraints on the variation of the fine-structure constant, \(\Delta\alpha/\alpha\), measured by the ESPRESSO spectrograph at the VLT. This link provides an independent consistency test for any scalar-field model that attempts to explain the observed dynamics.
+
+---
+
+### 1. Linear coupling to the electromagnetic sector
+
+We consider a quintessence scalar field \(\phi\) coupled to the electromagnetic sector via the interaction term
+
+\[
+\mathcal{L}_{\text{int}} = -\frac{1}{4} B_F(\phi) \, F_{\mu\nu}F^{\mu\nu},
+\]
+
+where \(F_{\mu\nu}\) is the electromagnetic field tensor and \(B_F(\phi)\) is a dimensionless function of the scalar field. Expanding around the present-day field value \(\phi_0\) to linear order,
+
+\[
+B_F(\phi) = 1 - \zeta \, \frac{\phi - \phi_0}{M_{\rm Pl}},
+\]
+
+with \(\zeta\) the (dimensionless) coupling parameter and \(M_{\rm Pl}\) the reduced Planck mass. This parametrisation induces a dependence of the fine-structure constant \(\alpha\) on the scalar field:
+
+\[
+\frac{\Delta\alpha}{\alpha}(z) \equiv \frac{\alpha(z) - \alpha_0}{\alpha_0}
+\simeq \zeta \, \frac{\Delta\phi(z)}{M_{\rm Pl}},
+\tag{H.1}
+\]
+
+where \(\Delta\phi(z) = \phi(z) - \phi_0\) is the field deviation from its present value.
+
+---
+
+### 2. Mapping the stochastic density fluctuation \(\sigma_X\)
+
+Under the stochastic model (Axiom A3), the dark-energy density experiences local fluctuations \(\delta\rho_\Lambda\) governed by an Ornstein–Uhlenbeck process. Assuming the energy density is dominated by the potential, \(\rho_\Lambda \simeq V(\phi)\), the first-order Taylor expansion gives
+
+\[
+\delta\rho_\Lambda \simeq V'(\phi) \, \delta\phi,
+\]
+
+where \(V'(\phi) = dV/d\phi\). The dimensionless stochastic amplitude defined in the main text is
+
+\[
+\sigma_X \equiv \frac{\delta\rho_\Lambda}{\rho_\Lambda}.
+\]
+
+Combining these expressions yields
+
+\[
+\sigma_X \simeq \frac{V'(\phi)}{V(\phi)} \, \delta\phi
+\quad\Longrightarrow\quad
+\delta\phi \simeq \sigma_X \, \frac{V(\phi)}{V'(\phi)}.
+\tag{H.2}
+\]
+
+Substituting Eq. (H.2) into Eq. (H.1) gives the exact link between the spectroscopic observable and the stochastic vacuum amplitude:
+
+\[
+\boxed{
+\frac{\Delta\alpha}{\alpha}
+\simeq
+\zeta \left( \frac{V(\phi)}{M_{\rm Pl} V'(\phi)} \right) \sigma_X
+}.
+\tag{H.3}
+\]
+
+This relation is independent of the specific form of the potential and only requires a linear coupling and a potential-dominated equation of state.
+
+---
+
+### 3. Injection of the ESPRESSO and DESI DR2 limits
+
+The ESPRESSO spectrograph at the VLT has provided the most precise measurement of \(\Delta\alpha/\alpha\) from metal absorption systems in high-redshift quasars. The absorber at \(z_{\rm abs} = 1.15\) towards the quasar HE 0515-4414 yields [1]:
+
+\[
+\frac{\Delta\alpha}{\alpha} =
+(1.3 \pm 1.3_{\rm stat} \pm 0.4_{\rm sys}) \times 10^{-6}.
+\]
+
+Taking the conservative \(2\sigma\) (95% CL) upper limit, with the errors added in quadrature,
+
+\[
+\left| \frac{\Delta\alpha}{\alpha} \right| \lesssim 2.7 \times 10^{-6}.
+\tag{H.4}
+\]
+
+Combining this empirical limit with the upper bound on the stochastic amplitude obtained in Sec. 4.2,
+
+\[
+\sigma_X < 1.5 \times 10^{-4} \quad (95\%\ \text{CL}),
+\]
+
+and using Eq. (H.3), we obtain a combined constraint on the product of the coupling and the potential slope:
+
+\[
+\left| \zeta \left( \frac{V(\phi)}{M_{\rm Pl} V'(\phi)} \right) \right|
+< \frac{2.7 \times 10^{-6}}{1.5 \times 10^{-4}}
+\;\Longrightarrow\;
+\boxed{
+\left| \zeta \left( \frac{V(\phi)}{M_{\rm Pl} V'(\phi)} \right) \right|
+\lesssim 1.8 \times 10^{-2}
+}.
+\tag{H.5}
+\]
+
+---
+
+### 4. Diagnostic of theoretical consistency
+
+Equation (H.5) imposes a severe fine-tuning constraint on any quintessence model that attempts to explain both cosmic acceleration and the proposed stochastic fluctuations. We consider two limiting cases:
+
+#### Case 1: Standard gravitational coupling (\(\zeta \sim \mathcal{O}(1)\))
+
+If the scalar field interacts with the gauge sector with a strength comparable to gravity, then the dimensionless potential-slope term must satisfy
+
+\[
+\left| \frac{V(\phi)}{M_{\rm Pl} V'(\phi)} \right| \lesssim 1.8 \times 10^{-2}.
+\]
+
+For an exponential potential \(V(\phi) = V_0 \exp(-\lambda\, \phi / M_{\rm Pl})\), the above ratio is \(1/\lambda\), hence
+
+\[
+\lambda \gtrsim 55.5.
+\]
+
+However, a scalar field with \(\lambda > \sqrt{24\pi} \approx 8.7\) (or even \(\lambda > 3\) in the slow-roll limit) cannot produce acceleration at the present epoch; instead it enters a tracking solution where the field energy density scales as matter or radiation, and the equation of state deviates significantly from \(-1\) [2]. This scenario is therefore incompatible with DESI DR2 observations that favour a background close to \(\Lambda\)CDM.
+
+#### Case 2: Slow-roll quintessence potential (\(\lambda \lesssim 1\))
+
+For the field to reproduce the observed accelerated expansion, the potential must be extremely flat, such that \(\left|V'/V\right| M_{\rm Pl} \lesssim 1\). In this regime, Eq. (H.5) forces
+
+\[
+\left| \zeta \right| \lesssim 1.8 \times 10^{-2}.
+\]
+
+This implies a suppression scale
+
+\[
+M_{\rm cut} \equiv \frac{M_{\rm Pl}}{|\zeta|} \gtrsim 55\, M_{\rm Pl},
+\]
+
+placing the new-physics scale well above the Planck scale. Such a suppression is technically unnatural and requires a protective symmetry mechanism, such as an axionic shift symmetry, to suppress quantum corrections from charged-particle loops [3].
+
+---
+
+### 5. Conclusion for the stochastic model
+
+The cross-check of spectroscopic (ESPRESSO) and cosmological (DESI DR2) data shows that the stochastic dark-energy model can survive only in two specific niches:
+
+1. **The scalar field is trapped in a local minimum or false vacuum** (\(V' \to 0\)), which kills the variation of fundamental constants but reduces the model to a pure cosmological constant, in tension with the dynamical evidence from DESI DR2.
+
+2. **The coupling to the electromagnetic sector is strongly suppressed** (\(|\zeta| \lesssim 10^{-2}\)), shifting the problem to the need for a screening mechanism (such as the chameleon or symmetron effect) that decouples the field in high-density environments like the quasar absorption systems probed by ESPRESSO.
+
+In either case, the combined limits exclude a free-rolling quintessence field with natural coupling as the origin of the proposed stochastic fluctuations. This result reinforces the interpretation of the bound \(\sigma_X < 1.5\times 10^{-4}\) as a robust phenomenological constraint, rather than a window to new fundamental physics.
+
+---
+
+### References
+
+[1] ESPRESSO Collaboration, "Fundamental physics with ESPRESSO: Constraining the variation of the fine-structure constant," *Astron. Astrophys.*, 2022.
+
+[2] Steinhardt, P. J., Wang, L., & Zlatev, I., "Cosmological tracking solutions," *Phys. Rev. D*, 59, 123504 (1999).
+
+[3] Carroll, S. M., "Quintessence and the rest of the world," *Phys. Rev. Lett.*, 81, 3067 (1998).
+
 ### F.1 Setup and Symmetry Conditions
 
 Define the fractional fluctuation field $X(x, \mathbf{r}) \equiv \delta\rho_\Lambda(x, \mathbf{r})/\rho_{\Lambda,0}$,
