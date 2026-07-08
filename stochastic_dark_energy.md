@@ -619,4 +619,3 @@ References
 [9] Wald, R. M., General Relativity, University of Chicago Press (1984).
 
 Note on BMS symmetries: The connection between BMS charges [8] and the Sorkin fluctuation mechanism [4] is presented as theoretical motivation, not a derived result. A rigorous derivation is deferred to future work.
-textCopiar**
