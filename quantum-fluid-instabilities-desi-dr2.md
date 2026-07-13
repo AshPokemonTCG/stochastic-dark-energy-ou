@@ -4,7 +4,6 @@
 **Date:** July 2026  
 **ORCID:** 0009-0000-7637-1818  
 **Repository:** https://github.com/AshPokemonTCG/Bogoliubov_DESI_extension  
-**Status:** Preprint — not peer reviewed
 
 ---
 
