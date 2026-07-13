@@ -32,33 +32,41 @@ In unimodular gravity the restriction \(\sqrt{-g} =\) constant is imposed (via L
 
 ---
 
-## 3. Two Interpretations
+### 3. Two Interpretations
 
-### 3.1 Interpretation A: SDiff as a Fundamental Symmetry
+The reduction of the spacetime gauge group from \(\mathrm{Diff}(M)\) to \(\mathrm{SDiff}(M)\) admits two logically distinct interpretations regarding the origin and implications of this symmetry.
 
-\(\mathrm{SDiff}(M)\) is imposed from the beginning as a fundamental principle of the theory.
+#### 3.1 Interpretation A: SDiff as a Fundamental Symmetry
 
-**Advantages:**
-- Minimal modification of General Relativity.
-- The suppression of vacuum fluctuations (\(\sigma_X \to 0\)) follows directly from the algebraic structure (trace-free projection).
-- No additional dynamical mechanism is required.
+In this view, the restriction to volume-preserving diffeomorphisms is imposed at the fundamental level. The action is constructed such that \(\sqrt{-g}\) is fixed, either by a Lagrange multiplier or by direct imposition. As a result, the determinant of the metric is not a dynamical degree of freedom.
 
-**Limitations:**
-- The choice of \(\mathrm{SDiff}(M)\) over \(\mathrm{Diff}(M)\) remains a postulate without deeper justification from first principles.
-- Does not predict the specific value of \(\Lambda\); it only explains why it does not fluctuate.
+**Consequences:**
+- Local vacuum energy contributions of the form \(T_{\mu\nu} \propto g_{\mu\nu}\) are automatically projected out by the trace-free Einstein equations.
+- Fluctuations in the vacuum density are strongly suppressed at the classical level.
+- The cosmological constant \(\Lambda\) appears as a constant of integration rather than a dynamical field.
 
-### 3.2 Interpretation B: SDiff as an Emergent Symmetry
+**Strengths:** This interpretation is minimal and provides a direct structural explanation for the observed smoothness of the vacuum.
+**Limitations:** It treats the choice of \(\mathrm{SDiff}(M)\) as a fundamental postulate without deriving it from a deeper principle.
 
-\(\mathrm{SDiff}(M)\) emerges at low energies as a consequence of the quantum entanglement structure of spacetime (holographic principle, Ryu-Takayanagi, etc.).
+#### 3.2 Interpretation B: SDiff as an Emergent Symmetry
 
-**Advantages:**
-- Opens the possibility that the value of \(\Lambda\) could be determined by the entanglement structure.
-- Allows for small residual fluctuations at scales below current sensitivity.
-- Connects unimodular gravity with approaches to quantum gravity based on information and entanglement.
+In this alternative view, the reduction to volume-preserving diffeomorphisms is not fundamental but arises as an effective low-energy phenomenon. At microscopic scales, the full diffeomorphism group may be present, but quantum entanglement and information-theoretic constraints cause the effective gauge symmetry to reduce to \(\mathrm{SDiff}(M)\) at cosmological scales.
 
-**Limitations:**
-- Highly speculative. No complete quantum gravity framework currently demonstrates that \(\mathrm{SDiff}(M)\) emerges from entanglement.
-- Predicts possible small stochastic signals that have not yet been observed.
+**Consequences:**
+- The rigidity of the volume is not exact but emerges statistically from the underlying quantum structure.
+- Small residual fluctuations in the effective cosmological constant could exist, although they may be highly suppressed.
+- This interpretation opens the possibility that the value of \(\Lambda\) itself could be determined by the entanglement structure of spacetime.
+
+**Strengths:** It connects unimodular gravity with broader ideas in quantum gravity and holography.
+**Limitations:** It remains speculative, as no complete quantum gravity framework has yet demonstrated the emergence of \(\mathrm{SDiff}(M)\) from entanglement.
+
+#### 3.3 Scope and Limitations of the SDiff Protection
+
+It is important to clarify the precise scope of the protection offered by volume-preserving diffeomorphisms. The trace-free projection inherent to unimodular gravity suppresses contributions to the energy-momentum tensor of the form \(T_{\mu\nu} \propto g_{\mu\nu}\). This mechanism effectively eliminates local fluctuations of vacuum energy that would otherwise source spacetime curvature inhomogeneously.
+
+However, this protection applies specifically to **local, inhomogeneous fluctuations**. It does not constrain the **homogeneous background evolution** of dark energy. A dynamical dark energy component with a time-varying equation of state \(w(z)\) (for example, within the Chevallier–Polarski–Linder parametrization) remains compatible with the unimodular structure, provided that fluctuations around this homogeneous background are sufficiently suppressed.
+
+In other words, unimodular gravity offers a natural explanation for the observed smoothness of the vacuum (\(\sigma_X < 1.5 \times 10^{-4}\)) but does not, by itself, favor a cosmological constant over a dynamical dark energy model at the background level. The question of whether \(w = -1\) exactly or \(w(z)\) varies remains an independent issue that must be addressed through cosmological observations (e.g., DESI, Euclid) rather than through the gauge structure of spacetime alone.
 
 ---
 
