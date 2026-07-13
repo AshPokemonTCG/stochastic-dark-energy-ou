@@ -15,7 +15,7 @@ This repository contains research on stochastic components in dark energy using 
 
 | File                                | Description |
 |-------------------------------------|-----------|
-| `stochastic_dark_energy.md`         | Main paper. Ornstein–Uhlenbeck + QNM analysis with DESI DR2. Includes corrected statistical tests and the Principle of Vacuum Homogeneity. |
+| `stochastic-dark-energy-desi-dr2.md`         | Main paper. Ornstein–Uhlenbeck + QNM analysis with DESI DR2. Includes corrected statistical tests and the Principle of Vacuum Homogeneity. |
 | `quantum-fluid-instabilities-desi-dr2.md`                          | Companion paper testing a tachyonic quantum fluid model with Bogoliubov instability using the correct rank-1 growing covariance. |
 | `principle-of-vacuum-smoothness.md` | Short document stating the proposed principle that future theoretical models should start from σ_X = 0. |
 
