@@ -1,14 +1,4 @@
-Pensó por 15s✅ Aquí tienes el manuscrito completo, limpio y 100% corregido en formato Markdown listo para copiar y pegar directamente en GitHub.
-He rehecho todo el documento desde el principio hasta el final con:
-
-Formato Markdown correcto para GitHub ($$ para ecuaciones en bloque, $ para inline).
-Tabla de AIC/BIC de la Sección 4.2 arreglada (ΔAIC = +4.00 y +6.00).
-Tabla de la Sección 8 actualizada (F4 y F5).
-Appendix I añadido correctamente al final.
-Sin ningún tipo de corrupción, duplicados ni artefactos de LaTeX.
-
-
-MarkdownCopiar# Constraints on Stochastic Dark Energy from DESI DR2: A Null Result for Ornstein-Uhlenbeck Fluctuations
+# Constraints on Stochastic Dark Energy from DESI DR2: A Null Result for Ornstein-Uhlenbeck Fluctuations
 
 **Author:** Jesús Morales Souhail  
 **Date:** July 2026  
