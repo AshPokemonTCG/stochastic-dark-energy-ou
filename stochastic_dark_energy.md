@@ -466,7 +466,6 @@ def kernel_S_iso(z, H0=67.4, Ol0=0.685, delta=1e-4):
 if __name__ == "__main__":
     for z in [0.51, 0.71, 0.93, 1.50]:
         print(f"z={z:.2f}, S(z)={kernel_S_iso(z):+.4f}")
-
 This implementation is self-contained and reproduces the kernel values used in the main text.
 Appendix B — Reproducibility and Data Access
 All scripts are publicly available in the repository associated with this preprint:
@@ -658,3 +657,4 @@ References
 [7] Wilczyńska, M. R. et al., "Four direct measurements of the fine-structure constant 13 billion years ago," Science Advances 6, eaay3092 (2020).
 [8] Ashtekar, A. et al., "BMS supertranslations and Weinberg's soft graviton theorem," JHEP 2015, 152 (2015).
 [9] Wald, R. M., General Relativity, University of Chicago Press (1984).
+textCopiar
