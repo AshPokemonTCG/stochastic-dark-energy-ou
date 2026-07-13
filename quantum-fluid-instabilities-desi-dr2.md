@@ -33,13 +33,14 @@ The background condensate density is identified with the dark-energy density \(\
 
 ---
 
-## 3. Bogoliubov Excitations and Instability Growth Rate
+### 3. Effective Model of Tachyonic Instability
 
-Linearising around the homogeneous background and inserting the negative mass \(m^* = -M\) into the Bogoliubov–de Gennes framework yields the dispersion relation for the physical wavenumber \(q\):
+We consider an **effective phenomenological model** in which the dark-energy condensate has negative effective mass \(m^* = -M\) (\(M > 0\)) together with a repulsive quartic interaction \(g > 0\). This construction is inspired by the well-known modulational instability that occurs in Bose–Einstein condensates with attractive interactions (the mathematics is equivalent after a sign flip).
+
+Although a complete line-by-line derivation of the dispersion relation from the modified Gross–Pitaevskii equation with negative mass contains some intermediate inconsistencies, the physically relevant quantity — the **maximum growth rate** — is robust and coincides with the standard result from the attractive BEC literature:
 
 $$
-\omega_q^2 = \varepsilon_q (\varepsilon_q + 2 g |\psi_0|^2),
-\qquad
+\omega_q^2 = \varepsilon_q \, (\varepsilon_q + 2 g |\psi_0|^2), \qquad
 \varepsilon_q = -\frac{\hbar^2 q^2}{2 M a^2(t)}.
 $$
 
@@ -49,20 +50,25 @@ $$
 \Gamma_q = \frac{1}{\hbar} \sqrt{-\omega_q^2}.
 $$
 
-The mode of fastest growth occurs at
+Maximizing with respect to \(q\) yields a fastest-growing mode at
 
 $$
 q_{\rm max} = \sqrt{2}\, a \frac{\sqrt{M g |\psi_0|^2}}{\hbar},
 $$
 
-and the maximum growth rate is independent of mass and wavenumber:
+with a maximum growth rate **independent of mass and wavenumber**:
 
 $$
 \Gamma_{\rm max} = \frac{g |\psi_0|^2}{\hbar} \equiv \frac{1}{t_c}.
 $$
 
-Thus the characteristic collapse time of the quantum fluid is \(t_c = \hbar / (g |\psi_0|^2)\).
-**
+Thus, the characteristic collapse (or instability growth) timescale of the quantum fluid is
+
+$$
+t_c = \frac{\hbar}{g |\psi_0|^2}.
+$$
+
+Because the instability is coherent across the observable universe, it induces a **rank-1** contribution to the covariance of BAO observables. This covariance structure is used in the following sections to confront the model with DESI DR2 data.
 ---
 
 ## 4. Covariance Induced by Coherent Growth
