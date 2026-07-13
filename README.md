@@ -14,18 +14,19 @@ This repository contains research on whether the late-time dark energy sector co
 
 ## Repository Structure
 
-### Scientific Documents (`.md`)
+### Scientific Documents (.md)
 
 | File | Description |
 |------|-------------|
 | `stochastic-dark-energy-desi-dr2.md` | Main analysis paper on Ornstein–Uhlenbeck and QNM models fitted to DESI DR2 data. |
 | `quantum-fluid-instabilities-desi-dr2.md` | Paper testing tachyonic quantum fluid instabilities using rank-1 growing covariance. |
 | `principle-of-vacuum-smoothness.md` | Short note presenting the **Principle of Late-Time Vacuum Homogeneity**. |
-| `smoothness-of-the-vacuum-unimodular.md` | Theoretical discussion exploring unimodular gravity as a possible explanation for vacuum smoothness. |
+| `smoothness-of-the-vacuum-unimodular.md` | Theoretical discussion exploring unimodular gravity as a possible explanation for vacuum smoothness (detailed version). |
+| `unimodular-gravity-vacuum-smoothness.md` | **New version** — More developed theoretical synthesis on unimodular gravity and the geometric origin of vacuum smoothness. |
 | `sensitivity_kernel_table.md` | Supplementary table with BAO sensitivity kernel values. |
 | `README.md` | This file. |
 
-### Python Scripts (`.py`)
+### Python Scripts (.py)
 
 | File | Description |
 |------|-------------|
@@ -34,7 +35,7 @@ This repository contains research on whether the late-time dark energy sector co
 | `cross_correlation_DESI.py` | Cross-correlation analysis between DESI galaxies and Pantheon+ supernovae. |
 | `test_desi_dr2_correlations.py` | Additional correlation tests on DESI DR2 data. |
 
-### Figures (`.png`)
+### Figures (.png)
 
 | File | Description |
 |------|-------------|
