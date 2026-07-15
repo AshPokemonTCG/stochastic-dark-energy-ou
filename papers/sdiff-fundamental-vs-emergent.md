@@ -109,3 +109,10 @@ Future data from Euclid DR1 will provide the first quantitative test capable of 
 ---
 
 *This note complements the observational analysis presented in `stochastic-dark-energy-desi-dr2.md` and `quantum-fluid-instabilities-desi-dr2.md`.*
+
+---
+
+## Quantitative follow-up
+
+Path-integrated residuals \(\sigma_{m res}=A_0 e^{-	heta\Delta x}\), amplification bounds relative to the Sorkin seed, and a partitioned theory space (F, E0–E3) are developed in `fundamental-vs-emergent-vacuum-relaxation.md`, using the laboratory desqueezing law \(t_{1/2}=\ln 2/\gamma\) as the finite-relaxation template.
+
