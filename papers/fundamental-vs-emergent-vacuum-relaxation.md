@@ -160,7 +160,7 @@ It does convert the fundamental/emergent fork into **numbers, regions, and tests
 | File | Content |
 |------|---------|
 | `results/sdiff_discrimination/sdiff_discrimination_grid.csv` | Grid over \(\theta\) and \(A_0\) scenarios |
-| `results/sdiff_discrimination/HARD_PUSH_SUMMARY.txt` | Compact machine summary |
+| `results/sdiff_discrimination/summary.txt` | Numerical summary |
 | `figures/sdiff_residual_vs_theta.png` | Residual vs \(\theta\) |
 | `figures/sdiff_A0_min_for_detection.png` | Minimum \(A_0\) for detection |
 | `figures/sdiff_t_half_vs_theta.png` | Half-life vs \(\theta\) |

@@ -68,6 +68,7 @@ Supporting note:
 | File | Description |
 |------|-------------|
 | [`notes/desqueezing-relaxation-vacuum-fluctuations-note.md`](notes/desqueezing-relaxation-vacuum-fluctuations-note.md) | Open-system half-life and map to \(\theta H(z)\) |
+| [`papers/fundamental-vs-emergent-vacuum-relaxation.md`](papers/fundamental-vs-emergent-vacuum-relaxation.md) | Path-integrated residuals; SDiff regions F/E0–E3; Euclid falsifiers |
 
 ---
 
