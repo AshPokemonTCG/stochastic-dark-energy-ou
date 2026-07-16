@@ -1,37 +1,37 @@
-# A Minimal Euclid Protocol for Fundamental versus Emergent Vacuum Relaxation
+# Euclid BAO analysis for vacuum smoothness and mean-reversion
 
 **Author:** Jesús Morales Souhail  
 **Date:** July 2026  
 **ORCID:** [0009-0000-7637-1818](https://orcid.org/0009-0000-7637-1818)  
 **Repository:** https://github.com/jesus-morales-souhail/stochastic-dark-energy-ou  
-**Status:** Analysis protocol note — not peer reviewed  
-**Companions:** `fundamental-vs-emergent-vacuum-relaxation.md`, `sdiff-fundamental-vs-emergent.md`, `stochastic-dark-energy-desi-dr2.md`
+**Status:** Preprint note — not peer reviewed  
+**Related notes:** `fundamental-vs-emergent-vacuum-relaxation.md`, `sdiff-fundamental-vs-emergent.md`, `stochastic-dark-energy-desi-dr2.md`
 
 ---
 
 ## Abstract
 
-We specify a minimal but sharp analysis protocol for Euclid-scale BAO (and near-term joint) tests of vacuum smoothness. Building on the DESI null \(\sigma_X < 1.5\times 10^{-4}\) (95% CL) and the path-integrated residual \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\), we define the parameter vector, priors, decision regions (F / E0 / E1 / E2 / E3), and outcome scenarios. We refine region **E2** (\(\theta\sim\mathcal{O}(1)\)): amplitude-based damping is potentially visible when \(A_0\) exceeds the measurement noise, whereas lag-shape detection with a simple Pearson estimator is weak unless \(N\) is large or a full OU-kernel likelihood is used. Euclid alone does not separate fundamental SDiff (**F**) from emergent Sorkin-only silence (**E0**); a detection in \(10^{-5}\lesssim\sigma_X\lesssim 10^{-4}\) selects **E1**-type physics.
+We set out a Euclid-scale BAO analysis for residual stochastic fluctuations of dark energy, extending the DESI DR2 working limit \(\sigma_X < 1.5\times 10^{-4}\) (95% CL). The fit uses the parameter vector \(\{w_0,w_a,\theta,\sigma_X\}\), with optional \(\omega_R\) for a nested QNM kernel. Path residuals of the form \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\) define operational regions (F, E0–E3). For \(\theta\sim\mathcal{O}(1)\), amplitude-based damping can be visible when \(A_0\) exceeds the measurement noise, while lag–shape tests with a Pearson estimator alone are weak unless \(N\) is large or the full OU kernel is used in the likelihood. A BAO-only null does not separate fundamental geometric silence (F) from an emergent but unobservable seed (E0); a residual in \(10^{-5}\lesssim\sigma_X\lesssim 10^{-4}\) would favour E1-type effective physics.
 
 ---
 
-## 1. Logic of the test (what is actually being constrained)
+## 1. What is constrained
 
-Three layers must not be confused:
+Three layers enter the interpretation:
 
-| Layer | Object | Status |
-|-------|--------|--------|
-| Geometric | Local \(T_{\mu\nu}=V(x)g_{\mu\nu}\) projected out by SDiff | **F** if exact |
-| Micro seed | Sorkin / Bekenstein–Hawking \(\sigma_0\sim 10^{-61}\) | Always \(\ll\) BAO noise |
-| Effective BAO | Residual amplitude after expansion path | What DESI/Euclid measure |
+| Layer | Quantity | Role |
+|-------|----------|------|
+| Geometry | Local \(T_{\mu\nu}=V(x)g_{\mu\nu}\) projected by SDiff | Exact silence if fundamental (region F) |
+| Microscopic seed | Sorkin / Bekenstein–Hawking \(\sigma_0\sim 10^{-61}\) | Always \(\ll\) BAO noise |
+| Effective BAO residual | \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\) after the expansion path | What DESI and Euclid constrain |
 
-**Honest target:** Euclid tests the **effective** residual \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\) (and, if the data allow, the shape of the OU kernel). It does **not** directly measure \(\sigma_0\), and a null cannot distinguish **F** from **E0**.
+Euclid therefore constrains the **effective** residual amplitude and, when the data allow, the shape of the OU kernel. It does not measure \(\sigma_0\) directly. A deep null remains compatible with both F and E0.
 
 ---
 
 ## 2. Parameter vector
 
-### 2.1 Recommended baseline (Euclid BAO-focused)
+Baseline Euclid BAO-focused model:
 
 $$
 \Theta = \{w_0,\, w_a,\, \theta,\, \sigma_X\}.
@@ -39,105 +39,97 @@ $$
 
 | Parameter | Role |
 |-----------|------|
-| \(w_0,w_a\) | Smooth CPL background (breaks DE / noise degeneracy) |
+| \(w_0,w_a\) | Smooth CPL background (breaks DE–noise degeneracy) |
 | \(\theta\) | OU mean-reversion in \(x=\ln a\); \(\Gamma_{\rm phys}=\theta H\) |
-| \(\sigma_X\) | Effective stationary / residual amplitude scale of the OU kernel (same role as \(\sqrt{\mathrm{Var}(X)}\) or the \(A_0\)-like overall scale of \(C_{\rm OU}\)) |
+| \(\sigma_X\) | Amplitude scale of the additive OU covariance |
 
-Equivalent reparameterizations (do not change physics if Jacobian is handled):
+Equivalent reparameterizations (Jacobian handled as usual):
 
 - \(\{\theta,\, A_0\}\) with \(\sigma_{\rm res}(z)\sim A_0 e^{-\theta\Delta x(z)}\) for a single frozen kick;  
 - \(\{\Gamma_0,\, A_0\}\) with \(\Gamma_0=\theta H_0\) at \(z=0\).
 
-**Baseline recommendation:** fit \(\{w_0,w_a,\theta,\sigma_X\}\) with the additive kernel already used in this repository,
+Additive kernel as in this repository:
 
 $$
-(C_{\rm OU})_{ij}=S(z_i)S(z_j)\,\sigma_X^2\,e^{-\theta\lvert x_i-x_j\rvert},
+(C_{\rm OU})_{ij}=S(z_i)S(z_j)\,\sigma_X^{2}\,e^{-\theta\lvert x_i-x_j\rvert},
 $$
 
 plus the survey covariance \(C_{\rm std}\).
 
-Optional extension (only if data support it):
+Optional nested extension:
 
 $$
 \Theta_+ = \{w_0,\, w_a,\, \theta,\, \sigma_X,\, \omega_R\}
 $$
 
-for the damped oscillatory (QNM) kernel. Prefer nested comparison: if \(\omega_R\to 0\), recover OU.
+for a damped oscillatory (QNM) kernel. If \(\omega_R\to 0\), the model reduces to pure OU.
 
 ---
 
-## 3. Priors (deliberately conservative)
+## 3. Priors
 
-Priors must not smuggle a detection. Suggested defaults for a public, reproducible pipeline:
+Default priors for a reproducible pipeline:
 
 | Parameter | Prior | Rationale |
 |-----------|--------|-----------|
-| \(w_0\) | Uniform \([-1.5,\,-0.5]\) or Gaussian centered on external CPL with width \(\sim 0.1\) | Wide enough not to force \(w=-1\) |
-| \(w_a\) | Uniform \([-2,\,1]\) or Gaussian width \(\sim 0.3\)–\(0.5\) | Covers DESI-preferred quadrant without hard walls at 0 |
-| \(\theta\) | Log-uniform on \([10^{-3},\,10]\) | From MLE numerical floor to strongly damped e-fold scales |
-| \(\sigma_X\) | Log-uniform on \([10^{-6},\,10^{-2}]\) or half-Gaussian at 0 with scale \(10^{-4}\) | Straddles Euclid target and DESI limit; does not force a detection |
-| \(\omega_R\) (optional) | Uniform \([0,\,20]\) with \(\theta\ge 10^{-3}\) | Avoids undamped oscillations (unphysical QNM) |
+| \(w_0\) | Uniform \([-1.5,\,-0.5]\), or Gaussian about an external CPL with width \(\sim 0.1\) | Does not force \(w=-1\) |
+| \(w_a\) | Uniform \([-2,\,1]\), or Gaussian of width \(\sim 0.3\)–\(0.5\) | Covers the DESI-preferred quadrant |
+| \(\theta\) | Log-uniform on \([10^{-3},\,10]\) | From numerical floor to strong damping |
+| \(\sigma_X\) | Log-uniform on \([10^{-6},\,10^{-2}]\), or half-Gaussian at 0 with scale \(10^{-4}\) | Spans Euclid targets and the DESI limit |
+| \(\omega_R\) (optional) | Uniform \([0,\,20]\) with \(\theta\ge 10^{-3}\) | Avoids undamped modes |
 
-**Hard constraints (physics):**
+Physical constraints: \(\theta > 0\), \(\sigma_X \ge 0\); for QNM, \(\theta \ge \theta_{\min}\approx 10^{-3}\). Flatness \(\Omega_m+\Omega_{\rm DE}=1\) is assumed in the BAO kernel unless \(\Omega_m\) is sampled jointly.
 
-- \(\theta > 0\), \(\sigma_X \ge 0\);  
-- if QNM: \(\theta \ge \theta_{\min}\approx 10^{-3}\) (same floor as this repository’s optimizer);  
-- background flatness \(\Omega_m+\Omega_{\rm DE}=1\) as in the BAO kernel construction unless jointly sampling \(\Omega_m\).
-
-**Do not** place a prior on \(\sigma_X\) peaked at \(10^{-61}\): that is a UV seed, not the effective BAO parameter.
+A prior peaked at \(\sigma_X\sim 10^{-61}\) is inappropriate: that scale is a UV seed, not the effective BAO parameter.
 
 ---
 
-## 4. Likelihood and statistics
+## 4. Likelihood and model comparison
 
-### 4.1 Likelihood
-
-Gaussian BAO residual model (as implemented in `scripts/ou_bao_stochastic_test.py`):
+Gaussian residual likelihood (as in `scripts/ou_bao_stochastic_test.py`):
 
 $$
 -2\ln\mathcal{L}
 =
-\mathbf{r}^\top C^{-1}\mathbf{r}+\ln\det C+\mathrm{const},
+\mathbf{r}^{\top} C^{-1}\mathbf{r}+\ln\det C+\mathrm{const},
 \qquad
 C=C_{\rm std}+C_{\rm OU}(\theta,\sigma_X).
 $$
 
-For Euclid, replace the 7-bin DESI vector by the Euclid BAO vector (\(\gtrsim 20\) bins when available) and recompute \(S(z)\).
+For Euclid, replace the DESI 7-bin vector by the Euclid BAO vector (\(\gtrsim 20\) bins when available) and recompute \(S(z)\).
 
-### 4.2 Decision statistics (pre-registered)
+| Question | Statistic |
+|----------|-----------|
+| Need for a noise component | Nested CPL vs CPL+\(\{\theta,\sigma_X\}\): \(\Delta\mathrm{AIC}\), \(\Delta\mathrm{BIC}\), or Bayes factor |
+| Amplitude | 95% upper limit or interval on \(\sigma_X\) with free \(\{w_0,w_a,\theta\}\) |
+| Mean-reversion | Marginal \(p(\theta\mid\mathrm{data})\) from the full kernel |
+| QNM | Nested OU vs QNM on \(\omega_R\); require \(\omega_R\) away from 0 and \(\theta\) not at the floor |
 
-| Question | Statistic | Prefer |
-|----------|-----------|--------|
-| Is a noise component needed? | Nested \(\Lambda\)CDM/CPL vs CPL+\(\{\theta,\sigma_X\}\): \(\Delta\mathrm{AIC}\), \(\Delta\mathrm{BIC}\), or Bayes factor \(B_{10}\) | Detection language only if \(B_{10}\gtrsim 3\)–\(5\) (or \(\Delta\mathrm{AIC}\lesssim -6\)) **and** posterior on \(\sigma_X\) away from 0 |
-| Amplitude only | 95% upper limit on \(\sigma_X\) with free \(\{w_0,w_a,\theta\}\) | Profile or marginal posterior |
-| Shape / mean-reversion | Marginal posterior \(p(\theta\mid\mathrm{data})\); compare to prior | Prefer full-kernel likelihood over single-lag Pearson |
-| QNM | Nested OU vs QNM on \(\omega_R\) | Require \(\omega_R\) posterior away from 0 **and** \(\theta\) not at floor |
-
----
-
-## 5. Region map (operational)
-
-Using the DESI-path residual scale \(\sigma_{\rm res}\sim\sigma_X\) (same order as the OU amplitude entering \(C_{\rm OU}\)):
-
-| Region | Operational criterion (posterior) | Interpretation |
-|--------|-----------------------------------|----------------|
-| **F** | \(\sigma_X\) consistent with 0 at Euclid precision; no shape signal | Compatible with geometric silence |
-| **E0** | Same observationally as F; theory assumes Sorkin-only seed | Emergent but invisible |
-| **E1** | \(10^{-5}\lesssim \sigma_X \lesssim 1.5\times 10^{-4}\) with \(\theta\) small (posterior mass at \(\theta\lesssim 0.3\)) | Emergent + effective amplification |
-| **E2** | \(\theta\) constrained away from 0 **and** amplitude reduced relative to a no-damping model | Detectable mean-reversion / path damping |
-| **E3** | \(\sigma_X \gtrsim 1.5\times 10^{-4}\) at high posterior probability with free background | Tension with DESI null |
-
-**Euclid alone cannot split F from E0.** Label a null as “F \(\cup\) E0”.
+Detection language is reserved for cases where the Bayes factor (or \(\Delta\mathrm{AIC}\)) and the \(\sigma_X\) posterior both support a non-zero amplitude.
 
 ---
 
-## 6. Region E2 refined: when is \(\theta\sim\mathcal{O}(1)\) detectable?
+## 5. Operational regions
 
-Two different notions of “detectable damping” must be separated.
+With residual scale of order \(\sigma_X\):
 
-### 6.1 Amplitude-based damping (primary for E2)
+| Region | Criterion | Interpretation |
+|--------|-----------|----------------|
+| **F** | \(\sigma_X\) consistent with 0; no shape signal | Compatible with geometric silence |
+| **E0** | Observationally as F; theory assumes a Sorkin-only seed | Emergent but invisible |
+| **E1** | \(10^{-5}\lesssim \sigma_X \lesssim 1.5\times 10^{-4}\), \(\theta\) small | Emergent amplitude above the Poisson seed |
+| **E2** | \(\theta\) constrained away from 0 with reduced amplitude relative to no-damping | Detectable mean-reversion |
+| **E3** | \(\sigma_X \gtrsim 1.5\times 10^{-4}\) with free background | Tension with the DESI null |
 
-Suppose the effective kick \(A_0\) is large enough that a no-damping model would over-predict the residual. With absolute uncertainty \(s\) on \(\sigma_X\),
+Euclid alone cannot split F from E0. A null should be reported as **F \(\cup\) E0**.
+
+---
+
+## 6. Detectability of \(\theta\sim\mathcal{O}(1)\)
+
+### 6.1 Amplitude-based damping
+
+If a no-damping model would over-predict the residual and the absolute uncertainty on \(\sigma_X\) is \(s\),
 
 $$
 A_0\bigl(1-e^{-\theta\Delta x}\bigr)\gtrsim s
@@ -146,91 +138,66 @@ A_0\bigl(1-e^{-\theta\Delta x}\bigr)\gtrsim s
 \quad(s<A_0).
 $$
 
-**Numerical examples** (\(\Delta x=0.94\) DESI-wide path):
+Examples for a DESI-wide path \(\Delta x=0.94\):
 
-| \(s\) (abs. unc.) | \(A_0\) | Min \(\theta\) (order of magnitude) |
-|------------------:|--------:|------------------------------------:|
+| \(s\) | \(A_0\) | Min \(\theta\) (order of magnitude) |
+|------:|--------:|------------------------------------:|
 | \(10^{-5}\) | \(3\times 10^{-5}\) | \(\sim 0.4\) |
 | \(10^{-5}\) | \(10^{-4}\) | \(\sim 0.1\) |
 | \(3\times 10^{-5}\) | \(10^{-4}\) | \(\sim 0.4\) |
 | \(5\times 10^{-5}\) | \(1.5\times 10^{-4}\) | \(\sim 0.4\) |
 
-On a **narrower** Euclid DR1 path (\(\Delta x\sim 0.39\), \(z\sim 0.9\)–\(1.8\)), the same amplitude criterion requires **larger** \(\theta\) by a factor \(\sim 0.94/0.39\sim 2.4\).
+On a narrower Euclid DR1 path (\(\Delta x\sim 0.39\)), the same amplitude criterion requires larger \(\theta\) by a factor \(\sim 0.94/0.39\sim 2.4\). Thus \(\theta\sim\mathcal{O}(1)\) is relevant when \(A_0\) is a few times the noise \(s\).
 
-**Reading for E2:** \(\theta\sim\mathcal{O}(1)\) is in the right ballpark for amplitude-based damping **if** \(A_0\) is a few times the noise \(s\). If \(A_0\sim s\), damping cannot be seen from amplitude alone.
+### 6.2 Lag correlations
 
-### 6.2 Lag-shape detection (secondary; often weak)
+For lag-1 Pearson correlations with error \(\sim 1/\sqrt{N-3}\):
 
-For lag-1 Pearson correlations with error \(\sim 1/\sqrt{N-3}\), requiring \(1-e^{-\theta\Delta x_{\rm lag}}\gtrsim k\,\sigma_\rho\) gives:
-
-| Survey (schematic) | \(N\) | \(\sigma_\rho\) | Min \(\theta\) (order, \(k=1\)) |
-|--------------------|------:|----------------:|--------------------------------:|
-| DESI-like | 7 | \(\sim 0.5\) | \(\sim 4\) (effectively **unusable**) |
-| Euclid-like | 20 | \(\sim 0.24\) | \(\gtrsim 5\) (wide path) — still large |
+| Survey (schematic) | \(N\) | \(\sigma_\rho\) | Min \(\theta\) (order) |
+|--------------------|------:|----------------:|-----------------------:|
+| DESI-like | 7 | \(\sim 0.5\) | \(\sim 4\) (unusable) |
+| Euclid-like | 20 | \(\sim 0.24\) | \(\gtrsim 5\) |
 | Euclid-like | 40 | \(\sim 0.16\) | \(\gtrsim 7\) |
 
-This matches the existing DESI lag analysis: with \(N=7\), no lag is individually significant. **Falsifier #3 (positive OU-like lags) is therefore a high bar** unless:
-
-- \(N\) is large **and** the full OU kernel is fit in the likelihood (not single-lag Pearson alone), or  
-- external data (SNe residuals, multi-tracer BAO) tighten the covariance shape.
-
-**Protocol rule:** report lag diagnostics, but base E2 claims on the **joint posterior of \(\theta\) from \(C_{\rm OU}\)**, not on a single lag \(p\)-value.
+With \(N=7\), no lag is individually significant in the present DESI analysis. Lag tables remain useful diagnostics; E2 claims should rest on the joint posterior of \(\theta\) from \(C_{\rm OU}\).
 
 ---
 
-## 7. Pre-registered outcome scenarios
+## 7. Outcome scenarios
 
-### 7.1 Marginal detection in \(\sigma_X\)
+**Marginal \(\sigma_X\).** Posterior near \(10^{-5}\)–few\(\times 10^{-5}\), \(\theta\) unconstrained. Consistent with weak E1; systematics and free \(\{w_0,w_a\}\) required before a firm claim.
 
-- Posterior: \(\sigma_X\) peaks near \(10^{-5}\)–few\(\times 10^{-5}\), 95% interval excludes 0 weakly.  
-- \(\theta\) unconstrained or piled at the lower edge.  
-- **Decision:** favor **E1** over F/E0 at low-to-moderate significance; **do not** claim fundamental SDiff is ruled out at high confidence. Demand systematics control and joint \(\{w_0,w_a\}\).
+**Strong null.** Upper limit \(\sigma_X\ll 10^{-5}\), \(\theta\) prior-like. Compatible with F \(\cup\) E0.
 
-### 7.2 Strong null
+**Detection with shape.** \(\sigma_X\) in the E1 window and \(p(\theta\mid\mathrm{data})\) excludes \(\theta\to 0\). Strongest BAO-only support for dynamical relaxation (E1/E2).
 
-- 95% (or 99%) upper limit \(\sigma_X\ll 10^{-5}\).  
-- \(\theta\) returns to prior.  
-- **Decision:** data compatible with **F \(\cup\) E0**. Emergent scenarios without amplification become less attractive but not eliminated if one accepts \(A_0\sim\sigma_0\).
-
-### 7.3 Detection + shape (\(\theta\) away from 0)
-
-- \(\sigma_X\) in the E1 window **and** \(p(\theta\mid\mathrm{data})\) excludes \(\theta\to 0\) (e.g. 95% lower bound \(\theta\gtrsim 0.1\)–\(0.3\) depending on \(A_0\) and \(s\)).  
-- Lag diagnostics consistent with \(e^{-\theta\Delta x}\) (supporting, not decisive alone).  
-- **Decision:** strongest empirical support for **dynamical relaxation (E1/E2)**. This is the most damaging outcome for pure algebraic silence (**F**) among BAO-only tests.
-
-### 7.4 Apparent detection that vanishes when \(\{w_0,w_a\}\) are free
-
-- **Decision:** background degeneracy; do **not** claim E1. This failure mode is already emphasized in the DESI OU analysis of this repository.
+**Apparent detection that vanishes when \(\{w_0,w_a\}\) are free.** Background degeneracy; not an E1 detection. This mode already appears in the DESI BAO-only analysis of this repository.
 
 ---
 
-## 8. Minimal joint upgrade (when BAO alone is not enough)
+## 8. Multi-probe extension
 
-If Euclid BAO still leaves F/E0 degenerate, the next logical layer is a **pre-declared joint**:
+If Euclid BAO leaves F/E0 degenerate, a natural joint analysis includes:
 
-| Probe | What it adds |
+| Probe | Contribution |
 |-------|----------------|
-| Pantheon+ / future SN | Background \(\{w_0,w_a\}\) and residual cross-checks |
-| Redshift-space growth \(f\sigma_8\) | Smooth DE vs clustering; consistency of background |
-| ISW / CMB lensing cross | Optional; sensitive to DE perturbations if present |
-| Imaging systematics weights | Mandatory before claiming angular cross-correlations |
+| Pantheon+ / future SN | Background \(\{w_0,w_a\}\) |
+| Growth \(f\sigma_8\) | Smooth DE versus clustering |
+| ISW / CMB lensing | DE perturbations if present |
+| Imaging systematics weights | Required for angular cross-correlations |
 
-The vacuum-relaxation protocol itself stays the same: always quote \(\sigma_X\) and \(\theta\) **conditional on free smooth DE**.
+Report \(\sigma_X\) and \(\theta\) **conditional on free smooth DE**.
 
 ---
 
-## 9. One-page checklist (copy into an analysis notebook)
+## 9. Analysis sequence
 
-1. Build Euclid BAO data vector + \(C_{\rm std}\) + \(S(z)\).  
-2. Sample \(\{w_0,w_a,\theta,\sigma_X\}\) with priors in §3.  
-3. Report:  
-   - marginal 95% upper limit / interval on \(\sigma_X\);  
-   - marginal posterior on \(\theta\);  
-   - \(\Delta\mathrm{AIC}/\Delta\mathrm{BIC}\) or Bayes factor vs CPL-only;  
-   - lag table as diagnostic only.  
-4. Assign region F∪E0 / E1 / E2 / E3 using §5–§7.  
-5. Stress test: fix vs free \(\{w_0,w_a\}\); optional QNM nest.  
-6. No Sorkin prior on \(\sigma_X\); discuss amplification only in interpretation.
+1. Construct the Euclid BAO data vector, \(C_{\rm std}\), and \(S(z)\).  
+2. Sample \(\{w_0,w_a,\theta,\sigma_X\}\) with the priors of §3.  
+3. Report the marginal interval or upper limit on \(\sigma_X\), the posterior on \(\theta\), and nested model comparison versus CPL-only.  
+4. Use lag correlations only as diagnostics.  
+5. Assign F\(\cup\)E0 / E1 / E2 / E3 using §§5–7.  
+6. Compare fixed versus free \(\{w_0,w_a\}\); optionally nest QNM.  
 
 ---
 
@@ -239,8 +206,8 @@ The vacuum-relaxation protocol itself stays the same: always quote \(\sigma_X\) 
 | File | Content |
 |------|---------|
 | `results/euclid_protocol/euclid_forecast_grid.csv` | Residual forecasts over \((\theta,A_0)\) |
-| `figures/euclid_A0_theta_plane.png` | Detection / DESI-tension contours in \((A_0,\theta)\) |
-| `figures/euclid_theta_shape_detectability.png` | Rough lag-shape \(\theta\) thresholds vs \(N\) |
+| `figures/euclid_A0_theta_plane.png` | Contours in \((A_0,\theta)\) |
+| `figures/euclid_theta_shape_detectability.png` | Lag-shape \(\theta\) thresholds vs \(N\) |
 | `scripts/desqueezing/euclid_protocol_forecasts.py` | Regenerates grids and figures |
 
 ```bash
@@ -249,96 +216,65 @@ python scripts/desqueezing/euclid_protocol_forecasts.py
 
 ---
 
-## 11. Bottom line
+## 11. Summary
 
-- Fit \(\{w_0,w_a,\theta,\sigma_X\}\) with log-ish priors on \(\theta,\sigma_X\).  
-- **E1** is the only BAO-scale region where Euclid can positively favor emergence-with-amplification.  
-- **E2** needs \(\theta\) large enough that damping exceeds amplitude noise when \(A_0>s\); lag Pearson alone is usually insufficient.  
-- **F vs E0** remains a theoretical split under a deep null; only new physics (amplification) or new observables (shape + multi-probe) break it.
-
-That is the sharpest Euclid-facing protocol the present framework supports without overselling.
+- Fit \(\{w_0,w_a,\theta,\sigma_X\}\) with weakly informative log priors on \(\theta\) and \(\sigma_X\).  
+- E1 is the BAO window in which Euclid can favour residual amplitude above a pure Poisson seed.  
+- E2 requires damping large enough to exceed amplitude noise when \(A_0>s\); Pearson lags alone are usually insufficient.  
+- F versus E0 remains a theoretical distinction under a deep null.
 
 ---
 
+## 12. Mock MCMC (repository)
 
+Reference implementation: `scripts/euclid_mock_mcmc.py` (emcee). Euclid-like vector of 24 bins (\(z\in[0.9,1.8]\)), OU kernel as above; samples \(\{\theta,\sigma_X\}\) at fixed background or the full \(\{w_0,w_a,\theta,\sigma_X\}\).
 
----
-
-## 12. Mock MCMC validation (this repository)
-
-A reference implementation lives in `scripts/euclid_mock_mcmc.py` (emcee). It builds a 24-bin Euclid-like BAO vector (\(z\in[0.9,1.8]\)), uses the repository OU kernel, and samples either \(\{\theta,\sigma_X\}\) at fixed background or the full \(\{w_0,w_a,\theta,\sigma_X\}\).
-
-### 12.1 Sensitivity reality check
-
-With percent-level BAO uncertainties (\(\sigma_\alpha\sim 0.5\%\text{--}1.2\%\)) and \(S(z)\sim\mathcal{O}(1)\), the OU contribution \(S_i S_j\sigma_X^2\) only competes with \(C_{\rm std}\) when
+With percent-level BAO uncertainties (\(\sigma_\alpha\sim 0.5\%\)–\(1.2\%\)) and \(S(z)\sim\mathcal{O}(1)\), the OU term competes with \(C_{\rm std}\) only for
 
 $$
 \sigma_X \sim \mathrm{few}\times 10^{-3}\ \text{to}\ 10^{-2}.
 $$
 
-The scientific window \(10^{-5}\text{--}1.5\times 10^{-4}\) therefore sits **below the single-mock SNR** of this simplified forecast. The published DESI working limit remains a phenomenological upper bound from multi-bin MLE behaviour, not a claim that \(\sigma_X\sim 10^{-4}\) is a high-SNR detection scale in a 24-bin mock with \(\sim 1\%\) errors.
-
-### 12.2 What the mocks show (illustrative run)
+The scientific window \(10^{-5}\)–\(1.5\times 10^{-4}\) therefore sits below the single-mock SNR of this simplified forecast. The DESI working limit remains a phenomenological upper bound from multi-bin MLE behaviour, not a high-SNR detection scale in a 24-bin mock with \(\sim 1\%\) errors.
 
 | Scenario (truth) | Fixed \((w_0,w_a)\) | Free \((w_0,w_a)\) |
 |------------------|---------------------|---------------------|
-| Null \(\sigma_X=10^{-6}\) | Posterior prior-like; no false high-\(\sigma_X\) claim | Same; background widens further |
-| E1 \(\sigma_X=0.012,\ \theta=0.1\) | Amplitude only partially recovered; \(\theta\) weakly constrained | Signal largely absorbed by background freedom |
-| E2 \(\sigma_X=0.015,\ \theta=1.5\) | Amplitude recovered at the right order; \(\theta\) still poorly pinned (kernel degeneracy) | Recovery degrades once \(w_0,w_a\) are free |
+| Null \(\sigma_X=10^{-6}\) | Prior-like posterior | Same; background widens further |
+| E1 \(\sigma_X=0.012,\ \theta=0.1\) | Partial amplitude recovery; \(\theta\) weak | Signal largely absorbed by background freedom |
+| E2 \(\sigma_X=0.015,\ \theta=1.5\) | Amplitude recovered in order of magnitude; \(\theta\) poorly pinned | Recovery degrades with free \(w_0,w_a\) |
 
-**Lesson for the protocol:** always free \(\{w_0,w_a\}\) before claiming E1/E2; fixed-background fits can look artificially optimistic. Lag-shape constraints remain secondary to the full-kernel posterior on \(\theta\).
-
-### 12.3 Products
-
-| Path | Content |
-|------|---------|
-| `scripts/euclid_mock_mcmc.py` | Mock generation + emcee sampler |
-| `results/euclid_mcmc/mcmc_summary.txt` | Latest run summary |
-| `results/euclid_mcmc/mcmc_summaries.json` | Machine-readable posteriors |
-| `figures/euclid_mcmc_*_fixedBG.png` | 1D posterior panels (fixed background) |
-| `figures/euclid_mcmc_*_freeBG.png` | 1D posterior panels (free background) |
+Free \(\{w_0,w_a\}\) before interpreting E1/E2. Products: `results/euclid_mcmc/`, `figures/euclid_mcmc_*_{fixed,free}BG.png`.
 
 ```bash
 pip install emcee
 python scripts/euclid_mock_mcmc.py
 ```
 
-
-
-
 ---
 
-## 13. Joint BAO + SN mock (optimistic Euclid errors)
+## 13. Joint BAO + SN mock
 
 Implementation: `scripts/euclid_joint_bao_sne_mcmc.py`.
 
-**BAO:** 20 bins, \(z\in[0.9,1.8]\), optimistic forecast-style \(\sigma_\alpha\sim 0.3\%\text{--}0.7\%\).  
-**SN:** 25 compressed distance-modulus bins (relative fit; mean residual removed), shared \(\{w_0,w_a\}\).  
-**Noise sector:** OU kernel on BAO only.
+- **BAO:** 20 bins, \(z\in[0.9,1.8]\), forecast-style \(\sigma_\alpha\sim 0.3\%\)–\(0.7\%\).  
+- **SN:** 25 compressed distance-modulus bins (relative fit), shared \(\{w_0,w_a\}\).  
+- **Noise sector:** OU kernel on BAO only.
 
-### Illustrative outcomes (one seed)
+| Scenario | Probe | \(\sigma_X\) (illustrative) | \(\theta\) | Comment |
+|----------|-------|----------------------------:|-----------:|---------|
+| Null | BAO | \(\sim 2\times 10^{-4}\) (upper, prior-like) | unconstrained | No false high-\(\sigma_X\) peak |
+| Null | BAO+SN | similar \(\sigma_X\); tighter \(w_0\) | unconstrained | SN helps the background |
+| E1 (\(\sigma_X=0.008,\theta=0.1\)) | BAO / joint | weak recovery | weak | Edge of optimistic SNR |
+| E2 (\(\sigma_X=0.012,\theta=1.5\)) | BAO | \(\sim 0.016\ [0.000,0.029]\) | poorly pinned | Amplitude recovered at right order |
+| E2 | BAO+SN | \(\sim 0.007\ [0.000,0.027]\) | median higher | SN reduces DE–noise trade-off |
 
-| Scenario | Probe | \(\sigma_X\) median [2.5%, 97.5%] | \(\theta\) median | Note |
-|----------|-------|--------------------------------------:|-------------------:|------|
-| Null | BAO | \(\sim 2\times 10^{-4}\) (upper prior-like) | unconstrained | No false high-\(\sigma_X\) claim |
-| Null | BAO+SN | similar \(\sigma_X\); slightly tighter \(w_0\) | unconstrained | SN helps background |
-| E1 (\(\sigma_X=0.008,\theta=0.1\)) | BAO / joint | still weak recovery | weak | Near edge of optimistic SNR |
-| E2 (\(\sigma_X=0.012,\theta=1.5\)) | BAO | \(\sim 0.016\ [0.000,0.029]\) | poorly pinned | **Amplitude recovered at right order** |
-| E2 | BAO+SN | \(\sim 0.007\ [0.000,0.027]\) | median higher than BAO-only | SN reduces (but does not remove) DE–noise trade-off |
-
-### Conclusions for the protocol
-
-1. **Optimistic Euclid BAO errors** move the practical recovery threshold from \(\sigma_X\sim\mathrm{few}\%\) toward \(\sim 1\%\), but the literature window \(10^{-5}\text{--}10^{-4}\) remains demanding.
-2. **SN data primarily tighten \(\{w_0,w_a\}\)**; they help only indirectly with \(\theta,\sigma_X\) by limiting absorption of correlated BAO residuals into smooth DE.
-3. **Joint analysis is necessary** for honest region claims, but **not sufficient** without BAO covariance SNR.
-4. Pre-register: always report BAO-only and BAO+SN side by side.
-
-Products: `results/euclid_joint_mcmc/`, `figures/joint_mcmc_*.png`.
+Optimistic Euclid errors move the practical recovery threshold toward \(\sigma_X\sim 1\%\), but \(10^{-5}\)–\(10^{-4}\) remains demanding. SN data primarily tighten \(\{w_0,w_a\}\). Products: `results/euclid_joint_mcmc/`, `figures/joint_mcmc_*.png`.
 
 ```bash
 python scripts/euclid_joint_bao_sne_mcmc.py
 ```
 
+---
 
 ## References
 

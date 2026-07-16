@@ -11,7 +11,7 @@
 
 ## Abstract
 
-DESI DR2 BAO analyses in this repository drive stationary stochastic fluctuations of dark energy to a null working limit \(\sigma_X < 1.5\times 10^{-4}\) (95% CL). This note formulates the sharpest open question that follows: whether late-time vacuum smoothness is an **exact geometric law** (fundamental volume-preserving diffeomorphisms, SDiff) or an **attractor with finite relaxation time** (emergent SDiff). Combining the Ornstein–Uhlenbeck (OU) continuity structure \(\Gamma_{\rm phys}(z)=\theta H(z)\) with the laboratory desqueezing law \(t_{1/2}=\ln 2/\gamma\), we derive path-integrated residuals \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\), compute the minimum kick amplitude required for Euclid-scale detectability, and show that a pure Sorkin–Bekenstein seed \(\sigma_0\sim 10^{-61}\) remains unobservable for all cosmologically relevant \(\theta\). We partition theory space into falsifiable regions (F, E0–E3) and list decisive Euclid and lag-correlation tests.
+DESI DR2 BAO analyses in this repository drive stationary stochastic fluctuations of dark energy to a null working limit \(\sigma_X < 1.5\times 10^{-4}\) (95% CL). The open question is whether late-time vacuum smoothness is an exact geometric law (fundamental volume-preserving diffeomorphisms, SDiff) or an attractor with finite relaxation time (emergent SDiff). Combining the Ornstein–Uhlenbeck continuity structure \(\Gamma_{\rm phys}(z)=\theta H(z)\) with the open-system desqueezing law \(t_{1/2}=\ln 2/\gamma\), we derive path-integrated residuals \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\), estimate the kick amplitude needed for Euclid-scale detectability, and show that a pure Sorkin–Bekenstein seed \(\sigma_0\sim 10^{-61}\) remains unobservable for cosmologically relevant \(\theta\). Theory space is partitioned into regions F and E0–E3 with corresponding Euclid and lag-correlation tests.
 
 ---
 
@@ -131,31 +131,22 @@ $$
 | **E2** | Emergent + \(\theta\sim\mathcal{O}(1)\) + moderate \(A_0\) | Compatible if damped below DESI | Residual near/below \(10^{-5}\) after long paths |
 | **E3** | Small \(\theta\) + \(A_0>1.5\times 10^{-4}\) | **Tension with DESI null** | Already disfavored |
 
-**Important:** Euclid alone cannot separate **F** from **E0**. Separating them requires either a detection (favors E1-type physics) or a theoretical prior on \(A_0\).
+Euclid alone cannot separate **F** from **E0**. Separation requires either a residual detection (favouring E1-type physics) or an independent prior on \(A_0\).
 
 ---
 
-## 5. Sharpest falsifiers
+## 5. Observational tests
 
-1. **Euclid detection** \(0<\sigma_X\lesssim 10^{-4}\) in a joint fit with free \(\{w_0,w_a\}\): disfavors pure **F** (absent systematics).  
-2. **Euclid null** \(\sigma_X\ll 10^{-5}\) with \(\gtrsim 20\) bins: forces \(A_0 e^{-\theta\Delta x}\) tiny; compatible with **F** and **E0**.  
-3. **Positive lag correlations** in whitened BAO residuals matching an OU kernel: supports dynamical mean-reversion (**emergent-like**), not pure algebraic projection.  
-4. **Laboratory consistency:** any Markovian emergent bath mapped to cosmology must respect \(t_{1/2}=\ln 2/\gamma\) with \(\gamma\leftrightarrow\theta H\).
+1. **Euclid residual** \(0<\sigma_X\lesssim 10^{-4}\) in a joint fit with free \(\{w_0,w_a\}\): disfavours pure **F** (if systematics are controlled).  
+2. **Euclid null** \(\sigma_X\ll 10^{-5}\) with \(\gtrsim 20\) bins: forces \(A_0 e^{-\theta\Delta x}\) small; compatible with **F** and **E0**.  
+3. **Lag structure** in whitened BAO residuals matching an OU kernel: supports dynamical mean-reversion rather than pure algebraic projection.  
+4. **Open-system map:** a Markovian bath mapped to cosmology should obey \(t_{1/2}=\ln 2/\gamma\) with \(\gamma\leftrightarrow\theta H\).
 
----
-
-## 6. What this does *not* claim
-
-- It does not derive SDiff from quantum gravity.  
-- It does not assert that a desqueezing bath exists in the cosmos.  
-- It does not identify a microphysical amplifier that turns \(10^{-61}\) into \(10^{-5}\).  
-- It does not replace a full joint Bayesian analysis with free background parameters and the DESI covariance.
-
-It does convert the fundamental/emergent fork into **numbers, regions, and tests**.
+This note does not derive SDiff from quantum gravity, nor does it identify a microphysical amplifier from \(10^{-61}\) to \(10^{-5}\). It organises the fundamental/emergent alternatives into quantitative regions and tests, subject to a full joint analysis with free background parameters and the survey covariance.
 
 ---
 
-## 7. Numerical products
+## 6. Numerical products
 
 | File | Content |
 |------|---------|
@@ -165,24 +156,22 @@ It does convert the fundamental/emergent fork into **numbers, regions, and tests
 | `figures/sdiff_A0_min_for_detection.png` | Minimum \(A_0\) for detection |
 | `figures/sdiff_t_half_vs_theta.png` | Half-life vs \(\theta\) |
 
-Reproduce:
-
 ```bash
 python scripts/desqueezing/sdiff_discrimination.py
 ```
 
 ---
 
-## 8. Conclusion
+## 7. Conclusion
 
-The most interesting question opened by the DESI null is not a better upper limit alone, but the **status of vacuum smoothness**:
+The DESI null raises the status of vacuum smoothness as a quantitative question:
 
-- **Fundamental SDiff** predicts geometric silence.  
-- **Emergent SDiff** predicts finite relaxation, with laboratory scaling \(t_{1/2}=\ln 2/\gamma\) and cosmological residual \(A_0 e^{-\theta\Delta x}\).  
-- **Sorkin-only emergence is observationally silent** at BAO/Euclid precision.  
-- **Any detection at \(10^{-5}\)–\(10^{-4}\)** would be evidence for effective physics far above the Poisson seed — and a crack in pure fundamental silence.
+- **Fundamental SDiff** predicts geometric silence at BAO scales.  
+- **Emergent SDiff** allows finite relaxation, with open-system scaling \(t_{1/2}=\ln 2/\gamma\) and residual \(A_0 e^{-\theta\Delta x}\).  
+- A pure Sorkin seed remains unobservable at DESI/Euclid precision.  
+- A residual in \(10^{-5}\)–\(10^{-4}\) would indicate effective physics well above that seed.
 
-That is the edge where theory, open quantum systems, and the next BAO generation meet.
+A Euclid-facing fit with free \(\{w_0,w_a,\theta,\sigma_X\}\) is specified in `euclid-protocol-vacuum-relaxation.md`.
 
 ---
 
@@ -195,10 +184,4 @@ That is the edge where theory, open quantum systems, and the next BAO generation
 [5] Sorkin, R. D., arXiv:gr-qc/0503057 (2005).  
 [6] Bekenstein, J. D., Phys. Rev. D 7, 2333 (1973).  
 [7] Uhlenbeck, G. E. & Ornstein, L. S., Phys. Rev. 36, 823 (1930).
-
----
-
-## Euclid analysis protocol
-
-A minimal pre-registered Euclid-facing fit (\(\{w_0,w_a,\theta,\sigma_X\}\), priors, E2 damping thresholds, and outcome scenarios) is given in `euclid-protocol-vacuum-relaxation.md`.
 

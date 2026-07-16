@@ -4,7 +4,7 @@
 Euclid-style mock BAO MCMC for vacuum-relaxation protocol.
 
 Samples {w0, wa, theta, sigma_X} under C = C_std + C_OU on a synthetic
-Euclid-like BAO vector. Runs three pre-registered scenarios:
+Euclid-like BAO vector. Runs three fixed scenarios:
   null   (F cup E0): pure measurement noise
   E1     : detectable amplitude, weak mean-reversion
   E2     : detectable amplitude + O(1) mean-reversion
@@ -325,7 +325,7 @@ def main():
     z, sig, S = make_euclid_grid(n_bins=24)
     print(f"  N={len(z)}, z=[{z[0]:.2f},{z[-1]:.2f}], |S|~[{np.abs(S).min():.3f},{np.abs(S).max():.3f}]")
 
-    # SNR-honest truths: C_OU comparable to C_std when sigma_X ~ 0.01
+    # Illustrative truths: C_OU comparable to C_std when sigma_X ~ 0.01
     scenarios = {
         "null_F_E0": {"w0": -1.0, "wa": 0.0, "theta": 0.5, "sigma_X": 1e-6},
         "E1_amplitude": {"w0": -1.0, "wa": 0.0, "theta": 0.1, "sigma_X": 0.012},
@@ -390,7 +390,7 @@ def main():
         f"N_bins={len(z)}, z in [{z[0]:.2f},{z[-1]:.2f}]",
         f"walkers={nwalkers}, steps={nsteps}, discard={discard}, thin={thin}",
         "Tier A: fixed (w0,wa)=truth. Tier B: free {w0,wa,theta,sigma_X}.",
-        "Note: sigma_X ~ 0.01 is used for SNR-honest recovery under ~1% BAO errors;",
+        "Note: illustrative sigma_X ~ 0.01 under ~1% BAO errors;",
         "literature targets 1e-5..1.5e-4 require multi-survey power beyond this mock.",
         "",
     ]

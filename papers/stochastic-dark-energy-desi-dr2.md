@@ -206,7 +206,7 @@ For the numerical results in Sections 4–6, we use the discrete sensitivity ker
 | 1.484           | QSO          | 1.541                 | $7.17 \times 10^{-3}$       |
 | 2.330           | Ly$\alpha$ | 1.798                 | $8.36 \times 10^{-3}$       |
 
-> **Note:** An exact integral susceptibility kernel $\chi(z, z')$ is presented in Appendix C for theoretical completeness. It is **not** used in this version but provides a roadmap for future work.
+> **Note:** An exact integral susceptibility kernel $\chi(z, z')$ is given in Appendix C; the main analysis uses the discrete BAO kernel of Sec. 3.
 
 ---
 
@@ -284,7 +284,7 @@ corresponding to a $Z \approx 2.73\sigma$ excess over the null hypothesis ($r=0$
 
 ## 6. Test 3: Redshift Lag Correlations in BAO Residuals (The Critical Test)
 
-### 6.1 The Falsified Prediction
+### 6.1 The stationary stochastic prediction
 
 The OU process predicted positive lag correlations. For a DESI‑like 9-bin grid, the original prediction was:
 
@@ -670,7 +670,7 @@ $$
 \Xi_{\rm QNM}(\Delta x, r) = \Xi(\Delta x, r) \cdot \cos(\omega_R \Delta x).
 $$
 
-**Falsifiable prediction for Euclid DR1:** If the stochastic component exists, the whitened BAO residuals should show this $K_1$ spatial structure. Any significant deviation would indicate non-linear self-interactions ($\lambda \phi^4$ terms), time-dependent damping ($\theta(z)$), or a breakdown of spatial isotropy — each pointing to new physics beyond this minimal model.
+**Euclid DR1.** If a residual stochastic component is present, the whitened BAO residuals should follow this $K_1$ spatial structure. Significant deviations would indicate non-linear self-interactions, time-dependent damping, or a breakdown of spatial isotropy beyond this minimal model.
 
 ---
 
@@ -817,7 +817,7 @@ Section 4's null result fixes the background to $\alpha = 1$, equivalent to $w_0
 
 **(c)** Joint fit $\{w_0, w_a, \theta, \sigma_X\}$ free: with only 7 points and 4 parameters, the fit is weakly determined — treat it as qualitative, not as a measurement. The optimum falls near $w_0 \approx -0.99$, $w_a \approx -0.02$ (nearly pure $\Lambda$CDM), with $\sigma_X \approx 4.5 \times 10^{-5}$ — the same numerical floor as (a) — and a log-likelihood improvement of only $(+0.13)$ over the 2-parameter fit, not significant for 2 extra degrees of freedom.
 
-**Reading:** The null result is robust when the BAO data are allowed to choose their own background — the data, left free, do not want to move away from $\Lambda$CDM and also do not need $\sigma_X$. However, the null result is **not** robust if the background is fixed to the external (CMB+SNe) value that the Abstract claims to use: there, a non-negligible amplitude appears.
+**Interpretation.** The null result is robust when the BAO data are allowed to choose their own background: the optimum stays near $\Lambda$CDM and does not require $\sigma_X>0$. It is not robust if the background is fixed to the external (CMB+SNe) CPL point quoted in the Abstract; there a non-negligible amplitude reappears.
 
 We interpret this as: the null result is not an artifact of an arbitrary background choice — the data, left free to choose their own background, land close to $\Lambda$CDM and still do not want a stochastic term. It is sensitive to fixing the background at an externally-derived (CMB+SNe-informed) CPL point that this BAO-only dataset does not itself prefer; doing so reintroduces an apparent signal at roughly the DR1-calibration amplitude.
 

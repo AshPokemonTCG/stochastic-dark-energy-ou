@@ -28,15 +28,14 @@ INTERPRETIVE REGIONS:
       => strong path damping; residual may sit near Euclid edge after recomb path.
   E3: theta ~ 1e-3 (MLE floor) + A0 > 1.5e-4 => already tension with DESI null.
 
-SHARPEST FALSIFIERS:
-  1) Euclid detection 0 < sigma_X <~ 1e-4 with free {w0,wa}:
-     disfavors pure fundamental SDiff (unless systematics).
-  2) Euclid null to << 1e-5 with >20 bins:
-     forces A0_eff * exp(-theta Dx) tiny; compatible with F and E0.
-  3) Detection of positive lag correlations matching OU kernel:
-     supports dynamical relaxation (emergent-like), not pure algebraic projection.
-  4) Lab side: t_1/2 = ln2/gamma verified => any emergent Markovian bath
-     must obey the same scaling if mapped to theta H.
+OBSERVATIONAL TESTS:
+  1) Euclid residual 0 < sigma_X <~ 1e-4 with free {w0,wa}:
+     disfavours pure fundamental SDiff (if systematics controlled).
+  2) Euclid null << 1e-5 with >20 bins:
+     forces A0_eff * exp(-theta Dx) small; compatible with F and E0.
+  3) Lag structure matching an OU kernel:
+     supports dynamical mean-reversion rather than pure algebraic projection.
+  4) Open-system map: t_1/2 = ln2/gamma with gamma <-> theta H.
 
-CSV: /home/ashpokemon/proyectos/stochastic-dark-energy-ou/results/sdiff_discrimination/sdiff_discrimination_grid.csv
-Figures: /home/ashpokemon/proyectos/stochastic-dark-energy-ou/results/sdiff_discrimination/ and figures/sdiff_*.png
+CSV: results/sdiff_discrimination/sdiff_discrimination_grid.csv
+Figures: results/sdiff_discrimination/ and figures/sdiff_*.png

@@ -204,7 +204,7 @@ Future surveys, such as Euclid DR1 (expected 2026), may further tighten the limi
 
 ## Acknowledgements
 
-The author thanks the DESI collaboration for making the DR2 BAO data publicly available. This work has been supported by the open-science philosophy of reproducible research.
+The author thanks the DESI collaboration for making the DR2 BAO data publicly available.
 
 ---
 

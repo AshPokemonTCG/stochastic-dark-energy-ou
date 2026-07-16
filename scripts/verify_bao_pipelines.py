@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Regression checks for the DESI DR2 BAO MLE scripts.
+Sanity checks for the DESI DR2 BAO MLE scripts.
 
   python3 scripts/verify_bao_pipelines.py
-
-Confirms that ``eos_efectiva.py`` returns a near-ΛCDM CPL background and that
-``ou_bao_likelihood.py`` drives the residual stochastic amplitude to the floor.
 """
 
 from __future__ import annotations

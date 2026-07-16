@@ -260,7 +260,7 @@ For a half-life equal to the \(\Lambda\)CDM age \(t_0\simeq 13.8\,\mathrm{Gyr}\)
 | Half-decay on DESI path | \(0.737\) | \(5.1\times 10^{-2}\) | \(13.6\) | \(0.94\) |
 | Hubble half-life | \(0.693\) | \(4.8\times 10^{-2}\) | \(14.5\) | \(1\) |
 
-**Key reading:** the MLE floor implies **essentially no damping** across the DESI path,
+The MLE floor implies **essentially no damping** across the DESI path,
 
 $$
 e^{-10^{-3}\times 0.94}\simeq 0.999.
@@ -282,7 +282,7 @@ Page-time half-lives correspond to mean-reversion rates **invisible** on BAO e-f
 
 ## 5. Residuals under the repository seed only
 
-### 5.1 The calculation that must not be cheated
+### 5.1 Residual from the Sorkin seed alone
 
 With the Sorkin seed fixed by the repository,
 

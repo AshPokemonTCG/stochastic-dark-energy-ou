@@ -167,7 +167,7 @@ Future surveys such as Euclid DR1, with $>20$ bins, will further constrain any r
 
 ## Acknowledgements
 
-The author thanks the DESI collaboration for making the DR2 BAO data publicly available. This work has been supported by the open‑science philosophy of reproducible research.
+The author thanks the DESI collaboration for making the DR2 BAO data publicly available.
 
 ---
 

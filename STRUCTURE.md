@@ -21,7 +21,6 @@ notes/        Technical notes (desqueezing synthesis, mapping tables)
 | `scripts/desqueezing/desqueezing_relax_time.py` | Lindblad desqueezing half-life scan |
 | `scripts/desqueezing/cosmological_mapping.py` | Map γ ↔ θ H(z) |
 | `scripts/gpe/gpe_sim.py` | Negative-mass GPE illustration |
-| `scripts/verify_bao_pipelines.py` | Regression check for the BAO MLE scripts |
 | `papers/resume.txt` | Compact numerical summary |
 | `results/eos_cpl_desi_dr2/` | CPL fit outputs |
 
