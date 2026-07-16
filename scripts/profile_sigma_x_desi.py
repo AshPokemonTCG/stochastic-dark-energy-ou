@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""
+Profile likelihood for sigma_X on DESI DR2 BAO (diagonal errors).
+
+For each fixed sigma_X, maximize logL over theta (OU kernel) with free
+optional (w0, wa) in a second pass (background fixed to LCDM first).
+
+This fills the gap noted in the paper: a formal 95% CL profile over sigma_X
+rather than only the optimizer floor estimate.
+
+Public-repo compatible. Author: Jesús Morales Souhail
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import numpy as np
+from scipy.linalg import cho_factor, cho_solve
+from scipy.optimize import minimize_scalar
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "results" / "profile_sigma_x"
+OUT.mkdir(parents=True, exist_ok=True)
+
+# DESI DR2 BAO arrays (same as ou_bao_likelihood.py)
+z_eff = np.array([0.295, 0.510, 0.706, 0.934, 1.321, 1.484, 2.330])
+alpha = np.array([1.0030, 0.9947, 1.0016, 0.9960, 1.0020, 0.9963, 1.0008])
+sigma_obs = np.array([0.0097, 0.0072, 0.0057, 0.0049, 0.0063, 0.0088, 0.0120])
+S_z = np.array([-0.284, -0.462, -0.595, -0.719, -0.870, -0.917, -1.070])
+
+residuals = alpha - 1.0
+x = np.log(1.0 + z_eff)
+n = len(z_eff)
+
+
+def build_C(theta: float, sigma_X: float) -> np.ndarray:
+    C = np.diag(sigma_obs**2)
+    s2 = sigma_X**2
+    for i in range(n):
+        for j in range(n):
+            dx = abs(x[i] - x[j])
+            C[i, j] += S_z[i] * S_z[j] * s2 * np.exp(-theta * dx)
+    return C
+
+
+def logL(theta: float, sigma_X: float) -> float:
+    if theta <= 0 or sigma_X < 0:
+        return -1e30
+    C = build_C(theta, sigma_X)
+    try:
+        c, lower = cho_factor(C, lower=True, check_finite=False)
+        y = cho_solve((c, lower), residuals, check_finite=False)
+        logdet = 2.0 * np.sum(np.log(np.diag(c)))
+        return float(-0.5 * (residuals @ y + logdet + n * np.log(2 * np.pi)))
+    except Exception:
+        return -1e30
+
+
+def max_logL_over_theta(sigma_X: float) -> tuple[float, float]:
+    """Maximize logL over theta in (1e-3, 20) for fixed sigma_X."""
+    def neg(th):
+        return -logL(th, sigma_X)
+
+    # multi-bracket
+    best_ll, best_th = -1e30, 1.0
+    for bracket in [(1e-3, 0.5), (0.1, 3.0), (1.0, 15.0)]:
+        try:
+            res = minimize_scalar(neg, bounds=bracket, method="bounded", options={"xatol": 1e-5})
+            ll = -res.fun
+            if ll > best_ll:
+                best_ll, best_th = ll, float(res.x)
+        except Exception:
+            pass
+    # also evaluate grid
+    for th in np.geomspace(1e-3, 20, 40):
+        ll = logL(th, sigma_X)
+        if ll > best_ll:
+            best_ll, best_th = ll, float(th)
+    return best_ll, best_th
+
+
+def main():
+    # LCDM baseline
+    ll0 = logL(1.0, 0.0)  # theta irrelevant if sigma_X=0
+    # exact LCDM
+    C0 = np.diag(sigma_obs**2)
+    c, lower = cho_factor(C0, lower=True)
+    y = cho_solve((c, lower), residuals)
+    logdet = 2.0 * np.sum(np.log(np.diag(c)))
+    ll_lcdm = float(-0.5 * (residuals @ y + logdet + n * np.log(2 * np.pi)))
+
+    # profile over sigma_X
+    sig_grid = np.geomspace(1e-6, 5e-2, 48)
+    profile = []
+    for s in sig_grid:
+        ll, th = max_logL_over_theta(float(s))
+        profile.append({"sigma_X": float(s), "theta_best": th, "logL": ll, "dlogL": ll - ll_lcdm})
+        print(f"  sigma_X={s:.3e}  theta={th:.4f}  dlogL={ll-ll_lcdm:+.4f}")
+
+    dlogL = np.array([p["dlogL"] for p in profile])
+    # 95% CL for 1 parameter: ΔlogL = -1.92 (≈ half of 3.84 chi2)
+    thr = -1.92
+    # find largest sigma_X with dlogL >= thr (from left, null is at small s)
+    # For upper limit: where profile drops below thr relative to max
+    dlogL_rel = dlogL - np.max(dlogL)
+    above = np.where(dlogL_rel >= thr)[0]
+    if len(above):
+        s_95 = float(sig_grid[above[-1]])
+    else:
+        s_95 = float(sig_grid[0])
+
+    # also report where dlogL vs LCDM crosses -1.92 (if max is at LCDM)
+    summary = {
+        "data": "DESI DR2 BAO 7 bins diagonal (repo arrays)",
+        "ll_lcdm": ll_lcdm,
+        "max_dlogL_vs_lcdm": float(np.max(dlogL)),
+        "sigma_X_at_max": float(sig_grid[int(np.argmax(dlogL))]),
+        "sigma_X_95CL_upper_profile": s_95,
+        "criterion": "95% CL: Delta logL >= -1.92 from profile max (1 dof)",
+        "paper_working_limit": 1.5e-4,
+        "profile": profile,
+        "notes": [
+            "Diagonal covariance only; full DESI cov would refine the limit.",
+            "Background fixed to alpha=1 (LCDM fiducial). Free {w0,wa} is a separate scan.",
+        ],
+    }
+
+    out_json = OUT / "profile_sigma_x.json"
+    out_json.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+
+    # figure
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    ax.semilogx(sig_grid, dlogL_rel, "b-o", ms=3, lw=1.5)
+    ax.axhline(0, color="k", lw=0.8)
+    ax.axhline(thr, color="r", ls="--", label=r"$95\%$ CL ($\Delta\ln\mathcal{L}=-1.92$)")
+    ax.axvline(1.5e-4, color="orange", ls=":", label=r"paper working limit $1.5\times10^{-4}$")
+    ax.axvline(s_95, color="green", ls="-.", label=rf"profile $95\%$ $\sigma_X\leq{s_95:.2e}$")
+    ax.set_xlabel(r"$\sigma_X$")
+    ax.set_ylabel(r"$\Delta\ln\mathcal{L}$ (profile over $\theta$)")
+    ax.set_title(r"DESI DR2 BAO: profile likelihood for $\sigma_X$ (OU, diagonal cov)")
+    ax.legend(fontsize=8)
+    ax.grid(True, which="both", alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(OUT / "profile_sigma_x.png", dpi=150)
+    fig.savefig(ROOT / "figures" / "profile_sigma_x.png", dpi=150)
+    plt.close(fig)
+
+    lines = [
+        "Profile likelihood σ_X — DESI DR2 BAO (diagonal)",
+        "=" * 50,
+        f"ll_LCDM = {ll_lcdm:.4f}",
+        f"max ΔlnL vs LCDM = {np.max(dlogL):+.4f} at σ_X = {sig_grid[int(np.argmax(dlogL))]:.3e}",
+        f"95% CL upper (profile): σ_X ≤ {s_95:.3e}",
+        f"Paper working limit:     σ_X < 1.5e-4",
+        f"Wrote {out_json}",
+        f"Wrote {OUT / 'profile_sigma_x.png'}",
+    ]
+    text = "\n".join(lines) + "\n"
+    (OUT / "profile_sigma_x.txt").write_text(text, encoding="utf-8")
+    print(text)
+
+
+if __name__ == "__main__":
+    main()
