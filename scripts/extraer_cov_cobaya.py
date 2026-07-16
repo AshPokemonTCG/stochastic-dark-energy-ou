@@ -102,4 +102,4 @@ print(corr)
 # Guardar
 out_path = DATA_DIR / 'desi_cov_alpha_iso.npy'
 np.save(out_path, cov_alpha)
-print(f"\n✅ Guardado como '{out_path}'")
+print(f"\nSaved as '{out_path}'")

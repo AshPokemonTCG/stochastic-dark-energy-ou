@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# Script para testear correlaciones en residuos BAO de DESI DR2
-# Basado en el modelo de Red Estocástica (OU)
+# Lag-correlation test on DESI DR2 BAO residuals (OU kernel)
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,8 +13,8 @@ class bcolors:
     WARNING = '\033[93m'; FAIL = '\033[91m'; ENDC = '\033[0m'; BOLD = '\033[1m'
 
 print(f"{bcolors.HEADER}{'='*70}{bcolors.ENDC}")
-print(f"{bcolors.BOLD}🔬 TEST DE CORRELACIONES EN RESIDUOS BAO - DESI DR2{bcolors.ENDC}")
-print(f"{bcolors.BOLD}   Modelo de Red Estocástica (Proceso Ornstein-Uhlenbeck){bcolors.ENDC}")
+print(f"{bcolors.BOLD}BAO residual lag correlations — DESI DR2{bcolors.ENDC}")
+print(f"{bcolors.BOLD}   Ornstein–Uhlenbeck stochastic model{bcolors.ENDC}")
 print(f"{bcolors.HEADER}{'='*70}{bcolors.ENDC}")
 
 # ------------------------------------------------------------
@@ -31,7 +30,7 @@ archivos_data = [
 data_cargados = False
 for archivo in archivos_data:
     if os.path.exists(archivo):
-        print(f"{bcolors.OKGREEN}✅ Cargando: {archivo}{bcolors.ENDC}")
+        print(f"{bcolors.OKGREEN}Loading: {archivo}{bcolors.ENDC}")
         if archivo.endswith('.npz'):
             datos = np.load(archivo)
             z = datos['z_eff']
@@ -53,7 +52,7 @@ for archivo in archivos_data:
         break
 
 if not data_cargados:
-    print(f"{bcolors.FAIL}❌ No se encontraron archivos de datos DR2.{bcolors.ENDC}")
+    print(f"{bcolors.FAIL}No DESI DR2 data files found.{bcolors.ENDC}")
     print(f"   Ejecuta primero: python obtener_datos_desi_dr2.py")
     sys.exit(1)
 
@@ -68,16 +67,16 @@ if cov is None:
     ]
     for archivo in archivos_cov:
         if os.path.exists(archivo):
-            print(f"✅ Cargando covarianza: {archivo}")
+            print(f"Loading covariance: {archivo}")
             cov = np.loadtxt(archivo)
             break
     
     if cov is None:
-        print(f"{bcolors.WARNING}⚠️  No se encontró covarianza. Usando matriz diagonal (errores).{bcolors.ENDC}")
+        print(f"{bcolors.WARNING}No covariance file; using diagonal errors.{bcolors.ENDC}")
         if error is not None:
             cov = np.diag(error**2)
         else:
-            print(f"{bcolors.FAIL}❌ No hay errores. Abortando.{bcolors.ENDC}")
+            print(f"{bcolors.FAIL}No error column; aborting.{bcolors.ENDC}")
             sys.exit(1)
 
 # ------------------------------------------------------------
@@ -86,7 +85,7 @@ if cov is None:
 # Para DESI, alpha ya está normalizado: alpha=1 para ΛCDM fiducial [citation:7]
 residuals = alpha - 1.0
 
-print(f"\n{bcolors.BOLD}📊 Estadísticas básicas:{bcolors.ENDC}")
+print(f"\n{bcolors.BOLD} Estadísticas básicas:{bcolors.ENDC}")
 print(f"   Número de bins: {len(z)}")
 print(f"   Redshifts: {z}")
 print(f"   Alphas: {alpha}")
@@ -96,9 +95,9 @@ print(f"   Residuos (alpha-1): {np.round(residuals, 4)}")
 try:
     L = cholesky(cov, lower=True)
     y = solve_triangular(L, residuals, lower=True)
-    print(f"{bcolors.OKGREEN}✅ Whitening completado con matriz de covarianza completa.{bcolors.ENDC}")
+    print(f"{bcolors.OKGREEN}Whitening with full covariance complete.{bcolors.ENDC}")
 except np.linalg.LinAlgError:
-    print(f"{bcolors.WARNING}⚠️  Error en Cholesky. Añadiendo regularización...{bcolors.ENDC}")
+    print(f"{bcolors.WARNING}Cholesky failed; adding regularisation...{bcolors.ENDC}")
     cov_reg = cov + np.eye(len(cov)) * 1e-6
     L = cholesky(cov_reg, lower=True)
     y = solve_triangular(L, residuals, lower=True)
@@ -131,7 +130,7 @@ def lag_correlation_with_ci(y, k, alpha=0.05):
     
     return rho, (ci_low, ci_high)
 
-print(f"\n{bcolors.BOLD}📈 RESULTADOS:{bcolors.ENDC}")
+print(f"\n{bcolors.BOLD}Results:{bcolors.ENDC}")
 print("-" * 50)
 print(f"{'Lag':<6} {'Correlación':<12} {'IC 95%':<30} {'n_efectivo':<10}")
 print("-" * 50)
@@ -149,12 +148,12 @@ print("-" * 50)
 # ------------------------------------------------------------
 # 5. COMPARACIÓN CON MODELO OU
 # ------------------------------------------------------------
-print(f"\n{bcolors.BOLD}🎯 PREDICCIÓN DEL MODELO OU (Red Estocástica):{bcolors.ENDC}")
+print(f"\n{bcolors.BOLD} PREDICCIÓN DEL MODELO OU (Red Estocástica):{bcolors.ENDC}")
 print(f"   Lag 1: 0.78")
 print(f"   Lag 2: 0.62")
 print(f"   Lag 3: 0.49")
 
-print(f"\n{bcolors.BOLD}🔍 INTERPRETACIÓN:{bcolors.ENDC}")
+print(f"\n{bcolors.BOLD} INTERPRETACIÓN:{bcolors.ENDC}")
 print(f"   • Si las correlaciones observadas están DENTRO del IC 95% de la predicción OU,")
 print(f"     el modelo es consistente con los datos.")
 print(f"   • Si están FUERA del IC 95% y son consistentemente positivas, el modelo gana puntos.")
@@ -200,33 +199,33 @@ plt.tight_layout()
 import os
 os.makedirs('plots', exist_ok=True)
 plt.savefig('plots/test_desi_dr2_resultado.png', dpi=150)
-print(f"\n{bcolors.OKGREEN}✅ Gráfico guardado: plots/test_desi_dr2_resultado.png{bcolors.ENDC}")
+print(f"\n{bcolors.OKGREEN}Figure saved: plots/test_desi_dr2_resultado.png{bcolors.ENDC}")
 
 # ------------------------------------------------------------
-# 7. CONCLUSIÓN AUTOMÁTICA
+# 7. Summary
 # ------------------------------------------------------------
 print(f"\n{bcolors.HEADER}{'='*70}{bcolors.ENDC}")
-print(f"{bcolors.BOLD}📋 CONCLUSIÓN AUTOMÁTICA{bcolors.ENDC}")
+print(f"{bcolors.BOLD}Summary{bcolors.ENDC}")
 print(f"{bcolors.HEADER}{'='*70}{bcolors.ENDC}")
 
 if len(z) >= 12:
-    print(f"✅ Con {len(z)} bins, el test tiene suficiente potencia estadística.")
+    print(f"With {len(z)} bins the lag test has limited statistical power.")
     
     # Evaluar si las correlaciones son consistentes con OU
     if resultados and resultados[0][1] > 0.5:
-        print(f"   {bcolors.OKGREEN}✓ Las correlaciones son positivas y altas (>0.5).{bcolors.ENDC}")
+        print(f"   {bcolors.OKGREEN} Las correlaciones son positivas y altas (>0.5).{bcolors.ENDC}")
         print(f"   Esto APOYA la hipótesis de la Red Estocástica.")
     elif resultados and resultados[0][1] < 0.2 and abs(resultados[0][1]) < 0.2:
-        print(f"   {bcolors.WARNING}⚠️  Las correlaciones son cercanas a cero (<0.2).{bcolors.ENDC}")
+        print(f"   {bcolors.WARNING}Lag correlations are consistent with zero (<0.2).{bcolors.ENDC}")
         print(f"   Esto PONE UN LÍMITE SUPERIOR a las fluctuaciones estocásticas.")
         print(f"   Es un resultado publicable como 'constraint'.")
     else:
-        print(f"   {bcolors.WARNING}⚠️  Resultado intermedio: se necesitan más tests.{bcolors.ENDC}")
+        print(f"   {bcolors.WARNING}Intermediate result; more data needed.{bcolors.ENDC}")
 else:
-    print(f"⚠️  Con {len(z)} bins, los intervalos de confianza son amplios.")
+    print(f"With {len(z)} bins, confidence intervals remain wide.")
     print(f"   Los resultados son preliminares hasta tener la muestra completa de DR2.")
 
-print(f"\n{bcolors.BOLD}📄 Para publicar:{bcolors.ENDC}")
+print(f"\n{bcolors.BOLD} Para publicar:{bcolors.ENDC}")
 print(f"   • Si el resultado apoya el modelo: 'Evidence for stochastic dark energy from DESI DR2'")
 print(f"   • Si el resultado pone un límite: 'Constraints on stochastic dark energy from DESI DR2'")
 print(f"\n{bcolors.HEADER}{'='*70}{bcolors.ENDC}")

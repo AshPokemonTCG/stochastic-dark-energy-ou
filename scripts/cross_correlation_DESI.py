@@ -36,12 +36,12 @@ R_CROSS_PRED = G_COUPLING * SIGMA_8 / SIGMA_X  # ≈ 0.0227
 
 print("="*65)
 print("PIPELINE: Cross-correlation δ_m × δΩΛ")
-print(f"Predicción modelo OU: r_cross = {R_CROSS_PRED:.4f}")
+print(f"OU model prediction: r_cross = {R_CROSS_PRED:.4f}")
 print("="*65)
 
 
 # ============================================================
-# PASO 1: DESCARGA DE DATOS
+# 1. Data download
 # ============================================================
 DATA_SOURCES = {
     "DESI_DR2_LRG": {
@@ -76,7 +76,7 @@ os.makedirs("output", exist_ok=True)
 os.makedirs("plots", exist_ok=True)
 
 def instrucciones_descarga():
-    print("\n[PASO 1] DESCARGA DE DATOS")
+    print("\n[1] Data download")
     print("-"*65)
     print("Ejecutar en terminal antes de correr este script:\n")
     print("mkdir -p data")
@@ -91,7 +91,7 @@ instrucciones_descarga()
 
 
 # ============================================================
-# PASO 2: CONSTRUCCIÓN MAPA DE DENSIDAD DE GALAXIAS
+# 2. Galaxy density map
 # ============================================================
 def construir_mapa_densidad_galaxias(archivo_lrg, nside=NSIDE,
                                       z_min=Z_MIN_LRG, z_max=Z_MAX_LRG):
@@ -103,7 +103,7 @@ def construir_mapa_densidad_galaxias(archivo_lrg, nside=NSIDE,
         mask:    máscara de píxeles válidos (footprint survey)
         completeness: mapa de completitud
     """
-    print("\n[PASO 2] Mapa de densidad de galaxias LRG")
+    print("\n[2] LRG galaxy density map")
     print("-"*65)
     
     try:
@@ -207,7 +207,7 @@ def _generar_mapa_sintetico_galaxias(nside):
 
 
 # ============================================================
-# PASO 3: MAPA DE VARIACIONES DE ΩΛ (PROXY: RESIDUOS SN Ia)
+# 3. δΩΛ map from SN residuals
 # ============================================================
 def construir_mapa_omega_lambda(archivo_sn, nside=NSIDE,
                                  z_min=0.1, z_max=0.9):
@@ -221,7 +221,7 @@ def construir_mapa_omega_lambda(archivo_sn, nside=NSIDE,
     Fundamento: si ΩΛ varía localmente, la distancia de luminosidad
     cambia respecto a ΛCDM estándar. El residuo Δμ captura esto.
     """
-    print("\n[PASO 3] Mapa de variaciones δΩΛ (proxy: SNe Ia)")
+    print("\n[3] δΩΛ map (SNe Ia proxy)")
     print("-"*65)
     
     try:
@@ -346,7 +346,7 @@ def _generar_mapa_sintetico_OL(nside):
 
 
 # ============================================================
-# PASO 4: CROSS-CORRELACIÓN ANGULAR
+# 4. Angular cross-correlation
 # ============================================================
 def cross_correlacion(delta_g, mask_g, delta_OL, mask_OL, nside=NSIDE):
     """
@@ -355,7 +355,7 @@ def cross_correlacion(delta_g, mask_g, delta_OL, mask_OL, nside=NSIDE):
     Usa el estimador pseudo-C_ell con máscara (MASTER/NaMaster approach).
     Versión simplificada: correlación directa en espacio de píxeles.
     """
-    print("\n[PASO 4] Cross-correlación angular")
+    print("\n[4] Angular cross-correlation")
     print("-"*65)
     
     # Máscara conjunta
@@ -424,7 +424,7 @@ def cross_correlacion(delta_g, mask_g, delta_OL, mask_OL, nside=NSIDE):
 
 
 # ============================================================
-# PASO 5: BOOTSTRAP Y SIGNIFICANCIA
+# 5. Bootstrap and significance
 # ============================================================
 def bootstrap_significancia(delta_g, mask_g, delta_OL, mask_OL,
                              n_boot=N_BOOTSTRAP):
@@ -434,7 +434,7 @@ def bootstrap_significancia(delta_g, mask_g, delta_OL, mask_OL,
     Método: rotar aleatoriamente el mapa de δΩΛ respecto al de galaxias.
     Bajo H_null, las rotaciones dan la distribución de r bajo no-correlación.
     """
-    print("\n[PASO 5] Bootstrap (rotaciones aleatorias)")
+    print("\n[5] Bootstrap (random rotations)")
     print("-"*65)
     
     mask_joint = mask_g & mask_OL
@@ -485,7 +485,7 @@ def bootstrap_significancia(delta_g, mask_g, delta_OL, mask_OL,
     z_score     = r_obs / sigma_boot
     p_boot      = np.mean(np.abs(r_boot) >= np.abs(r_obs))
     
-    print(f"\n  RESULTADO:")
+    print(f"\n  Result:")
     print(f"  r_obs         = {r_obs:.4f}")
     print(f"  r_predicho    = {R_CROSS_PRED:.4f}")
     print(f"  σ(r) boot     = {sigma_boot:.4f}")
@@ -508,14 +508,14 @@ def bootstrap_significancia(delta_g, mask_g, delta_OL, mask_OL,
 
 
 # ============================================================
-# PASO 6: COMPARACIÓN CON PREDICCIÓN OU
+# 6. Comparison with OU prediction
 # ============================================================
 def comparar_con_prediccion(r_obs, sigma_r, r_cross_pred=R_CROSS_PRED):
     """
     Evalúa si el resultado es consistente con H_OU o H_null.
     Calcula Bayes Factor simplificado.
     """
-    print("\n[PASO 6] Comparación con predicción del modelo")
+    print("\n[6] Comparison with model prediction")
     print("="*65)
     
     # Likelihood bajo H_OU: L(r|H_OU) = N(r; r_pred, sigma_r)
@@ -558,7 +558,7 @@ def comparar_con_prediccion(r_obs, sigma_r, r_cross_pred=R_CROSS_PRED):
 
 
 # ============================================================
-# PASO 7: TEST ALTERNATIVO — Z-BINS (más robusto con pocas SNe)
+# 7. Alternative z-bin test
 # ============================================================
 def test_zbins_alternativo(archivo_sn, archivo_lrg, z_bins=None):
     """
@@ -602,7 +602,7 @@ def test_zbins_alternativo(archivo_sn, archivo_lrg, z_bins=None):
     print(f"  ACF lag-1 predicha (kernel OU): {acf_lag1_mean:.3f}")
     print(f"  Umbral detección (N=14 bins):   {2/np.sqrt(n_bins):.3f}")
     print(f"  Test factible si ACF > umbral:  "
-          f"{'SÍ ✓' if acf_lag1_mean > 2/np.sqrt(n_bins) else 'NO ✗'}")
+          f"{'SÍ ' if acf_lag1_mean > 2/np.sqrt(n_bins) else 'NO '}")
     
     return z_centers, acf_pred
 
@@ -619,24 +619,24 @@ def main():
     archivo_lrg = "data/desi/LRG_NGC_clustering_DR1.dat.fits"  # real public DR1 (clean re-download)
     archivo_sn  = "data/pantheon/Pantheon+SH0ES.dat"  # real Pantheon+ 
     
-    # PASO 2: Mapa de galaxias
+    # 2. Galaxy map
     delta_g, mask_g, _ = construir_mapa_densidad_galaxias(archivo_lrg)
     
-    # PASO 3: Mapa de δΩΛ
+    # 3. δΩΛ map
     delta_OL, mask_OL, sigma_OL = construir_mapa_omega_lambda(archivo_sn)
     
-    # PASO 4: Cross-correlación
+    # 4. Cross-correlation
     r_pearson, p_val, cl_results = cross_correlacion(
         delta_g, mask_g, delta_OL, mask_OL)
     
-    # PASO 5: Significancia (versión rápida con 100 rotaciones para demo)
+    # 5. Significance (100 rotations)
     r_obs, sigma_r, z_score, r_boot = bootstrap_significancia(
         delta_g, mask_g, delta_OL, mask_OL, n_boot=100)
     
-    # PASO 6: Comparación con predicción
+    # 6. Model comparison
     log_BF, BF = comparar_con_prediccion(r_obs, sigma_r)
     
-    # PASO 7: Test alternativo en z-bins
+    # 7. Alternative z-bin test
     z_centers, acf_pred = test_zbins_alternativo(archivo_sn, archivo_lrg)
     
     # ============================================================

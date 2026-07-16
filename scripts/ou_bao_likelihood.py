@@ -396,7 +396,7 @@ print()
 
 # Physical warning for near-zero theta
 if result_QNM.get('theta_near_zero'):
-    print(f"  ⚠ PHYSICAL WARNING: {result_QNM['warning']}")
+    print(f"  Note: {result_QNM['warning']}")
     print()
 
 print("─── MODEL SELECTION (AIC/BIC) ────────────────────────────────")
@@ -407,8 +407,8 @@ winner_BIC = "H1 preferred" if dBIC > 0 else "H0 preferred"
 print(f"  ΔAIC(H0 − H1) = {dAIC:+.3f}  → {winner_AIC}  (|Δ| > 2 notable, > 6 strong)")
 print(f"  ΔBIC(H0 − H1) = {dBIC:+.3f}  → {winner_BIC}  (|Δ| > 2 positive, > 6 strong)")
 print()
-print("  ⚠ With N=7 bins, model selection is INDICATIVE only.")
-print("  ⚠ Decisive test: >20 bins (Euclid DR1, expected H2 2026).")
+print("  With N=7 bins, model selection is only indicative.")
+print("  More bins (e.g. Euclid DR1) are needed for a decisive test.")
 print()
 
 print("─── QNM CONSISTENCY: θ/ω_R RATIO ────────────────────────────")
@@ -417,7 +417,7 @@ if result_QNM['omega_R'] > 0.05:
     print(f"  θ/ω_R = {result_QNM['theta']:.4f} / "
           f"{result_QNM['omega_R']:.4f} = {ratio:.4f}")
     print(f"  (This ratio = ω_I/ω_R constrains m_eff/H in de Sitter QNM.)")
-    print(f"  Falsification criterion F6: if this ratio is inconsistent")
+    print(f"  Consistency check: if this ratio is inconsistent")
     print(f"  between DESI DR1, DR2, and Euclid → QNM kernel incoherent.")
 else:
     print(f"  ω_R ≈ {result_QNM['omega_R']:.4f}: fit converged near OU limit.")
@@ -427,13 +427,13 @@ print()
 print("─── LINEARITY TEST: Δη vs Δx ────────────────────────────────")
 print(f"  Pearson r(Δη, Δx) over all {len(pairs_dx)} pairs = {r_lin:.6f}")
 if r_lin > 0.999:
-    print(f"  ✓ Excellent linearity. Projection C(Δη) ≈ C(Δx) is VALID "
+    print(f"   Excellent linearity. Projection C(Δη) ≈ C(Δx) is VALID "
           f"for z ∈ [{z_eff.min():.2f}, {z_eff.max():.2f}].")
 elif r_lin > 0.99:
     print(f"  ≈ Good linearity (r < 0.999). Consider 2nd-order correction "
           f"in future versions.")
 else:
-    print(f"  ✗ Non-linear. Projection C(Δη) → C(Δx) requires "
+    print(f"   Non-linear. Projection C(Δη) → C(Δx) requires "
           f"explicit Jacobian. Results may be biased.")
 print()
 
@@ -459,7 +459,7 @@ for lag_k in [1, 2, 3]:
           f"{pred_ou:>+10.4f} {pred_qnm:>+10.4f}  {mean_dx:>7.4f}")
 print()
 
-print("─── FALSIFICATION CRITERIA ───────────────────────────────────")
+print("─── NESTED / MULTI-SURVEY TESTS ───────────────────────────────")
 print("  F4a: ΔlogL(OU)  < 0 with 20+ bins           → H0 (OU) falsified")
 print("  F4b: ΔlogL(QNM) < ΔlogL(OU) with 20+ bins  → QNM adds no value")
 print("  F6:  θ/ω_R inconsistent across DESI/Euclid  → QNM kernel incoherent")
