@@ -186,6 +186,7 @@ The author thanks the DESI collaboration for making the DR2 BAO data publicly av
 [6] DESI Collaboration, "DESI 2024 III: Baryon Acoustic Oscillations from Galaxies and Quasars," arXiv:2404.03000 (2024).
 
 [7] Planck Collaboration, "Planck 2018 results. VI. Cosmological parameters," Astron. Astrophys. **641**, A6 (2020).
+
 ---
 
 ## Addendum: Principle of Late-Time Vacuum Homogeneity
