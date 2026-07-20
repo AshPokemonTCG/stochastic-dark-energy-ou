@@ -87,12 +87,34 @@ Analyses of DESI clustering / full-shape modelling often report deviations of th
 
 **Do not** lump these into a single slogan “GR preferred, no story.” State each with its own significance.
 
-### 3.2 Growth index \(\gamma\) (standard definition \(f=\Omega_m^\gamma\))
+### 3.2 The number \(\gamma = 1.17 \pm 0.11\) — **now verified (wrong name in casual tables)**
 
-In GR/ΛCDM textbooks, \(\gamma \approx 0.55\).  
-Any quoted value near \(\gamma \approx 1.17\) **must not** be cited as “the growth index in the standard definition” without opening the paper: it is almost certainly a **different parametrisation** (or a different \(\gamma\)). Treat unverified \(\gamma\sim 1.17\) numbers as **suspect until confirmed**.
+**Paper (opened, not just the abstract blurb):**  
+Maus et al., *A joint analysis of 3D clustering and galaxy × CMB-lensing cross-correlations with DESI DR1 galaxies*,  
+[arXiv:2505.20656](https://arxiv.org/abs/2505.20656).
 
-### 3.3 Forecasts on slip \(\eta\)
+**What \(\gamma\) is in *that* paper (Appendix E):**
+
+\[
+\gamma \equiv \frac{\Phi}{\Psi}\,,
+\qquad
+\Phi_\gamma \equiv \frac{\Phi+\Psi}{2} \equiv \Psi\,\frac{1+\gamma}{2}\,.
+\]
+
+- This is the **gravitational slip** (Newtonian potential \(\Psi\) vs lensing/Weyl-related \(\Phi\)).  
+- **GR limit: \(\gamma = 1\)** (not \(0.55\)).  
+- **Result:** \(\gamma = 1.17 \pm 0.11\), mild \(\sim 1.5\sigma\) from GR; authors note it may be a **projection effect** (Appendix E).  
+- Probe: RSD (3D clustering) + galaxy×CMB-lensing (Planck PR4 / ACT DR6) with DESI DR1 BGS+LRG.
+
+**What it is *not*:**
+
+- **Not** the growth-rate index \(f(z)=\Omega_m(z)^\gamma\) of structure growth (that book-value is \(\gamma\simeq 0.55\) in GR/ΛCDM).  
+- Confusing the two was the earlier table error: a slip \(\gamma\sim 1.17\) is *near* GR’s \(1.0\); a growth index \(\gamma\sim 1.17\) would be a catastrophe. Once the definition is read, the number is **internally consistent**.
+
+**For our Option 0 note:** this is actually *better* than a random growth-index: it is a **published DESI-era slip constraint of the type we care about** (RSD + lensing).  
+With \(\sigma(\gamma)\sim 0.11\), current sensitivity to \(|\eta-1|\) (or \(|\gamma-1|\)) is still \(\mathcal{O}(0.1)\), far above the \(\sim 10^{-4}\) scale of the \(f=1\), \(\sigma_X\sim 10^{-4}\) estimate below.
+
+### 3.3 Forecasts on slip \(\eta\) (or equivalent \(\gamma=\Phi/\Psi\))
 
 Model-independent forecasts combining Euclid-like and DESI-like surveys for anisotropic stress / slip typically quote **percent-level** reach on \(\eta\) (few percent, not \(10^{-4}\)). Exact \(\sigma(\eta)\) depends on survey assumptions; use as \(\mathcal{O}(0.03\text{–}0.05)\) order-of-magnitude, not a hard law.
 
