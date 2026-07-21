@@ -1,9 +1,9 @@
 # Three questions: quantum lens, tesseract→ABCD, and “focal length” in the OU model
 
-**Author:** Jesús Morales Souhail  
-**Date:** July 2026  
-**Status:** Formal mapping with explicit **yes / analogy only / no**  
-**Related:** `no-go-superoscillation-tesseract.md`, `car-drone-pupil-newton-einstein.md`, `stochastic-dark-energy-desi-dr2.md`  
+**Author:** Jesús Morales Souhail 
+**Date:** July 2026 
+**Status:** Formal mapping with explicit **yes / analogy only / no** 
+**Related:** `no-go-superoscillation-tesseract.md`, `car-drone-pupil-newton-einstein.md`, `stochastic-dark-energy-desi-dr2.md` 
 **Repo θ, σ:** OU kernel \(C(\Delta x)=\sigma_X^2 e^{-\theta|\Delta x|}\); MLE drives \(\sigma_X\to 0\), \(\theta\) poorly constrained near boundary
 
 ---
@@ -15,7 +15,7 @@
 In **classical paraxial wave optics**, a thin lens (or quadratic-phase “mirror”) multiplies the field by
 
 \[
-M(\mathbf{r}_\perp)=A(\mathbf{r}_\perp)\,\exp\!\left(-i\frac{k}{2f}\,|\mathbf{r}_\perp|^2\right).
+M(\mathbf{r}_\perp)=A(\mathbf{r}_\perp) \exp\!\left(-i\frac{k}{2f} |\mathbf{r}_\perp|^2\right).
 \]
 
 Propagating with the Fresnel kernel from object plane \(z=-s_o\) to image plane \(z=s_i\), the quadratic phase at the pupil collects the factor
@@ -35,7 +35,7 @@ P(\mathbf{r},s_i)=|\psi(\mathbf{r},s_i)|^2,
 with \(\psi\) the same mode function (Born). So one may write, schematically,
 
 \[
-P(\mathbf{r},s_i)=\Big|\mathcal{F}\!\left\{\psi_{\mathrm{in}}\,A\,\exp\!\Big(i\frac{k}{2}\,|\mathbf{r}_\perp|^2\,\Delta R^{-1}\Big)\right\}\Big|^2
+P(\mathbf{r},s_i)=\Big|\mathcal{F}\!\left\{\psi_{\mathrm{in}} A \exp\!\Big(i\frac{k}{2} |\mathbf{r}_\perp|^2 \Delta R^{-1}\Big)\right\}\Big|^2
 \]
 
 (up to known Fresnel prefactors and normalizations). This is **not** a new law of physics: it is Fresnel + quadratic lens + Born.
@@ -48,8 +48,8 @@ P(\mathbf{r},s_i)=\Big|\mathcal{F}\!\left\{\psi_{\mathrm{in}}\,A\,\exp\!\Big(i\f
 | Probability concentrates to a point when \(\Delta R^{-1}=0\) | **No.** Focused mode still has finite Airy / diffraction size set by \(A\) and \(\lambda\). |
 | “Perfect phase” forces detection at the geometric image point | **No.** Born uses the full \(|\psi|^2\); side lobes remain. |
 
-**Answer to Q1:** Yes to a **careful** single-photon *mode* statement:  
-**Descartes remains the condition \(\Delta R^{-1}=0\) for quadratic phase cancellation; probability is \(|\psi|^2\) after Fresnel propagation.**  
+**Answer to Q1:** Yes to a **careful** single-photon *mode* statement: 
+**Descartes remains the condition \(\Delta R^{-1}=0\) for quadratic phase cancellation; probability is \(|\psi|^2\) after Fresnel propagation.** 
 No to replacing Descartes with a formula that gives a deterministic sub-diffraction hit for one photon.
 
 ---
@@ -70,34 +70,34 @@ The proposed map
 \[
 M_{\mathrm{tesseract}}=\begin{pmatrix}A&B\\C&D\end{pmatrix}
 \quad\text{with}\quad
-A=\cos\phi_w\,I,\;
-B\propto d_w\sin\phi_w\,R(\theta),\;\ldots
+A=\cos\phi_w I, 
+B\propto d_w\sin\phi_w R(\theta), \ldots
 \]
 
 and
 
 \[
-\Phi_{\mathrm{SLM}}\propto (x^2\cos\phi_w+y^2\sin\phi_w)+\gamma_4\,\mathrm{atan2}(y,x)\,\ln(r^2/r_0^2)
+\Phi_{\mathrm{SLM}}\propto (x^2\cos\phi_w+y^2\sin\phi_w)+\gamma_4 \mathrm{atan2}(y,x) \ln(r^2/r_0^2)
 \]
 
 **asserts** that:
 
-1. SO(4) / Coxeter \(B_4\) / “8 cubes” define \(\phi_w,d_w,f_w,\gamma_4\);  
-2. those parameters equal a physical 4D geometry of light;  
+1. SO(4) / Coxeter \(B_4\) / “8 cubes” define \(\phi_w,d_w,f_w,\gamma_4\); 
+2. those parameters equal a physical 4D geometry of light; 
 3. this exceeds ordinary SLM + pulse shaping.
 
 None of (1)–(3) is derived from Maxwell + a physical tesseract cavity in the text. A 4D hypercube has 8 cubic cells as a **mathematical boundary**; that does **not** automatically supply eight independent optical channels beyond a 2D phase mask.
 
 A **real** SLM programme would be:
 
-1. Choose a target transfer (e.g. focus \(f\), astigmatism, OAM charge \(\ell\)).  
-2. Compute \(\Phi(x,y)\) from standard Fourier / Fresnel / GS algorithms.  
-3. Measure PSF and \(E_{\mathrm{core}}/E_{\mathrm{total}}\).  
+1. Choose a target transfer (e.g. focus \(f\), astigmatism, OAM charge \(\ell\)). 
+2. Compute \(\Phi(x,y)\) from standard Fourier / Fresnel / GS algorithms. 
+3. Measure PSF and \(E_{\mathrm{core}}/E_{\mathrm{total}}\). 
 
 No \(B_4\) required. OAM \(\propto \ell\phi\) is standard and **not** a tesseract theorem.
 
-**Answer to Q2:**  
-**You implement quadratic (and higher) phases on an SLM as usual.**  
+**Answer to Q2:** 
+**You implement quadratic (and higher) phases on an SLM as usual.** 
 **You do *not* get a derived “tesseract ABCD” until someone builds Maxwell + device geometry → \(M\).** Until then, treat tesseract language as **undeclared physical power** (same pattern as \(\ln 4 \equiv \omega_R\)).
 
 ---
@@ -109,7 +109,7 @@ No \(B_4\) required. OAM \(\propto \ell\phi\) is standard and **not** a tesserac
 Ornstein–Uhlenbeck (Axiom A3 / scripts):
 
 \[
-\mathrm{d}X = -\theta\, X\,\mathrm{d}x + \sigma\,\mathrm{d}W_x,
+\mathrm{d}X = -\theta X \mathrm{d}x + \sigma \mathrm{d}W_x,
 \qquad
 x=\ln a,
 \]
@@ -118,7 +118,7 @@ with stationary variance \(\mathrm{Var}(X)=\sigma^2/(2\theta)\) (when \(\theta>0
 
 \[
 \mathrm{Cov}\big(X(x_i),X(x_j)\big)
-=\frac{\sigma^2}{2\theta}\,e^{-\theta|x_i-x_j|}.
+=\frac{\sigma^2}{2\theta} e^{-\theta|x_i-x_j|}.
 \]
 
 Physical reading in the paper: \(\theta\) is an **effective mean-reversion / damping rate** (related to Hubble friction \(3H(1+w)\) in the continuity story), **not** a geometric focal length.
@@ -156,8 +156,8 @@ without a derived map \(\theta \leftrightarrow\) metric curvature / wavefront ra
 
 In open-system notes, \(t_{1/2}=\ln 2/\gamma\) with \(\gamma\leftrightarrow\theta H_0\) is a **relaxation time**, again analogous to a rate, not to an optical \(f\) in metres.
 
-**Answer to Q3:**  
-The closest **repo parameter** to a “restoring strength” is **\(\theta\)** (or \(\tau=1/\theta\)).  
+**Answer to Q3:** 
+The closest **repo parameter** to a “restoring strength” is **\(\theta\)** (or \(\tau=1/\theta\)). 
 Call it a **formal analogy** to \(1/f\), not a replacement of Descartes by cosmology.
 
 ---
@@ -186,13 +186,13 @@ P=|\psi|^2.
 
 **OU (OK, repo):**
 \[
-\mathrm{d}X=-\theta X\,\mathrm{d}x+\sigma\,\mathrm{d}W,\qquad
+\mathrm{d}X=-\theta X \mathrm{d}x+\sigma \mathrm{d}W,\qquad
 C_{ij}\propto e^{-\theta|x_i-x_j|}.
 \]
 
 **Bridge (analogy only):**
 \[
-f \;\longleftrightarrow\; \frac{1}{\theta}
+f \longleftrightarrow \frac{1}{\theta}
 \quad\text{as “restoring-parameter” roles, not units-equivalent physics.}
 \]
 

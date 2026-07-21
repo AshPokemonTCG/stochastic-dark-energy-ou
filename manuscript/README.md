@@ -5,8 +5,8 @@ This directory holds the **unified preprint** for the scientific claims of
 
 | File | Role |
 |:-----|:-----|
-| **[PREPRINT.md](PREPRINT.md)** | Main manuscript (English). GitHub-flavoured Markdown with `$`/`$$` math |
-| [CLAIMS.md](CLAIMS.md) | One-page claim / non-claim checklist for referees |
+| **[PREPRINT.md](PREPRINT.md)** | Main manuscript (English); GitHub math with `$...$` and `$$...$$` |
+| [CLAIMS.md](CLAIMS.md) | Referee checklist: claims vs non-claims |
 | [COVER_LETTER.md](COVER_LETTER.md) | Optional journal cover letter draft |
 
 ## Rendering notes
@@ -25,6 +25,11 @@ This directory holds the **unified preprint** for the scientific claims of
 
 ## What is *not* in the paper
 
+Theory programme (Minimal Model, past light cone, Einstein+Morales wall):
+
+**https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum**  
+Start: `papers/FOR_REFEREES.md`
+
 Exploratory optics / scale–operator pedagogy:
 
 **https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes**
@@ -32,7 +37,7 @@ Exploratory optics / scale–operator pedagogy:
 ## Suggested arXiv categories
 
 - primary: `astro-ph.CO`
-- cross-list (optional): `gr-qc` (unimodular / SDiff discussion only)
+- cross-list (optional): `gr-qc`
 
 ## Status
 

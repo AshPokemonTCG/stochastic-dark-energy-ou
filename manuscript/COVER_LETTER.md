@@ -1,6 +1,6 @@
 # Cover letter draft (optional)
 
-**Re:** Constraints on Stochastic Dark Energy from DESI DR2 BAO: A Null Result and the \(10^{56}\) Amplification Bottleneck  
+**Re:** Constraints on Stochastic Dark Energy from DESI DR2 BAO: A Null Result and the \(10^{56}\) Amplification Bottleneck 
 **Author:** Jesús Morales Souhail (ORCID 0009-0000-7637-1818)
 
 Dear Editor,
@@ -13,6 +13,6 @@ The work is intentionally conservative: we separate data constraints from geomet
 
 All analysis code and numerical tables are public (MIT). I hope the combination of a clear null result, a model exclusion with the correct covariance, and an honest amplification map will be of interest to your readers.
 
-Sincerely,  
-Jesús Morales Souhail  
+Sincerely, 
+Jesús Morales Souhail 
 jmskjym@gmail.com

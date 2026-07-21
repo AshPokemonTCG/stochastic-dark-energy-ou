@@ -1,7 +1,7 @@
 # SDiff as Fundamental Symmetry vs Emergent Feature: Implications for the Cosmological Vacuum
 
-**Author:** Jesús Morales Souhail  
-**Date:** July 2026  
+**Author:** Jesús Morales Souhail 
+**Date:** July 2026 
 **Repository:** https://github.com/jesus-morales-souhail/stochastic-dark-energy-ou
 
 ---
@@ -21,11 +21,11 @@ Both interpretations are compatible with current data (\(\sigma_X < 1.5 \times 1
 
 ## 2. Mathematical Distinction: Diff(M) vs SDiff(M)
 
-| Property                      | \(\mathrm{Diff}(M)\)                          | \(\mathrm{SDiff}(M)\)                              |
+| Property | \(\mathrm{Diff}(M)\) | \(\mathrm{SDiff}(M)\) |
 |-------------------------------|-----------------------------------------------|----------------------------------------------------|
-| Definition                    | All smooth reparametrizations                 | Volume-preserving diffeomorphisms only             |
-| Free functions                | 4 arbitrary functions \(\xi^\mu(x)\)          | 3 arbitrary functions with \(\partial_\mu \xi^\mu = 0\) |
-| Determinant of the metric     | Can vary locally (\(\sqrt{-g}\) dynamical)    | Fixed: \(\sqrt{-g} =\) constant                    |
+| Definition | All smooth reparametrizations | Volume-preserving diffeomorphisms only |
+| Free functions | 4 arbitrary functions \(\xi^\mu(x)\) | 3 arbitrary functions with \(\partial_\mu \xi^\mu = 0\) |
+| Determinant of the metric | Can vary locally (\(\sqrt{-g}\) dynamical) | Fixed: \(\sqrt{-g} =\) constant |
 | Consequence for vacuum energy | Local vacuum fluctuations can source curvature| Vacuum contributions of the form \(\rho g_{\mu\nu}\) are algebraically projected out |
 
 In unimodular gravity the restriction \(\sqrt{-g} =\) constant is imposed (via Lagrange multiplier or directly in the action), reducing the gauge group to \(\mathrm{SDiff}(M)\).
@@ -74,12 +74,12 @@ In other words, unimodular gravity offers a natural explanation for the observed
 
 Current and near-future data can distinguish between the two interpretations:
 
-| Observable                    | Fundamental SDiff                          | Emergent SDiff                              | Discriminating Power |
+| Observable | Fundamental SDiff | Emergent SDiff | Discriminating Power |
 |-------------------------------|--------------------------------------------|---------------------------------------------|----------------------|
-| Stochastic amplitude \(\sigma_X\) | Exactly zero (or below numerical floor)   | Small but non-zero residual possible        | High (Euclid DR1)    |
-| Euclid DR1 (2026)             | No detection of stochastic signal          | Possible detection of small \(\sigma_X\)    | High                 |
-| Primordial gravitational waves| No scalar mode                             | Possible scalar mode at high energies       | Medium               |
-| DESI DR2 (current)            | Compatible                                 | Compatible                                  | None (already passed)|
+| Stochastic amplitude \(\sigma_X\) | Exactly zero (or below numerical floor) | Small but non-zero residual possible | High (Euclid DR1) |
+| Euclid DR1 (2026) | No detection of stochastic signal | Possible detection of small \(\sigma_X\) | High |
+| Primordial gravitational waves| No scalar mode | Possible scalar mode at high energies | Medium |
+| DESI DR2 (current) | Compatible | Compatible | None (already passed)|
 
 **Key test:** If Euclid DR1 detects a stochastic signal with \(0 < \sigma_X \lesssim 10^{-4}\), the fundamental interpretation would be strongly disfavored. If no signal is found, both remain viable, with the fundamental option being more minimal.
 
@@ -114,5 +114,6 @@ Future data from Euclid DR1 will provide the first quantitative test capable of 
 
 ## Quantitative follow-up
 
-Path-integrated residuals \(\sigma_{m res}=A_0 e^{-	heta\Delta x}\), amplification bounds relative to the Sorkin seed, and a partitioned theory space (F, E0–E3) are developed in `fundamental-vs-emergent-vacuum-relaxation.md`, using the laboratory desqueezing law \(t_{1/2}=\ln 2/\gamma\) as the finite-relaxation template.
+Path-integrated residuals \(\sigma_{
+m res}=A_0 e^{-	heta\Delta x}\), amplification bounds relative to the Sorkin seed, and a partitioned theory space (F, E0–E3) are developed in `fundamental-vs-emergent-vacuum-relaxation.md`, using the laboratory desqueezing law \(t_{1/2}=\ln 2/\gamma\) as the finite-relaxation template.
 

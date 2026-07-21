@@ -1,8 +1,8 @@
 # The Smoothness of the Vacuum and the Unimodular Structure of Spacetime
 
-**Author:** Jesús Morales Souhail  
-**Date:** July 2026  
-**ORCID:** 0009-0000-7637-1818  
+**Author:** Jesús Morales Souhail 
+**Date:** July 2026 
+**ORCID:** 0009-0000-7637-1818 
 **Repository:** https://github.com/jesus-morales-souhail/stochastic-dark-energy-ou
 
 ---
@@ -21,23 +21,29 @@ That expectation has not been fulfilled.
 
 The DESI DR2 BAO data, when analysed within a phenomenological Ornstein-Uhlenbeck (OU) framework, show no evidence for stochastic fluctuations [1]. The Maximum Likelihood Estimation drives the amplitude to zero:
 
+
 $$
 \sigma_X \to 0, \qquad \omega_R \to 0,
 $$
 
+
 establishing a conservative upper limit [1]:
+
 
 $$
 \sigma_X < 1.5 \times 10^{-4}
 $$
 
+
 **(95% CL).**
 
 Moreover, a specific class of models — those based on a tachyonic quantum fluid with negative effective mass — is excluded with high significance [2]:
 
+
 $$
 \Delta\chi^2 \approx +22.7,
 $$
+
 
 meaning that the data reject a coherent growing-mode scenario entirely.
 
@@ -49,15 +55,19 @@ These results are not a "non-discovery." They are a structural constraint on the
 
 We define the fractional fluctuation of the dark-energy density as:
 
+
 $$
 X(x) \equiv \frac{\delta\rho_\Lambda(x)}{\bar{\rho}_\Lambda},
 $$
 
+
 with variance $\sigma_X^2 \equiv \langle X^2 \rangle$. The DESI DR2 BAO data, combined with the sensitivity kernel $S(z) = \partial \ln D_V / \partial \Omega_\Lambda$, yield [1]:
+
 
 $$
 \sigma_X < 1.5 \times 10^{-4}
 $$
+
 
 **(95% CL).**
 
@@ -73,35 +83,45 @@ Under the classical theory of fields and Einstein's equations, only two structur
 
 If dark energy is a pure cosmological constant, its energy-momentum tensor is
 
+
 $$
-T_{\mu\nu} = -\Lambda \, g_{\mu\nu}.
+T_{\mu\nu} = -\Lambda g_{\mu\nu}.
 $$
 
+
 By the Bianchi identity, $\nabla_\mu T^{\mu\nu} = 0$ implies $\partial_\mu \Lambda = 0$. There are no local degrees of freedom. Consequently,
+
 
 $$
 \sigma_X = 0 \quad \text{exactly}.
 $$
 
+
 ### 3.2 A dynamical field frozen by Hubble friction
 
 If dark energy is a scalar field $\phi$ with energy density
+
 
 $$
 \rho_\phi = \frac{1}{2}\dot{\phi}^2 + V(\phi),
 $$
 
+
 then small fluctuations $\delta\phi$ obey the wave equation in an expanding universe:
 
+
 $$
-\delta\ddot{\phi} + 3H\,\delta\dot{\phi} + \left(\frac{k^2}{a^2} + m_\phi^2\right)\delta\phi = 0.
+\delta\ddot{\phi} + 3H \delta\dot{\phi} + \left(\frac{k^2}{a^2} + m_\phi^2\right)\delta\phi = 0.
 $$
 
-If $m_\phi \ll H_0$ (where $H_0 \sim 10^{-33}\ \text{eV}$), the friction term $3H\,\delta\dot{\phi}$ forces the mode into the "frozen" regime, effectively erasing inhomogeneities. The limits derived in [1] give:
+
+If $m_\phi \ll H_0$ (where $H_0 \sim 10^{-33}\ \text{eV}$), the friction term $3H \delta\dot{\phi}$ forces the mode into the "frozen" regime, effectively erasing inhomogeneities. The limits derived in [1] give:
+
 
 $$
 m_\phi \lesssim 10^{-5}\ \text{eV}, \qquad \left|\frac{V'}{V}\right| M_{\mathrm{Pl}} \lesssim 10^{-2}.
 $$
+
 
 In this regime, the field is observationally indistinguishable from a cosmological constant. Both alternatives lead to the same phenomenological outcome: $\sigma_X$ is zero or below detection.
 
@@ -113,13 +133,15 @@ To distinguish which of the two alternatives is more fundamental, we must ask: w
 
 ### 4.1 Candidate A: Conformal (Weyl) invariance
 
-Weyl invariance requires the action to be invariant under local rescalings of the metric: $g_{\mu\nu}(x) \to \Omega^2(x)\, g_{\mu\nu}(x)$. Classically, this forces the trace of the energy-momentum tensor to vanish: $T^{\mu}{}_{\mu} = 0$.
+Weyl invariance requires the action to be invariant under local rescalings of the metric: $g_{\mu\nu}(x) \to \Omega^2(x) g_{\mu\nu}(x)$. Classically, this forces the trace of the energy-momentum tensor to vanish: $T^{\mu}{}_{\mu} = 0$.
 
 **Problem:** At the quantum level, Weyl invariance is broken by the conformal anomaly:
+
 
 $$
 \langle T^{\mu}{}_{\mu} \rangle_{\mathrm{anomaly}} \propto R^2 + C_{\mu\nu\rho\sigma} C^{\mu\nu\rho\sigma}.
 $$
+
 
 Since the local curvature $R(x)$ varies in space and time due to structure formation, the anomaly reintroduces local vacuum fluctuations. Thus, Weyl invariance cannot guarantee $\sigma_X = 0$ in a universe with matter.
 
@@ -127,27 +149,35 @@ Since the local curvature $R(x)$ varies in space and time due to structure forma
 
 In unimodular gravity, the gauge group is reduced from the full diffeomorphism group $\mathrm{Diff}(M)$ to the subgroup that preserves the four-volume element:
 
+
 $$
 \sqrt{-g} = \text{constant}.
 $$
 
+
 The resulting field equation is the trace-free part of Einstein's equation:
 
+
 $$
-R_{\mu\nu} - \frac{1}{4} R\, g_{\mu\nu} = 8\pi G \left(T_{\mu\nu} - \frac{1}{4} T^{\lambda}{}_{\lambda}\, g_{\mu\nu}\right).
+R_{\mu\nu} - \frac{1}{4} R g_{\mu\nu} = 8\pi G \left(T_{\mu\nu} - \frac{1}{4} T^{\lambda}{}_{\lambda} g_{\mu\nu}\right).
 $$
+
 
 Now, any local vacuum fluctuation of matter has the form
 
+
 $$
-T_{\mu\nu}^{\mathrm{vac}}(x) = V(x)\, g_{\mu\nu}.
+T_{\mu\nu}^{\mathrm{vac}}(x) = V(x) g_{\mu\nu}.
 $$
+
 
 Substituting this into the trace-free equation:
 
+
 $$
-V(x)\, g_{\mu\nu} - \frac{1}{4}(4V(x))\, g_{\mu\nu} = 0 \quad \text{identically}.
+V(x) g_{\mu\nu} - \frac{1}{4}(4V(x)) g_{\mu\nu} = 0 \quad \text{identically}.
 $$
+
 
 **Conclusion:** In unimodular gravity, the trace-free projection cancels any local vacuum fluctuation, regardless of its magnitude or inhomogeneity. This is a purely algebraic cancellation, independent of the details of the quantum fields.
 
@@ -162,11 +192,11 @@ $$
 
 The mathematical structure of unimodular gravity provides the only known symmetry that can absolutely shield the cosmic volume element from local quantum noise. The cosmological constant $\Lambda$ emerges as an integration constant from the conservation law:
 
+
 $$
-\nabla_\mu \left(R + 8\pi G\, T^{\lambda}{}_{\lambda}\right) = 0
-\quad \Longrightarrow \quad
-R + 8\pi G\, T^{\lambda}{}_{\lambda} = 4\Lambda = \text{global constant}.
+\nabla_\mu \left(R + 8\pi G T^{\lambda}{}_{\lambda}\right) = 0 \quad \Longrightarrow \quad R + 8\pi G T^{\lambda}{}_{\lambda} = 4\Lambda = \text{global constant}.
 $$
+
 
 Thus, $\Lambda$ is a single number for the entire universe. It has no local dynamics, no propagating degrees of freedom, and no fluctuations: $\sigma_X = 0$ exactly.
 

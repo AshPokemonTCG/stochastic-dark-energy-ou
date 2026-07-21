@@ -2,7 +2,7 @@
 
 Seed amplitude: \(\sigma_0\sim 10^{-61}\) (repo Axiom A2 / GPE paper).
 
-Fiducial: \(H_0=67.4\), \(\Omega_m=0.315\), \(t_0=13.796\,\mathrm{Gyr}\).
+Fiducial: \(H_0=67.4\), \(\Omega_m=0.315\), \(t_0=13.796 \mathrm{Gyr}\).
 
 ## Table 1 — \(\theta\) from repo → \(\gamma\), \(t_{1/2}\), Sorkin residual
 

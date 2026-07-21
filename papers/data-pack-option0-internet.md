@@ -1,8 +1,8 @@
 # Data pack (internet): scale/operator probes for Option 0 and closed tests
 
-**Compiled:** July 2026  
-**Purpose:** Citable external numbers + repo numbers for  
-`scale-operator-experiment-map.md` and `anisotropic-slip-option0.md`.  
+**Compiled:** July 2026 
+**Purpose:** Citable external numbers + repo numbers for 
+`scale-operator-experiment-map.md` and `anisotropic-slip-option0.md`. 
 **Rule:** every row has arXiv / DOI where possible; definitions stated.
 
 ---
@@ -17,7 +17,7 @@
 | Motivational seed | \(\sigma_0\sim 10^{-61}\sim 1/\sqrt{N}\), \(N\sim 10^{122}\) | Bekenstein–Hawking / Sorkin (motivational, not a detection) |
 | BAO public data used | DESI DR2 summary stats | arXiv:[2503.14738](https://arxiv.org/abs/2503.14738) |
 
-**Operator in repo:** residual kernel on BAO distances \(D_V,D_M,D_H\).  
+**Operator in repo:** residual kernel on BAO distances \(D_V,D_M,D_H\). 
 **Not in repo:** \(\Phi,\Psi,\eta\), CLASS/CAMB.
 
 ---
@@ -103,18 +103,18 @@ Using \(\sigma_X \sim 10^{-4}\), \(\Omega_{\mathrm{DE}}/\Omega_m\sim 2\), \(f=1\
 |------|--------|
 | Script | `scripts/car_drone_pupil_newton_einstein.py` |
 | \(v\) | 120 km/h \(\Rightarrow \beta\sim 1.1\times 10^{-7}\), \(\gamma-1\sim 6\times 10^{-15}\) |
-| Pupil | \(D=1\,\mathrm{mm}\), \(\theta_{\mathrm{Airy}}\sim 6.7\times 10^{-4}\) rad |
+| Pupil | \(D=1 \mathrm{mm}\), \(\theta_{\mathrm{Airy}}\sim 6.7\times 10^{-4}\) rad |
 | Verdict | **Wrong scale + wrong operator** for cosmic expansion |
 
 ---
 
 ## G) Reading / download checklist
 
-- [x] Maus et al. 2505.20656 — slip definition + number  
-- [x] Sakr et al. 2501.07477 — \(\eta\) forecasts  
-- [x] DESI full-shape MG 2411.12026 / 2411.12022 — \(\mu_0,\Sigma_0\)  
-- [x] DESI DR2 BAO 2503.14738 — background distances  
-- [ ] Full PDF of any “Dark Energy After DESI DR2” review if you want a single secondary survey (optional)  
+- [x] Maus et al. 2505.20656 — slip definition + number 
+- [x] Sakr et al. 2501.07477 — \(\eta\) forecasts 
+- [x] DESI full-shape MG 2411.12026 / 2411.12022 — \(\mu_0,\Sigma_0\) 
+- [x] DESI DR2 BAO 2503.14738 — background distances 
+- [ ] Full PDF of any “Dark Energy After DESI DR2” review if you want a single secondary survey (optional) 
 - [ ] Plaza et al. unimodular + DESI (pipeline craft only)
 
 ---

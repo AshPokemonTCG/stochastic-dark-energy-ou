@@ -1,19 +1,19 @@
 # Repository structure
 
 ```
-manuscript/   Unified preprint + referee claim checklist (START HERE for publication)
-papers/       Technical notes and data packs (English) — narrative arc in README.md
-scripts/      Analysis code and small demos
-  desqueezing/   Open-system desqueezing and timescale mapping
-  gpe/           Gross–Pitaevskii / Bogoliubov numerics
-  amplification/ Routes 1–3 (seed / freeze / avalanche)
-figures/      Figures
-results/      Numerical outputs (BAO fits, forecasts, desqueezing, routes)
-notes/        Technical notes (desqueezing synthesis, mapping tables)
-local_archive/  Offline drafts (not part of the public scientific claim)
+manuscript/ Unified preprint + referee claim checklist (START HERE for publication)
+papers/ Technical notes and data packs (English) — narrative arc in README.md
+scripts/ Analysis code and small demos
+ desqueezing/ Open-system desqueezing and timescale mapping
+ gpe/ Gross–Pitaevskii / Bogoliubov numerics
+ amplification/ Routes 1–3 (seed / freeze / avalanche)
+figures/ Figures
+results/ Numerical outputs (BAO fits, forecasts, desqueezing, routes)
+notes/ Technical notes (desqueezing synthesis, mapping tables)
+local_archive/ Offline drafts (not part of the public scientific claim)
 ```
 
-**Peer-review entry:** `manuscript/PREPRINT.md` · **Non-claims fence:** `papers/EXPLORATORY_BOUNDARY.md`  
+**Peer-review entry:** `manuscript/PREPRINT.md` · **Non-claims fence:** `papers/EXPLORATORY_BOUNDARY.md` 
 **Exploratory repo (separate):** `../stochastic-de-exploratory-notes/`
 
 ---
@@ -106,10 +106,10 @@ local_archive/  Offline drafts (not part of the public scientific claim)
 
 Every claim in this repository should be classifiable as one of:
 
-1. **BAO residual / model constraint** (Act I),  
-2. **Geometric interpretation** of smoothness (Act II),  
-3. **Amplification / Euclid protocol** (Act III),  
-4. **Slip Option 0 with amplitude honesty** (Act IV), or  
+1. **BAO residual / model constraint** (Act I), 
+2. **Geometric interpretation** of smoothness (Act II), 
+3. **Amplification / Euclid protocol** (Act III), 
+4. **Slip Option 0 with amplitude honesty** (Act IV), or 
 5. **Explicit no-go / boundary** (Act V).
 
 Anything that is only a lab optics metaphor belongs in Act V or in the **separated** optics project — not in the DESI likelihood narrative.

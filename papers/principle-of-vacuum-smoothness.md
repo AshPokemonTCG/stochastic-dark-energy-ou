@@ -1,7 +1,7 @@
 # Principle of Late-Time Vacuum Homogeneity
 
-**Author:** Jesús Morales Souhail  
-**Date:** July 2026  
+**Author:** Jesús Morales Souhail 
+**Date:** July 2026 
 **ORCID:** 0009-0000-7637-1818
 **Repository:** (https://github.com/jesus-morales-souhail/stochastic-dark-energy-ou)
 
@@ -13,15 +13,17 @@ At observable cosmological scales (\(z \lesssim 2.3\)) and with current baryon a
 
 Any physical mechanism capable of generating fluctuations in the dark energy density \(\rho_\Lambda\) — whether arising from spacetime discreteness, horizon quasi-normal modes, scalar field dynamics, or quantum gravitational effects — must be naturally suppressed below the level detectable by current surveys:
 
+
 $$
 \sigma_X < 1.5 \times 10^{-4}
 $$
+
 
 **(95% CL).**
 
 This is not merely an observational upper limit. It is proposed as a **working principle** for theoretical model building:
 
-> **Principle of Late-Time Vacuum Homogeneity**  
+> **Principle of Late-Time Vacuum Homogeneity** 
 > The late-time cosmological vacuum is extraordinarily smooth. Models of dark energy and quantum gravity should demonstrate that they naturally predict an effectively non-stochastic background before attempting to explain cosmic acceleration or dynamical dark energy.
 
 ---

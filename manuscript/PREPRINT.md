@@ -17,10 +17,11 @@
 
 We test whether public DESI DR2 baryon acoustic oscillation (BAO) summary statistics require a *stationary stochastic* component in the late-time dark-energy sector, on top of a smooth background. Fluctuations are modelled as an Ornstein–Uhlenbeck (OU) process in logarithmic scale factor $x = \ln a$, with a quasi-normal-mode (QNM) oscillatory extension. Using a Gaussian likelihood with an additive residual covariance kernel, maximum-likelihood estimation drives the stochastic amplitude to the numerical floor. We report the working 95% confidence upper limit
 
+
 $$
-\sigma_X < 1.5 \times 10^{-4}
-\quad (95\%~\mathrm{CL})
+\sigma_X < 1.5 \times 10^{-4} \quad (95\%~\mathrm{CL})
 $$
+
 
 under the stated phenomenological kernel and public BAO summary statistics (diagonal measurement errors in the baseline pipeline). Nested extensions that free $\{w_0, w_a, \sigma_X, \theta\}$ are not preferred over a smooth background ($\Delta\mathrm{AIC} \approx +4$).
 
@@ -83,6 +84,7 @@ We use **public DESI DR2 BAO summary statistics** (arXiv:2503.14738): isotropic 
 
 Let $X(x) \equiv \delta\Omega_X(x)$ with $x = \ln a$. The stationary OU process is
 
+
 $$
 \mathrm{d}X = -\theta X \mathrm{d}x + \sigma \mathrm{d}W_x,\quad \mathrm{Var}(X) = \frac{\sigma^{2}}{2\theta}\quad (\theta > 0).
 $$
@@ -90,15 +92,19 @@ $$
 
 We work with an effective residual amplitude $\sigma_X$ entering the BAO residual covariance. For bins $i,j$ with logarithmic separation $\Delta x_{ij}$,
 
+
 $$
 C^{\mathrm{OU}}_{ij} = \sigma_X^2 e^{-\theta \Delta x_{ij}},\quad C^{\mathrm{QNM}}_{ij} = \sigma_X^2 e^{-\theta \Delta x_{ij}}\cos(\omega_R \Delta x_{ij}).
 $$
 
+
 The total covariance is $C_{\mathrm{tot}}=C_{\mathrm{meas}}+C_{\mathrm{stoch}}$. The Gaussian log-likelihood is standard:
+
 
 $$
 -2\ln\mathcal{L} = \ln\det C_{\mathrm{tot}} + \mathbf{r}^{\mathrm{T}} C_{\mathrm{tot}}^{-1}\mathbf{r} + \mathrm{const}.
 $$
+
 
 with residual vector $\mathbf{r}$ relative to the smooth background prediction.
 
@@ -147,9 +153,11 @@ Under fixed smooth background and public BAO summary statistics, the MLE drives 
 
 From the residual analysis (profile / likelihood ratio under the OU kernel as implemented in the public pipeline):
 
+
 $$
 \sigma_X < 1.5 \times 10^{-4}\quad (95\%~\mathrm{CL}).
 $$
+
 
 This is an **upper limit on an effective residual amplitude**, not a measurement of a Planck-scale seed.
 
@@ -167,9 +175,11 @@ When $\{w_0,w_a\}$ are freed together with residual parameters, the stochastic e
 
 A distinct hypothesis is that a dark-energy quantum fluid with negative effective mass undergoes Bogoliubov instability, yielding a *coherent* growing mode $\sigma_X(t) = \sigma_0 e^{t/t_c}$. The induced BAO residual covariance is **rank-1**, not OU-stationary. Using that covariance in an MLE on the same BAO summary statistics yields
 
+
 $$
 \Delta\ln\mathcal{L} = \ln\mathcal{L}(t_c)-\ln\mathcal{L}_{\Lambda\mathrm{CDM}} = -11.35\quad(\Delta\chi^2\approx +22.7).
 $$
+
 
 Any finite collapse / growth time $t_c$ is disfavoured; the acceptable limit is $t_c \to \infty$ (no growth).
 
@@ -230,9 +240,11 @@ Volume-preserving diffeomorphisms / unimodular structure project out isotropic v
 
 Anisotropic stress is **not** of the form $V g_{\mu\nu}$. Sub-horizon slip satisfies (Newtonian gauge)
 
+
 $$
 \lvert\gamma-1\rvert = \left\lvert\frac{\Phi-\Psi}{\Psi}\right\rvert = 2\varepsilon\sigma_X\frac{\rho_X}{\rho_m \lvert\delta_m\rvert}.
 $$
+
 
 with $\varepsilon \in [0,1]$ the anisotropic fraction of the residual. With $\sigma_X = 1.5 \times 10^{-4}$, $\varepsilon = 1$, $\delta_m = 1$:
 
@@ -279,7 +291,7 @@ Method-hygiene digressions, optical analogies, band-limit / superoscillation dem
 
 **Theory (if the null is not the end of the story):** a separate English programme develops a minimal model as simple as $\Lambda$ (bulk $\Lambda$CDM + one grain $\sigma$ + light-path $\mathrm{RMS}\sim\sigma^{2/3}$), with a test-gated claim map:
 
-**https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum**  
+**https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum** 
 Start: `papers/FOR_REFEREES.md`, `papers/SIMPLE_AS_LAMBDA.md`, `papers/VERIFIED_RESULTS.md` (`pytest -q`).
 
 That theory repo does **not** alter the empirical claims of this preprint; it uses them only as a posteriori tests.
