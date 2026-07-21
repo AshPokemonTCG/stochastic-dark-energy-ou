@@ -18,7 +18,8 @@
 We test whether public DESI DR2 baryon acoustic oscillation (BAO) summary statistics require a *stationary stochastic* component in the late-time dark-energy sector, on top of a smooth background. Fluctuations are modelled as an Ornstein–Uhlenbeck (OU) process in logarithmic scale factor $x = \ln a$, with a quasi-normal-mode (QNM) oscillatory extension. Using a Gaussian likelihood with an additive residual covariance kernel, maximum-likelihood estimation drives the stochastic amplitude to the numerical floor. We report the working 95% confidence upper limit
 
 $$
-\sigma_X < 1.5 \times 10^{-4}.
+\sigma_X < 1.5 \times 10^{-4}
+\quad (95\%~\mathrm{CL})
 $$
 
 under the stated phenomenological kernel and public BAO summary statistics (diagonal measurement errors in the baseline pipeline). Nested extensions that free $\{w_0, w_a, \sigma_X, \theta\}$ are not preferred over a smooth background ($\Delta\mathrm{AIC} \approx +4$).
@@ -276,11 +277,12 @@ Method-hygiene digressions, optical analogies, band-limit / superoscillation dem
 
 **https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes**
 
-**Theory (if the null is not the end of the story):** a separate programme asks which *fundamental rules* would have to change for stochastic vacuum noise to be measurable without free-lunch numerology (counting scale $N_{\mathrm{eff}}$, open-horizon dynamics, slip from the same sector):
+**Theory (if the null is not the end of the story):** a separate English programme develops a minimal model as simple as $\Lambda$ (bulk $\Lambda$CDM + one grain $\sigma$ + light-path $\mathrm{RMS}\sim\sigma^{2/3}$), with a test-gated claim map:
 
-**https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum**
+**https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum**  
+Start: `papers/FOR_REFEREES.md`, `papers/SIMPLE_AS_LAMBDA.md`, `papers/VERIFIED_RESULTS.md` (`pytest -q`).
 
-That theory repo does **not** alter the empirical claims of this preprint; it uses them as a posteriori tests only.
+That theory repo does **not** alter the empirical claims of this preprint; it uses them only as a posteriori tests.
 
 | In primary repo (claims) | In exploratory repo (not claims) |
 |:-------------------------|:---------------------------------|
