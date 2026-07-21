@@ -30,6 +30,7 @@ notes/        Technical notes (desqueezing synthesis, mapping tables)
 | `scripts/car_drone_pupil_newton_einstein.py` | Car+drone@120 km/h, pupil diffraction: Newton vs SR + Hubble |
 | `papers/car-drone-pupil-newton-einstein.md` | Write-up of the car/drone/pupil experiment (no tesseract) |
 | `papers/scale-operator-experiment-map.md` | Closed wrong-scale results + correct next experiments |
+| `papers/data-pack-option0-internet.md` | Internet-sourced numbers + arXiv links for Option 0 |
 | `results/eos_cpl_desi_dr2/` | CPL fit outputs |
 
 See `README.md` for installation and overview.
