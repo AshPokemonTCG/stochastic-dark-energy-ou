@@ -276,6 +276,12 @@ Method-hygiene digressions, optical analogies, band-limit / superoscillation dem
 
 **https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes**
 
+**Theory (if the null is not the end of the story):** a separate programme asks which *fundamental rules* would have to change for stochastic vacuum noise to be measurable without free-lunch numerology (counting scale $N_{\mathrm{eff}}$, open-horizon dynamics, slip from the same sector):
+
+**https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum**
+
+That theory repo does **not** alter the empirical claims of this preprint; it uses them as a posteriori tests only.
+
 | In primary repo (claims) | In exploratory repo (not claims) |
 |:-------------------------|:---------------------------------|
 | BAO OU/QNM limits | Car–drone pupil diffraction pedagogy |

@@ -18,8 +18,11 @@ Independent analysis of **stochastic fluctuations in the dark-energy sector** wi
 | [`papers/resume.txt`](papers/resume.txt) | Compact numerical summary |
 | [`papers/EXPLORATORY_BOUNDARY.md`](papers/EXPLORATORY_BOUNDARY.md) | What is **not** part of the paper |
 
-**Exploratory / pedagogy (separate repository — not DESI claims):**  
-https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes
+**Exploratory / pedagogy (not DESI claims):**  
+https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes  
+
+**Theory programme — when could vacuum noise be measurable? (R1–R2–R3, no free lunch):**  
+https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum
 
 ---
 
