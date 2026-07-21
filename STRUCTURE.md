@@ -66,6 +66,7 @@ local_archive/  Offline drafts (not part of the public scientific claim)
 |------|------|
 | `papers/anisotropic-slip-option0.md` | \(\eta\) / shear vs \(\sigma_X\); amplification inheritance |
 | `papers/data-pack-option0-internet.md` | arXiv numbers (Maus, Sakr, DESI MG/BAO) |
+| `scripts/slip_bridge.py` | Runnable \(\sigma_X\to\|\gamma-1\|\) map; amplitude-starved verdict |
 
 ### V — Method hygiene and closed wrong paths
 

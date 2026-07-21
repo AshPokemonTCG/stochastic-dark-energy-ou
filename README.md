@@ -49,7 +49,8 @@ A pure Sorkin–Bekenstein seed \(\sigma_0\sim 10^{-61}\) sits far below BAO rea
 
 SDiff does **not** cancel shear. Gravitational slip \(\gamma=\Phi/\Psi\) (Maus et al., arXiv:2505.20656: \(\gamma=1.17\pm 0.11\), GR\(=1\)) is the right **kind** of operator. Order-of-magnitude: even \(f=1\) and \(\sigma_X\sim 10^{-4}\) give \(|\eta-1|\sim 10^{-4}\), far below current \(\mathcal{O}(0.1)\) sensitivity. **The gap inherits the amplification problem; it is not a shortcut.**
 
-**Primary papers:** `anisotropic-slip-option0.md`, `data-pack-option0-internet.md`.
+**Primary papers:** `anisotropic-slip-option0.md`, `data-pack-option0-internet.md`.  
+**Runnable bridge:** `python scripts/slip_bridge.py` (\(\sigma_X\to|\gamma-1|\); amplitude-starved).
 
 ### Act V — Closed wrong paths (scale / operator hygiene)
 
@@ -141,6 +142,9 @@ python scripts/desqueezing/cosmological_mapping.py
 # Euclid forecast MCMC (mock likelihood; requires emcee)
 python scripts/euclid_mock_mcmc.py
 python scripts/euclid_joint_bao_sne_mcmc.py
+
+# Option 0: σ_X → gravitational slip (amplitude-starved; not Boltzmann)
+python scripts/slip_bridge.py
 
 # Pedagogy / hygiene demos (not cosmology likelihoods)
 python scripts/superoscillation_energy_cost_demo.py

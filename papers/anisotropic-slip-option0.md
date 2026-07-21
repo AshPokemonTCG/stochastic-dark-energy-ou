@@ -35,11 +35,12 @@ from public DESI DR2 BAO summary statistics (`papers/resume.txt`). It does **not
 | CPL background + OU/QNM residual kernel on BAO distances | Boltzmann hierarchy (CLASS/CAMB) |
 | Joint / profile MLE for \(\{w_0,w_a,\sigma_X\}\) | Poisson / slip equations for \(\Phi,\Psi\) |
 | Euclid **BAO** mock forecasts | \(\eta(a,k)\) likelihoods |
-| Unimodular / SDiff narrative notes | Anisotropic stress parameter \(f\) |
+| Unimodular / SDiff narrative notes | Full \(\eta(a,k)\) MCMC |
+| `scripts/slip_bridge.py` (scaling map \(\sigma_X\to\|\gamma-1\|\)) | hi_class / MGCAMB Boltzmann |
 
 Scripts such as `ou_bao_likelihood.py`, `joint_w0wa_sigma_desi.py`, `profile_sigma_x_desi.py`, `eos_efectiva.py`, and `euclid_*` operate on **distances** (\(D_V\), \(D_M\), \(D_H\)) obtained from \(\int dz/H(z)\). That is by design: the primary DESI DR2 product used here is **BAO-only residual smoothness**.
 
-**Implication:** the “grieta” (anisotropic leakage past SDiff) **cannot be tested inside this repo as it stands**. Option 0 is literature + scaling, not a new MCMC.
+**Implication:** the “grieta” (anisotropic leakage past SDiff) is **quantified as amplitude-starved** via `slip_bridge.py`, not tested as a new MCMC. Option 0 remains literature + scaling.
 
 ---
 
@@ -130,37 +131,41 @@ Model-independent forecasts combining Euclid-like and DESI-like surveys for anis
 
 ## 4. Order-of-magnitude map \(\sigma_X \rightarrow |\eta-1|\)
 
-Let \(f\in[0,1]\) be the fraction of the DE-sector residual stress that is **anisotropic** (shear), and let \(\sigma_X\) be the fractional residual amplitude constrained by BAO:
+**Runnable bridge:** `python scripts/slip_bridge.py`  
+(sub-horizon anisotropy equation; not a Boltzmann code).
+
+Let \(\varepsilon\in[0,1]\) (also written \(f\) below) be the fraction of the DE-sector residual stress that is **anisotropic** (shear), and let \(\sigma_X\) be the fractional residual amplitude constrained by BAO. With \(\pi_T=\varepsilon\,\sigma_X\,\rho_X\) and \(\delta_m\sim 1\):
 
 \[
-|\eta-1| \;\sim\; \mathcal{O}\!\left(
-f \cdot \frac{\Omega_{\mathrm{DE}}}{\Omega_m} \cdot \sigma_X^{\mathrm{eff}}
-\right).
+|\gamma-1|
+\;=\;
+2\,\varepsilon\,\sigma_X\,\frac{\rho_X}{\rho_m\,|\delta_m|}.
 \]
 
-**Plug-in (optimistic):** \(\sigma_X\sim 10^{-4}\), \(\Omega_{\mathrm{DE}}/\Omega_m\sim 2\), **\(f=1\)** (all residual is anisotropic — best case for the gap):
+**Machine check (best case \(\varepsilon=1\), \(\sigma_X=1.5\times 10^{-4}\), \(\delta_m=1\)):**
 
-\[
-|\eta-1| \;\sim\; 2\times 10^{-4}.
-\]
+| \(z\) | \(\rho_X/\rho_m\) | max \(\|\gamma-1\|\) | gap vs Maus \(\sim 0.17\) | gap vs Sakr floor \(\sim 0.05\) |
+|-------|-------------------|----------------------|---------------------------|--------------------------------|
+| 0.5 | 0.644 | \(1.93\times 10^{-4}\) | \(\sim 880\times\) | \(\sim 260\times\) |
+| 1.0 | 0.272 | \(8.16\times 10^{-5}\) | \(\sim 2\times 10^{3}\) | \(\sim 610\times\) |
+| 1.5 | 0.139 | \(4.18\times 10^{-5}\) | \(\sim 4\times 10^{3}\) | \(\sim 1.2\times 10^{3}\) |
 
 Compare:
 
-| Instrument / status | Rough sensitivity to \(\eta-1\) | vs \(2\times 10^{-4}\) |
-|---------------------|----------------------------------|------------------------|
-| Current DESI-era growth/MG | \(\mathcal{O}(0.1)\) | **far above** prediction |
-| Euclid-like forecasts | \(\mathcal{O}(0.03\text{–}0.05)\) | **still above** by \(\sim 10^2\) |
+| Instrument / status | Rough sensitivity to \(\eta-1\) | vs \(\sim 10^{-4}\) (best case) |
+|---------------------|----------------------------------|----------------------------------|
+| Current DESI-era slip (Maus \(\gamma=1.17\pm 0.11\)) | \(\mathcal{O}(0.1)\) | **far above** prediction |
+| Euclid-like forecasts (Sakr et al.) | \(\mathcal{O}(0.03\text{–}0.05)\) | **still above** by \(\sim 10^{2}\)–\(10^{3}\) |
 
-**Interpretation:** even the most optimistic anisotropic fraction does **not** make the gap visible at current DESI precision, nor automatically at Euclid, **unless** there is **amplification** of the bare residual amplitude.
+**Interpretation:** even the most optimistic anisotropic fraction does **not** make the gap visible at current DESI precision, nor automatically at Euclid, **unless** there is **amplification** of the bare residual amplitude (or a shear sector **decoupled** from the BAO-bounded isotropic \(\sigma_X\)).
 
-That word — **amplification** — is the same one that appears in the desqueezing note when mapping Sorkin-scale seeds (\(\sim 10^{-61}\)) up to BAO-relevant \(\sigma_X\) (factors of order \(A_0/\sigma_0\sim 10^{56}\) in that narrative). The anisotropic channel **does not evade** that problem; it **inherits** it.
+That word — **amplification** — is the same one that appears in Act III (`amplification-no-free-lunch.md`) when mapping Sorkin-scale seeds (\(\sim 10^{-61}\)) up to BAO-relevant \(\sigma_X\) (factors of order \(A_0/\sigma_0\sim 10^{56}\)). The anisotropic channel **does not evade** that problem; it **inherits** it.
 
-| \(f\) | \(|\eta-1|\) (order) with \(\sigma_X\sim 10^{-4}\) |
-|------|-----------------------------------------------------|
-| 1 | \(\sim 2\times 10^{-4}\) |
-| 0.1 | \(\sim 2\times 10^{-5}\) |
-| 0.01 | \(\sim 2\times 10^{-6}\) |
-| 0.001 | \(\sim 2\times 10^{-7}\) |
+| \(\varepsilon\) | \(\|\gamma-1\|\) at \(z=0.5\), \(\sigma_X=1.5\times 10^{-4}\) |
+|-----------------|------------------------------------------------------------------|
+| 1 | \(1.93\times 10^{-4}\) |
+| 0.1 | \(1.93\times 10^{-5}\) |
+| 0.01 | \(1.93\times 10^{-6}\) |
 
 ---
 
@@ -209,5 +214,7 @@ That statement links this Option 0 note to the desqueezing / Sorkin-seed discuss
 - Plaza, León & Kraiselburd (2025) — unimodular + DESI DR2 (different science goal; pipeline craft only).
 
 ---
+
+**Runnable check:** `python scripts/slip_bridge.py`
 
 *End of Option 0 note. No Boltzmann code was modified or added.*
