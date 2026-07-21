@@ -23,6 +23,10 @@ notes/        Technical notes (desqueezing synthesis, mapping tables)
 | `scripts/gpe/gpe_sim.py` | Negative-mass GPE illustration |
 | `papers/resume.txt` | Compact numerical summary |
 | `papers/anisotropic-slip-option0.md` | Option 0: η / anisotropic stress vs σ_X (literature + scaling; no Boltzmann) |
+| `papers/no-go-superoscillation-tesseract.md` | No-go: Born tax + undeclared tesseract optical power |
+| `papers/self-shielding-vs-untestability.md` | SDiff “shielding” vs amplitude/operator honesty |
+| `papers/pattern-undeclared-physical-power.md` | Method hygiene: ln4 / B4 style claims |
+| `scripts/superoscillation_energy_cost_demo.py` | 1D demo: E_core collapses as superoscillation grows |
 | `results/eos_cpl_desi_dr2/` | CPL fit outputs |
 
 See `README.md` for installation and overview.
