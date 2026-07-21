@@ -6,12 +6,13 @@ Theory is **not** part of this DESI empirical claim set.
 
 | Document | Role |
 |:---------|:-----|
-| `papers/FOR_REFEREES.md` | **Peer-review entry** — claims, formula sheet |
-| `papers/OBSERVABLE_WALL.md` | **Einstein+Morales slip wall + self-shielding** |
+| `papers/FOR_REFEREES.md` | Peer-review entry — claims, formula sheet |
+| `papers/OBSERVABLE_WALL.md` | Einstein+Morales wall + self-shielding |
+| `papers/PAST_LIGHT_CONE_INTEGRATION.md` | **Only natural amplifier** $\mathrm{RMS}=\lvert\gamma-1\rvert\sqrt{\chi/\ell_*}$ |
+| `figures/past_light_cone_rms.png` | Boost + RMS figure |
 | `papers/SIMPLE_AS_LAMBDA.md` | Minimal model (as simple as $\Lambda$) |
 | `papers/VERIFIED_RESULTS.md` | Hard claims only (test-gated) |
-| `papers/NARROW_PATH.md` | DESI-safe NP-A / NP-B architecture |
-| `papers/TOPOLOGICAL_EDGE_ANALOGY.md` | Optional bulk/edge analogy |
-| `pytest -q` | Expect **34 passed** |
+| `papers/NARROW_PATH.md` | DESI-safe NP-A / NP-B |
+| `pytest -q` | Expect **42 passed** |
 
 This repository remains: DESI residual bounds, model exclusions, and no free lunch.
