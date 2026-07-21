@@ -13,8 +13,8 @@ They protect the programme against wrong-scale and wrong-operator claims. They a
 
 **Dedicated exploratory repository (canonical home for digressions):**
 
-- Local: `~/Proyectos/01_Fisica_y_Cosmologia/stochastic-de-exploratory-notes/`  
-- GitHub target: `https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes`
+- **https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes**  
+- Local: `~/Proyectos/01_Fisica_y_Cosmologia/stochastic-de-exploratory-notes/`
 
 Copies may remain in this tree for historical Act V narrative; **do not cite them as DESI results**.  
 See `manuscript/CLAIMS.md` for the referee checklist.

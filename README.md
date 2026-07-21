@@ -19,8 +19,7 @@ Independent analysis of **stochastic fluctuations in the dark-energy sector** wi
 | [`papers/EXPLORATORY_BOUNDARY.md`](papers/EXPLORATORY_BOUNDARY.md) | What is **not** part of the paper |
 
 **Exploratory / pedagogy (separate repository — not DESI claims):**  
-Local (ready to push): `~/Proyectos/01_Fisica_y_Cosmologia/stochastic-de-exploratory-notes/`  
-GitHub (create once, then push): `jesus-morales-souhail/stochastic-de-exploratory-notes`
+https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes
 
 ---
 

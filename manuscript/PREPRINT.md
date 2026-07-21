@@ -295,8 +295,7 @@ Contains the BAO pipelines, amplification audits, slip bridge, figures, and tech
 
 Method-hygiene digressions, optical analogies, band-limit / superoscillation demos, and other **non-cosmological** scale–operator checks are **not** part of the peer-review claim set. They are maintained separately:
 
-**Local:** `~/Proyectos/01_Fisica_y_Cosmologia/stochastic-de-exploratory-notes/`  
-**GitHub (after first push):** `https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes`
+**https://github.com/jesus-morales-souhail/stochastic-de-exploratory-notes**
 
 | In primary repo (claims) | In exploratory repo (not claims) |
 |--------------------------|----------------------------------|
