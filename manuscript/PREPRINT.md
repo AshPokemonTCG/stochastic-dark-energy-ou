@@ -83,7 +83,7 @@ We use **public DESI DR2 BAO summary statistics** (arXiv:2503.14738): isotropic 
 Let $X(x) \equiv \delta\Omega_X(x)$ with $x = \ln a$. The stationary OU process is
 
 $$
-dX = -\theta X  dx + \sigma  dW_x,\quad \mathrm{Var}(X)=\sigma^2/(2\theta)\quad(\theta>0).
+\mathrm{d}X = -\theta X \mathrm{d}x + \sigma \mathrm{d}W_x,\quad \mathrm{Var}(X) = \frac{\sigma^{2}}{2\theta}\quad (\theta > 0).
 $$
 
 
