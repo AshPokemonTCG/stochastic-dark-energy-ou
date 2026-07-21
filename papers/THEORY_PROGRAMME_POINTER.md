@@ -14,7 +14,8 @@ Theory is **not** part of this DESI empirical claim set.
 | `papers/VERIFIED_RESULTS.md` | Documented results only (unit-tested) |
 | `papers/NARROW_PATH.md` | DESI-safe NP-A / NP-B |
 | `papers/r1-open-kernel.md` | **Walls vs open kernel** (R1 load-bearing gap; not a derivation of $\ell_*$) |
-| `pytest -q` | Expect **49 passed** |
+| `papers/lensing-rms-forecast-real-data.md` | Path RMS vs Maus / Sakr / DESI MG / Stage-IV (real external data) |
+| `pytest -q` | Expect **54 passed** |
 
 This repository remains: DESI residual bounds, model exclusions, and the amplification gap (see `papers/amplification-gap.md`).  
 Theory open kernel (principle for mesoscopic $\ell_*$) lives only in the theory repo.
