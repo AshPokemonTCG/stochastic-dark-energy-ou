@@ -99,6 +99,9 @@ They **do not** start from Sorkin \(\sigma_0\sim 10^{-61}\). Light spectator: \(
 **Do not** claim it closes DESI residual detectability without a new seed→BAO map.  
 **Do** treat it as a respected, structurally distinct open door: missing factor \(\mathcal{O}(10^{1}\)–\(10^{2})\) + unmeasured \(H_{\mathrm{inf}}\), not free \(G\sim 10^{56}\) on holographic counting.
 
+**OOM advance (theory repo):** with modern \(r\sim 0.036\), \(\delta Q/M_p\sim 3\times 10^{-6}\); with \(A\sim 45\) and mild \(\varepsilon_Q\sim 0.05\), density contrast can sit at \(\sim\mathrm{few}\times 10^{-5}\) — residual *decade* without \(10^{56}\).  
+See [`inflation-spectator-residual-atlas.md`](https://github.com/jesus-morales-souhail/measurable-stochastic-vacuum/blob/main/papers/inflation-spectator-residual-atlas.md). Map to BAO kernel still open.
+
 ### 4.1 Why (d) is special
 
 Inflation is the **only** standard paradigm known to convert sub-horizon quantum fluctuations into large-scale classical curvature perturbations with a huge effective boost over many e-folds. Schematic amplitude after freeze-out is set by \(H/M_{\mathrm{Pl}}\) (and slow-roll factors), not by \(1/\sqrt{N_{\mathrm{BH,today}}}\).
