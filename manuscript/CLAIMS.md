@@ -16,7 +16,7 @@
 | **C2** | $\sigma_X < 1.5\times 10^{-4}$ (95% CL) under OU kernel + public BAO summary stats | Profile / residual pipeline in repo |
 | **C3** | Nested free background + stochastic extension not preferred ($\Delta\mathrm{AIC}\approx +4$) | `eos_efectiva.py` / joint fits |
 | **C4** | Coherent tachyonic growth (rank-1 cov) excluded: $\Delta\ln\mathcal{L}\approx -11.35$ | Quantum-fluid MLE |
-| **C5** | Gap $\sigma_0\sim 10^{-61}\to\sim 10^{-5}$ is $\sim 10^{56}$; linear amplifiers fail audit | `amplifier_audit.py` + PREPRINT §5 |
+| **C5** | Gap $\sigma_0\to 10^{-5}$ is $\sim 10^{56}$ (**Euclid target**); gap $\to 1.5\times 10^{-4}$ is $\sim 10^{57}$ (**DESI ceiling**); linear amplifiers fail both | `gap_two_targets.py` + `amplifier_audit.py` + PREPRINT §5 |
 | **C6** | Late freeze-out: gain $=1$; soft avalanche gain $\sim 2$; only $N_{\mathrm{eff}}$ redefinition hits amplitude | [`VERDICT.md`](../results/amplification_routes/VERDICT.md) |
 | **C7** | Even $\varepsilon=1$ anisotropic fraction of BAO-bounded residual gives $\|\gamma-1\|\sim 10^{-4}$ | `scripts/slip_bridge.py` |
 

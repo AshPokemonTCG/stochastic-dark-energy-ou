@@ -50,8 +50,10 @@ local_archive/ Offline drafts (not part of the public scientific claim)
 
 | Path | Role |
 |------|------|
-| `papers/amplification-gap.md` | **Act III closure:** gap \(10^{56}\), amplifier audit, only (d) worth new theory |
+| `papers/amplification-gap.md` | **Act III closure:** \(G_{\mathrm{Euclid}}\sim 10^{56}\), \(G_{\mathrm{DESI}}\sim 10^{57}\); amplifier audit |
 | `papers/amplification-no-free-lunch.md` | Redirect stub → `amplification-gap.md` (old bookmarks) |
+| `papers/HONEST_HEADLINES.md` | Press/title discipline: not “vacuum energy calculated” |
+| `scripts/gap_two_targets.py` | Exact two-gap arithmetic |
 | `scripts/amplifier_audit.py` | Runnable gain table (Sorkin → DESI/Euclid) |
 | `scripts/amplification/route1_local_causal_set_seed.py` | Route 1: N_eff / local seed scan |
 | `scripts/amplification/route2_late_horizon_exit.py` | Route 2: θ(x) freeze-out Monte Carlo |

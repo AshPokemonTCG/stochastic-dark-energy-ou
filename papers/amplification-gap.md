@@ -35,22 +35,33 @@ This note **fixes that gap as a quantitative problem** and audits candidate ampl
 
 | Quantity | Value | Role |
 |----------|-------|------|
-| Sorkin / Bekenstein seed | \(\sigma_0 \sim 10^{-61} \sim 1/\sqrt{N}\), \(N\sim 10^{122}\) | Motivational UV amplitude |
-| DESI DR2 BAO residual bound | \(\sigma_X < 1.5\times 10^{-4}\) (95% CL) | Effective late-time amplitude (OU kernel) |
-| Euclid-scale residual target | \(\sim 10^{-5}\) | Path-integrated residual of interest |
+| Sorkin / Bekenstein seed | \(\sigma_0 \sim 1.18\times 10^{-61}\) (\(H_0=67.4\)) | Motivational UV amplitude (holographic \(d=2\)) |
+| DESI DR2 BAO residual bound | \(\sigma_X < 1.5\times 10^{-4}\) (95% CL) | **Measured** effective late-time amplitude (OU kernel) |
+| Euclid-scale residual target | \(\sim 10^{-5}\) | **Aspirational** path-integrated residual of interest |
 | Minimum kick for detection (small \(\theta\)) | \(A_0^{\min}\sim 10^{-5}\) | From \(\sigma_{\rm res}=A_0 e^{-\theta\Delta x}\) |
 
-**Gap (order of magnitude):**
+### 2.1 Two gaps (do not mix labels)
 
-\[
-\frac{A_0^{\min}}{\sigma_0}\sim \frac{10^{-5}}{10^{-61}} = 10^{56}
-\qquad\text{(to}\ \sim 10^{57}\ \text{depending on \(\theta\Delta x\))}.
-\]
+These are **different questions** with answers that differ by about **one decade**. Never paste “\(\sim 10^{56}\)” onto a calculation that used the DESI ceiling.
 
-DESI constrains **effective** amplitude after any amplification — **not** \(\sigma_0\) itself. 
+| Gap | Definition | Exact OOM (\(\sigma_0=1.18\times 10^{-61}\)) | Soft \(r\) needed (\(e^{2r}\sigma_0=\sigma_{\mathrm{tgt}}\)) |
+|:----|:-----------|:---------------------------------------------|:-----------------------------------------------------------|
+| **\(G_{\mathrm{Euclid}}\)** | \(10^{-5}/\sigma_0\) | \(\mathbf{8.47\times 10^{55}\approx 10^{56}}\) | \(r\approx 64.4\) |
+| **\(G_{\mathrm{DESI}}\)** | \(1.5\times 10^{-4}/\sigma_0\) | \(\mathbf{1.27\times 10^{57}\approx 10^{57}}\) | \(r\approx 65.7\) |
+
+**Label rule (mandatory):**
+
+- “\(\sim 10^{56}\)” **only** for the **Euclid-scale target** \(\sigma\sim 10^{-5}\) (or \(A_0^{\min}\sim 10^{-5}\)).  
+- “\(\sim 10^{57}\)” for the **measured DESI ceiling** \(\sigma_X=1.5\times 10^{-4}\).  
+- Density form of the same ratio: \(\lvert\delta\rho\rvert_{\max}/(\sigma_0\rho_\Lambda)=\sigma_{\mathrm{tgt}}/\sigma_0\) — so DESI density gap is \(\sim 10^{57}\), not \(10^{56}\).
+
+**What DESI actually measured** is a **null residual bound**, not a new \(\rho_\Lambda\). Mean vacuum density \(\rho_\Lambda\sim\Omega_{\Lambda 0}\rho_{\mathrm{crit}}\) is imported from standard cosmology (e.g. Planck-class \(H_0,\Omega_\Lambda\)); this corpus constrains **fractional residual amplitude** \(\sigma_X\) on top of that background.
+
+DESI constrains **effective** amplitude after any amplification — **not** \(\sigma_0\) itself.  
 Without a physical map \(\sigma_0\to A_0\), “Euclid will see vacuum noise” is **not** a theorem of this repository.
 
-Runnable audit: `python scripts/amplifier_audit.py`.
+Runnable audit: `python scripts/amplifier_audit.py` · exact ratios: `python scripts/gap_two_targets.py`.  
+Headlines discipline: [`HONEST_HEADLINES.md`](HONEST_HEADLINES.md).
 
 ---
 

@@ -27,7 +27,7 @@ under the stated phenomenological kernel and public BAO summary statistics (diag
 
 Separately, a *coherent* tachyonic growth model with the correct rank-1 covariance induced by a single growing mode is strongly disfavoured: $\Delta\ln\mathcal{L} \approx -11.35$ relative to $\Lambda$CDM ($\Delta\chi^2 \approx +22.7$).
 
-We then quantify an *amplification bottleneck*: a Sorkin–Bekenstein Poisson seed $\sigma_0 \sim 10^{-61}$ lies $\sim 10^{56}$ below residual amplitudes of interest for Euclid-scale BAO ($\sim 10^{-5}$). Audited linear amplifiers are excluded, short by many decades, or redefine the seed. Machine scans of three allowed non-linear cards show that late-time freeze-out alone yields unit gain, a soft double-well avalanche yields gain $\sim 2$, and only a *local* effective count $N_{\mathrm{eff}} \sim 4 \times 10^{7}$ (DESI) / $10^{10}$ (Euclid) reaches target amplitudes—by redefining the microphysical seed, not by free amplification.
+We then quantify an *amplification bottleneck*: a Sorkin–Bekenstein Poisson seed $\sigma_0 \sim 10^{-61}$ lies $\sim 10^{56}$ below Euclid-scale residual amplitudes ($\sim 10^{-5}$) and $\sim 10^{57}$ below the DESI residual ceiling measured here ($1.5\times 10^{-4}$). Audited linear amplifiers are excluded, short by many decades, or redefine the seed. Machine scans of three allowed non-linear cards show that late-time freeze-out alone yields unit gain, a soft double-well avalanche yields gain $\sim 2$, and only a *local* effective count $N_{\mathrm{eff}} \sim 4 \times 10^{7}$ (DESI) / $10^{10}$ (Euclid) reaches target amplitudes—by redefining the microphysical seed, not by free amplification.
 
 Gravitational slip $\gamma = \Phi/\Psi$ is the correct *operator* for anisotropic leakage past volume-preserving (SDiff) structure, but inherits the same amplitude starvation: even full anisotropy of the BAO-bounded residual gives $\lvert\gamma - 1\rvert \sim 10^{-4}$, of order $10^{2}$–$10^{3}$ below current and forecast floors.
 
@@ -193,16 +193,19 @@ This exclusion is logically independent of the stationary OU bound: the covarian
 
 ## 5. Results III — Amplification bottleneck
 
-### 5.1 Quantified gap
+### 5.1 Quantified gap (two targets — do not mix)
 
 | Quantity | Value |
 |:---------|:------|
-| Motivational UV seed (Sorkin / Bekenstein) | $\sigma_0 \sim 10^{-61}$ |
-| DESI residual bound (this work) | $\sigma_X < 1.5 \times 10^{-4}$ (95% CL) |
-| Euclid-scale residual of interest | $\sim 10^{-5}$ |
-| Required gain $\sigma_{\mathrm{target}}/\sigma_0$ | $\sim 10^{56}$–$10^{57}$ |
+| Motivational UV seed (Sorkin / Bekenstein) | $\sigma_0 \approx 1.18\times 10^{-61}$ ($H_0=67.4$) |
+| DESI residual bound (**this work, measured**) | $\sigma_X < 1.5 \times 10^{-4}$ (95% CL) |
+| Euclid-scale residual of interest (**aspirational**) | $\sim 10^{-5}$ |
+| **$G_{\mathrm{Euclid}}=10^{-5}/\sigma_0$** | $\mathbf{8.5\times 10^{55}\approx 10^{56}}$ |
+| **$G_{\mathrm{DESI}}=1.5\times 10^{-4}/\sigma_0$** | $\mathbf{1.27\times 10^{57}\approx 10^{57}}$ |
 
-DESI constrains the **effective** amplitude after any amplification. Without a physical map $\sigma_0 \to A_0$, “Euclid will see vacuum noise” is not a theorem of this analysis.
+The headline “$\sim 10^{56}$” always means the **Euclid-scale** target. Using the DESI ceiling in a density ratio and labelling it $10^{56}$ is incorrect by a factor $\sim 15$ (one full decade in the common OOM tag). Both gaps remain **unbridgeable** by soft linear amplifiers ($r\sim 64$–$66$).
+
+DESI constrains the **effective** residual amplitude after any amplification — **not** $\sigma_0$, and **not** a new value of $\rho_\Lambda$ (background vacuum density is standard imported cosmology). Without a physical map $\sigma_0 \to A_0$, “Euclid will see vacuum noise” is not a theorem of this analysis.
 
 ### 5.2 Linear amplifier audit
 
@@ -226,7 +229,7 @@ Full tables: [`results/amplification_routes/VERDICT.md`](../results/amplificatio
 
 ### 5.4 Claim statement (Act III)
 
-> **Amplification gap:** linear amplification of a pure Sorkin seed does not reach BAO/Euclid residual scales (factor $\sim 10^{56}$). Publication of the present corpus is consistent with **honest limits + exclusions + a short map of open hypothesis cards**, each with an explicit theoretical price.
+> **Amplification gap:** linear amplification of a pure Sorkin seed does not reach BAO residual scales ($G_{\mathrm{DESI}}\sim 10^{57}$) nor Euclid-scale residual targets ($G_{\mathrm{Euclid}}\sim 10^{56}$). Publication of the present corpus is consistent with **honest limits + exclusions + a short map of open hypothesis cards**, each with an explicit theoretical price.
 
 ---
 
@@ -325,7 +328,7 @@ python scripts/slip_bridge.py
 
 1. **Null residual:** DESI DR2 BAO summary statistics do not favour stationary OU/QNM stochastic dark energy; $\sigma_X < 1.5 \times 10^{-4}$ (95% CL) under the stated kernel.
 2. **Model kill:** coherent tachyonic growth with rank-1 covariance is excluded ($\Delta\chi^2 \approx +22.7$).
-3. **Amplification gap:** the gap from $\sigma_0 \sim 10^{-61}$ to residual targets $\sim 10^{-5}$ is $\sim 10^{56}$; audited linear amplifiers fail; freeze-out and soft avalanche scans do not provide free gain; only redefining $N_{\mathrm{eff}}$ hits target amplitudes.
+3. **Amplification gap:** $\sigma_0 \to 10^{-5}$ is $\sim 10^{56}$ (Euclid target); $\sigma_0 \to 1.5\times 10^{-4}$ is $\sim 10^{57}$ (DESI ceiling); audited linear amplifiers fail both; freeze-out and soft avalanche scans do not provide free gain; only redefining $N_{\mathrm{eff}}$ hits target amplitudes.
 4. **Slip honesty:** anisotropic leakage past SDiff is a real structural crack in principle and an amplitude-starved channel in practice.
 5. **Scientific posture:** the strength of this programme is **what it closes**—limits, exclusions, and an honest map of open theory prices—not a promised detection.
 
